@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- a maven.xml file to be used when not expecting to build the RSF source
+  during the build, but to retrieve its jars from the local repository -->
+<project default="deploy"
+xmlns:j="jelly:core"
+  xmlns:maven="jelly:maven"
+  xmlns:u="jelly:util">
+
+	<goal name="full">
+		<!--attainGoal name="dependencies" /-->
+		<attainGoal name="deploy"/>
+	
+	</goal>
+
+
+	<goal name="deploy" prereqs="war:webapp">
+		<maven:property defaultValue="${pom.artifactId}" var="webappName" name="rsfhello.deploy.webappname"/>
+		<j:set var="destination" value="${maven.tomcat.home}/webapps/${webappName}"/>
+		
+		
+		<mkdir dir="${destination}"/>
+		
+		<copy todir="${destination}">
+			<fileset dir="${maven.war.webapp.dir}"/>	
+		</copy>		
+	</goal>
+	
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/J-RSFUtil"/>
+	<classpathentry kind="src" path="/PonderUtilCore"/>
+	<classpathentry kind="src" path="/J-ServletUtil"/>
+	<classpathentry kind="src" path="/Darwin"/>
+	<classpathentry kind="var" path="MAVEN_REPO/servletapi/jars/servletapi-2.3.jar"/>
+	<classpathentry kind="var" path="MAVEN_REPO/springframework/jars/spring-1.1.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
