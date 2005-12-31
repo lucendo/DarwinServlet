@@ -74,6 +74,15 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
+            <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+      <type>jar</type> 
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>  
         <dependency>
             <!-- Doug Lea's Oswego concurrency package. The forerunner of JSR 166
         java.util.concurrent -->
