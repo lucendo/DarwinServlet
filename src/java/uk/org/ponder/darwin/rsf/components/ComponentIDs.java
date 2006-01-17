@@ -9,4 +9,5 @@ public class ComponentIDs {
   public static final String NAV_FRAME = "nav-frame";
   public static final String TEXT_TARGET = "text-target:";
   public static final String IMAGE_TARGET = "image-target:";
+  public static final String PAGE_SELECT = "page-select";
 }

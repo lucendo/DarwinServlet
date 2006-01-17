@@ -6,13 +6,16 @@ package uk.org.ponder.darwin.rsf.components;
 import uk.org.ponder.darwin.parse.ItemCollection;
 import uk.org.ponder.darwin.parse.ItemDetails;
 import uk.org.ponder.darwin.parse.PageInfo;
-import uk.org.ponder.darwin.rsf.DarViewParams;
+import uk.org.ponder.darwin.rsf.ContentRenderParams;
+import uk.org.ponder.darwin.rsf.NavParams;
 import uk.org.ponder.rsac.RSACBeanLocator;
 import uk.org.ponder.rsf.components.UIContainer;
+import uk.org.ponder.rsf.components.UIOutput;
+import uk.org.ponder.rsf.components.UISelect;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
-import uk.org.ponder.rsf.viewstate.BaseURLProvider;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
+import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 
 /**
  * @author Antranig Basman (amb26@ponder.org.uk)
@@ -22,7 +25,7 @@ public class NavProducer implements ViewComponentProducer {
   public static final String VIEWID = "nav-frame";
   private ItemCollection collection;
   private RSACBeanLocator rbl;
-  private String renderpath;
+
   public String getViewID() {
     return VIEWID;
   }
@@ -30,28 +33,52 @@ public class NavProducer implements ViewComponentProducer {
   public void setItemCollection(ItemCollection collection) {
     this.collection = collection;
   }
-  // TODO: Move producers into request scope!!
+
   public void setRSACBeanLocator(RSACBeanLocator rbl) {
     this.rbl = rbl;
   }
-  // in general "render/", corresponding with web.xml
-  public void setContentRenderPath(String renderpath) {
-    this.renderpath = renderpath;
-  }
-  
-  public void fillComponents(UIContainer tofill, 
-      ViewParameters origviewparams, ComponentChecker checker) {
-    BaseURLProvider bup = 
-      (BaseURLProvider) rbl.getBeanLocator().locateBean("baseURLProvider");
-    String resourcebase = bup.getResourceBaseURL();
-    DarViewParams darview = (DarViewParams) origviewparams;
-    ItemDetails item = collection.getItem(darview.itemID);
-    for (int i = 0; i < item.pages.size(); ++ i) {
-      PageInfo page = (PageInfo) item.pages.get(i);
-      String texturl = 
+
+  public void fillComponents(UIContainer tofill, ViewParameters origviewparams,
+      ComponentChecker checker) {
+
+    NavParams navparams = (NavParams) origviewparams;
+    ContentRenderParams contentparams = new ContentRenderParams();
+    contentparams.itemID = navparams.itemID;
+
+    ItemDetails item = collection.getItem(navparams.itemID);
+    ViewStateHandler vsh = (ViewStateHandler) rbl.getBeanLocator().locateBean(
+        "viewStateHandler");
+    if (navparams.viewtype.equals(NavParams.TEXT_VIEW)
+        || navparams.viewtype.equals(NavParams.SIDE_VIEW)) {
+      contentparams.viewtype = ContentRenderParams.TEXT_VIEW;
+      for (int i = 0; i < item.pages.size(); ++i) {
+        PageInfo page = (PageInfo) item.pages.get(i);
+        contentparams.pageseq = page.sequence;
+        String texturl = vsh.getFullURL(contentparams);
+        UIOutput.make(tofill, ComponentIDs.TEXT_TARGET, texturl);
+      }
     }
-    // TODO Auto-generated method stub
-    
+    if (navparams.viewtype.equals(NavParams.IMAGE_VIEW)
+        || navparams.viewtype.equals(NavParams.SIDE_VIEW)) {
+      for (int i = 0; i < item.pages.size(); ++i) {
+        contentparams.viewtype = ContentRenderParams.IMAGE_VIEW;
+        PageInfo page = (PageInfo) item.pages.get(i);
+        contentparams.pageseq = page.sequence;
+        String imageurl = vsh.getFullURL(contentparams);
+        UIOutput.make(tofill, ComponentIDs.IMAGE_TARGET, imageurl);
+      }
+    }
+
+    String[] values = new String[item.pages.size()];
+    String[] labels = new String[item.pages.size()];
+
+    for (int i = 0; i < item.pages.size(); ++i) {
+      PageInfo page = (PageInfo) item.pages.get(i);
+      values[i] = Integer.toString(page.sequence);
+      labels[i] = page.text;
+    }
+
+    UISelect.make(tofill, ComponentIDs.PAGE_SELECT, values, labels, values[0]);
   }
 
 }

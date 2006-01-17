@@ -10,9 +10,9 @@ import uk.org.ponder.stringutil.StringList;
  * @author Antranig Basman (amb26@ponder.org.uk)
  * 
  */
-public class ContentRenderParams extends SimpleViewParameters {
+public class NavParams extends SimpleViewParameters {
   private static StringList attrnames = 
-    StringList.fromString("flowtoken, endflow, errortoken, errorredirect, itemID, viewtype, pageseq");
+    StringList.fromString("flowtoken, endflow, errortoken, errorredirect, itemID, viewtype");
   
   public StringList getAttributeFields() {
     return attrnames;
@@ -20,7 +20,8 @@ public class ContentRenderParams extends SimpleViewParameters {
   
   public static final String IMAGE_VIEW = "image";
   public static final String TEXT_VIEW = "text";
+  public static final String SIDE_VIEW = "side";
   public String itemID;
   public String viewtype;
-  public int pageseq;
+
 }

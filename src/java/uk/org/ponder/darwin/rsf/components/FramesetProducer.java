@@ -3,7 +3,7 @@
  */
 package uk.org.ponder.darwin.rsf.components;
 
-import uk.org.ponder.darwin.rsf.DarViewParams;
+import uk.org.ponder.darwin.rsf.NavParams;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
 import uk.org.ponder.rsf.view.ComponentChecker;
@@ -18,7 +18,7 @@ public class FramesetProducer implements ViewComponentProducer {
 
   public void fillComponents(UIContainer tofill, ViewParameters origviewparams, 
       ComponentChecker checker) {
-    DarViewParams navparams = (DarViewParams) origviewparams.copyBase();
+    NavParams navparams = (NavParams) origviewparams.copyBase();
     navparams.viewID = NavProducer.VIEWID;
     UIInternalLink.make(tofill, ComponentIDs.NAV_FRAME, navparams);
   } 
