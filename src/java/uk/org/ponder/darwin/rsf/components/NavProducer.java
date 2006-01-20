@@ -3,9 +3,9 @@
  */
 package uk.org.ponder.darwin.rsf.components;
 
-import uk.org.ponder.darwin.parse.ItemCollection;
-import uk.org.ponder.darwin.parse.ItemDetails;
-import uk.org.ponder.darwin.parse.PageInfo;
+import uk.org.ponder.darwin.item.ItemCollection;
+import uk.org.ponder.darwin.item.ItemDetails;
+import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.rsf.ContentRenderParams;
 import uk.org.ponder.darwin.rsf.NavParams;
 import uk.org.ponder.rsac.RSACBeanLocator;
