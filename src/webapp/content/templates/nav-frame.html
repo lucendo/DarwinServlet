@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:rsf="http://ponder.org.uk/rsf">
+<head>
+<link href="../css/level1_times.css" rel="stylesheet" type="text/css"
+	rsf:id="scr=rewrite-url" />
+<style type="text/css">
+ .hidden {
+display: none;
+}
+.center 
+{ text-align: center; }
+body {
+margin: 10px;
+}
+form {
+margin: 0px;
+}
+</style>
+<script type="text/javascript" src="../javascript/nav-frame.js"
+	rsf:id="scr=rewrite-url">
+</script>
+<title>Forms for navigation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body onload="updatePage()">
+<div class="hidden">
+<div rsf:id="text-target:" id="text-target:1">dummy/1843_remarks_F1662.html#pageseq-1</div>
+<div rsf:id="text-target:" id="text-target:2">dummy/1843_remarks_F1662.html#pageseq-2</div>
+<div rsf:id="text-target:" id="text-target:3">dummy/1843_remarks_F1662.html#pageseq-3</div>
+<div rsf:id="text-target:" id="text-target:4">dummy/1843_remarks_F1662.html#pageseq-4</div>
+<div rsf:id="image-target:" id="image-target:1">dummy/1843_remarks_F1662_1.png</div>
+<div rsf:id="image-target:" id="image-target:2">dummy/1843_remarks_F1662_2.png</div>
+<div rsf:id="image-target:" id="image-target:3">dummy/1843_remarks_F1662_3.png</div>
+<div rsf:id="image-target:" id="image-target:4">dummy/1843_remarks_F1662_4.png</div>
+<div rsf:id="current-page" id="current-page">1</div>
+<div rsf:id="last-page" id="last-page">4</div>
+<div rsf:id="view-type" id="view-type">side</div>
+</div>
+<div class="center"><img src="../images/title8.jpg" width="734"
+	height="43" rsf:id="scr=rewrite-url"/></div>
+<div class="center"><input type="button" id="back-button"
+	value=" &lt; Back" onclick="addPage(-1)" ondblclick="addPage(-1)"/> 
+<select
+	rsf:id="page-select" id="page-select" onchange="onPageSelect()">
+	<option value="1" selected="true">page 47</option>
+	<option value="2">page 48</option>
+	<option value="3">page 49</option>
+	<option value="4">page 50</option>
+</select> <input type="button" id="next-button" value="Next &gt;"
+	onclick="addPage(1)" ondblclick="addPage(1)"/>
+</div>
+</body>
+</html>

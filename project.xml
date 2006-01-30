@@ -3,7 +3,7 @@
 	<pomVersion>3</pomVersion>
 	<artifactId>darwinservlet</artifactId>
 	<name>DarwinServlet</name>
-	<groupId>drawin</groupId>
+	<groupId>darwin</groupId>
 	<currentVersion>1.0</currentVersion>
 	<organization>
 		<name>CARET</name>
@@ -25,6 +25,15 @@
 	</mailingLists>
 	<dependencies>
 		<!-- begin standard RSF dependencies here -->
+      <dependency>
+      <groupId>darwin</groupId>
+      <artifactId>darwin</artifactId>
+      <version>0.8</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
 		<dependency>
 			<groupId>ponderutilcore</groupId>
 			<artifactId>ponderutilcore</artifactId>
@@ -46,7 +55,7 @@
 		<dependency>
 			<groupId>rsfutil</groupId>
 			<artifactId>rsfutil</artifactId>
-			<version>0.5</version>
+			<version>0.6</version>
 			<type>jar</type>
 			<properties>
 				<war.bundle>true</war.bundle>

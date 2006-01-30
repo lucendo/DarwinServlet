@@ -1,41 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
   "http://www.springframework.org/dtd/spring-beans.dtd">
-  <!-- RSF application scope Spring configuration file for the trivial "Hello
-    World" application. This defines a single view, a single producer and a 
-    single bean, and illustrates the completely minimal RSF application. In 
-    fact, many beans appearing in blank-applicationContext.xml should *really*
-    be overridden in addition to these. -->
+<!-- RSF application scope Spring configuration file for the Darwin Servlet app -->
 <beans>
-  <!-- Define the component producer for the main view -->
-  <bean id="main-view" class="uk.org.ponder.rsf.helloapp.components.MainProducer">
+  <bean id="urlMapper" class="uk.org.ponder.darwin.parse.URLMapper">
+    <property name="contentRoot">
+      <ref bean="contentRoot" />
+    </property>
+    <property name="externalContentRoot">
+      <ref bean="externalContentRoot" />
+    </property>
   </bean>
-  
-  <!-- Add the main view producer into the collection -->
+
+  <bean id="itemCollectionManager"
+    class="uk.org.ponder.darwin.parse.ItemCollectionManager"
+    init-method="index">
+    <property name="contentRoot">
+      <ref bean="contentRoot" />
+    </property>
+  </bean>
+
+  <bean id="frameset-view"
+    class="uk.org.ponder.darwin.rsf.components.FramesetProducer">
+    <property name="RSACBeanLocator">
+      <ref bean="rsacBeanLocator" />
+    </property>
+  </bean>
+
+  <bean id="navframe-view"
+    class="uk.org.ponder.darwin.rsf.components.NavFrameProducer">
+    <property name="RSACBeanLocator">
+      <ref bean="rsacBeanLocator" />
+    </property>
+    <property name="URLMapper">
+      <ref bean="urlMapper"/>
+    </property>
+  </bean>
+
+  <bean id="status-view"
+    class="uk.org.ponder.darwin.rsf.components.StatusProducer">
+    <property name="itemCollectionManager">
+      <ref local="itemCollectionManager" />
+    </property>
+  </bean>
+
+  <bean id="viewParametersParser" parent="siteMap"></bean>
+
   <bean id="viewresolver" class="uk.org.ponder.rsf.view.ConcreteViewResolver">
     <property name="views">
       <list>
-        <ref local="main-view"/>
+        <ref local="frameset-view" />
+        <ref local="navframe-view" />
+        <ref local="status-view" />
       </list>
     </property>
   </bean>
-  
-  <!-- Define an default view which will be i) assumed on receiving a null
-  pathinfo, ii) target of client redirect if a non-fatal exception occurs 
-  (such as a bad incoming URL) -->
+
   <bean id="defaultView" class="java.lang.String">
     <constructor-arg>
-      <value>/main</value>
+      <value>/nav-frame</value>
     </constructor-arg>
   </bean>
-  
-  <!-- Define the bean roots from the request scope file that are accessible 
-  via incoming request URL (not strictly necessary for this app -->
-  <bean name="requestAddressibleBeans" class="uk.org.ponder.stringutil.StringList">
-    <constructor-arg>
-      <list>
-        <value>hellobean</value>
-      </list>
-    </constructor-arg>
+
+  <bean name="requestAddressibleBeans"
+    class="uk.org.ponder.springutil.StringListFactory">
+    <property name="strings">
+      <value>icmtrigger</value>
+    </property>
   </bean>
 </beans>

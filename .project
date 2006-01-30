@@ -3,6 +3,7 @@
 	<name>I-DarwinServlet</name>
 	<comment></comment>
 	<projects>
+		<project>Darwin</project>
 		<project>J-RSFUtil</project>
 	</projects>
 	<buildSpec>

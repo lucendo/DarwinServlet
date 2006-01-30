@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
+	"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+  <bean id="itemCollection" factory-bean="itemCollectionManager" 
+  factory-method="getItemCollection"/>
+
+  <bean id="handlerHook" class="uk.org.ponder.darwin.rsf.DarwinHandlerHook">
+    <property name="httpServletRequest">
+      <ref bean="httpServletRequest" />
+    </property>
+    <property name="httpServletResponse">
+      <ref bean="httpServletResponse" />
+    </property>
+    <property name="requestType">
+      <ref bean="requesttype" />
+    </property>
+    <property name="itemCollection">
+      <ref bean="itemCollection" />
+    </property>
+    <property name="viewParameters">
+      <ref bean="viewParameters" />
+    </property>
+    <property name="URLMapper">
+      <ref bean="urlMapper"/>
+    </property>
+  </bean>
+  
+  <bean id="icmtrigger" class="uk.org.ponder.darwin.rsf.beans.ICMTrigger">
+    <property name="itemCollectionManager">
+      <ref bean="itemCollectionManager"/>
+    </property>
+  </bean>
+</beans>

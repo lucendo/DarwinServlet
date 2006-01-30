@@ -17,7 +17,7 @@ xmlns:j="jelly:core"
 	</preGoal>
 
 	<goal name="deploy" prereqs="war:webapp">
-		<maven:property defaultValue="${pom.artifactId}" var="webappName" name="rsfhello.deploy.webappname"/>
+		<maven:property defaultValue="${pom.artifactId}" var="webappName" name="darwin.deploy.webappname"/>
 		<j:set var="destination" value="${maven.tomcat.home}/webapps/${webappName}"/>
 		
 		
@@ -32,7 +32,7 @@ xmlns:j="jelly:core"
 		<echo>ECHO HERE!!</echo>
 		
 		<maven:reactor basedir="${basedir}/.." 
-			includes="PonderUtilCore/project.xml,J-ServletUtil/project.xml,J-RSFUtil/project.xml"
+			includes="PonderUtilCore/project.xml,J-ServletUtil/project.xml,J-RSFUtil/project.xml,Darwin/project.xml"
 			goals="full"
 			postProcessing="true"
 			collectOnly="false"

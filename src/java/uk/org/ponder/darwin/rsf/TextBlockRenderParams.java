@@ -10,17 +10,24 @@ import uk.org.ponder.stringutil.StringList;
  * @author Antranig Basman (amb26@ponder.org.uk)
  * 
  */
-public class ContentRenderParams extends SimpleViewParameters {
+public class TextBlockRenderParams extends SimpleViewParameters {
+  public static final String VIEWID = "contentblock";
   private static StringList attrnames = 
-    StringList.fromString("flowtoken, endflow, errortoken, errorredirect, itemID, viewtype, pageseq");
-  
+    StringList.fromString("flowtoken, endflow, errortoken, errorredirect, itemID, contentfile");
+ 
   public StringList getAttributeFields() {
     return attrnames;
-   }  
+   }
   
-  public static final String IMAGE_VIEW = "image";
-  public static final String TEXT_VIEW = "text";
+  public String getAnchorField() {
+    return "pageseq";
+  }
+
+  public TextBlockRenderParams() {
+    viewID = VIEWID;
+  }
+  
   public String itemID;
-  public String viewtype;
+  public String contentfile;
   public int pageseq;
 }

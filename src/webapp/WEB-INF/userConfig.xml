@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+  "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+  <bean id="contentRoot" class="java.lang.String">
+    <constructor-arg><value>E:\workspace\I-DarwinServlet\src\webapp\converted</value></constructor-arg>
+  </bean>
+  <bean id="externalContentRoot" class="java.lang.String">
+    <constructor-arg><value>http://localhost:48080/Darwin/converted</value></constructor-arg>
+  </bean>
+</beans>

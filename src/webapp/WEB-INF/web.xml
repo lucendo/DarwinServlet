@@ -10,9 +10,11 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
+    
       classpath:conf/rsf-config.xml,
       classpath:conf/blank-applicationContext.xml,
-     /WEB-INF/applicationContext.xml</param-value>
+      /WEB-INF/applicationContext.xml,
+      /WEB-INF/userConfig.xml</param-value>
   </context-param>
   <!-- Configure "resource scope" Spring application contexts (RSAC).
      Be sure to mention rsf config files first, so any overrides may be
@@ -20,8 +22,9 @@
   <context-param>
     <param-name>requestContextConfigLocation</param-name>
     <param-value>classpath:conf/rsf-requestscope-config.xml,
-                  classpath:conf/blank-requestScopeApplicationContext.xml,
-                 /WEB-INF/requestScopeApplicationContext.xml</param-value>
+                  classpath:conf/blank-requestContext.xml,
+                 /WEB-INF/requestContext.xml
+               </param-value>
   </context-param>
   <!-- The "request scope application context" loading filter. Only use this
     if your application defines no filters which perform wrapping of the
