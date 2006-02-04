@@ -2,7 +2,7 @@
 <!DOCTYPE web-app PUBLIC
   "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
   "http://java.sun.com/dtd/web-app_2_3.dtd">
-  
+
 <web-app>
   <!-- Configure standard Spring application contexts. Be sure to mention
     rsf config files first, so any overrides may be processed. The first two
@@ -10,58 +10,37 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-    
       classpath:conf/rsf-config.xml,
       classpath:conf/blank-applicationContext.xml,
       /WEB-INF/applicationContext.xml,
-      /WEB-INF/userConfig.xml</param-value>
+      /WEB-INF/userConfig.xml
+    </param-value>
   </context-param>
   <!-- Configure "resource scope" Spring application contexts (RSAC).
-     Be sure to mention rsf config files first, so any overrides may be
+    Be sure to mention rsf config files first, so any overrides may be
     processed -->
   <context-param>
     <param-name>requestContextConfigLocation</param-name>
-    <param-value>classpath:conf/rsf-requestscope-config.xml,
-                  classpath:conf/blank-requestContext.xml,
-                 /WEB-INF/requestContext.xml
-               </param-value>
+    <param-value>
+      classpath:conf/rsf-requestscope-config.xml,
+      classpath:conf/blank-requestContext.xml, /WEB-INF/requestContext.xml
+    </param-value>
   </context-param>
-  <!-- The "request scope application context" loading filter. Only use this
-    if your application defines no filters which perform wrapping of the
-    servlet request, otherwise use methods of RSACBeanLocator manually in your 
-    filters. -->
-  <filter>
-  <filter-name>RSACFilter</filter-name>
-    <filter-class>
-      uk.org.ponder.rsac.servlet.RSACFilter
-    </filter-class>
-  </filter>
-  
-  <filter-mapping>
-    <filter-name>RSACFilter</filter-name>
-    <url-pattern>/faces/*</url-pattern>
-  </filter-mapping>
-  <!--
-  The listener used to load the parent application context (the spring beans).
-  -->
-  <listener>
-    <listener-class>
-      org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  
-  <!--
-  The declaration of your FacesServlet.
-  Map it to whatever url pattern you like.
+    
+   <!--
+    The declaration of your FacesServlet.
+    Map it to whatever url pattern you like.
   -->
   <servlet>
     <servlet-name>ReasonableServlet</servlet-name>
-    <servlet-class>uk.org.ponder.rsf.servlet.ReasonableServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
+    <servlet-class>
+      uk.org.ponder.rsf.servlet.ReasonableSpringServlet
+    </servlet-class>
   </servlet>
-  
+
   <servlet-mapping>
     <servlet-name>ReasonableServlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
- 
+
 </web-app>

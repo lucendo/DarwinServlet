@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<configs>
+		<config>src/webapp/WEB-INF/userConfig.xml</config>
+		<config>src/webapp/WEB-INF/requestContext.xml</config>
+		<config>src/webapp/WEB-INF/applicationContext.xml</config>
+	</configs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>

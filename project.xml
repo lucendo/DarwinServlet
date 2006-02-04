@@ -85,6 +85,17 @@
 				<war.bundle>true</war.bundle>
 			</properties>
 		</dependency>
+    <!-- Spring logging REQUIRES commons-logging, and will go upstairs to
+    Tomcat if this is not here. -->
+      <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.0.4</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
 		<!--  The framework requires CGLIB (Java bytecode manipulation library) 
 			in order to implement lazy-loaded beans  -->
 		<dependency>
