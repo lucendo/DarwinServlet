@@ -77,7 +77,8 @@ public class NavFrameProducer implements ViewComponentProducer {
         PageInfo page = (PageInfo) item.pages.get(i);
 //        contentparams.pageseq = page.sequence;
 //        String imageurl = vsh.getFullURL(contentparams);
-        String imageurl = urlmapper.fileToURL(page.imagefile);
+  
+        String imageurl = page.imagefile == null? "#":urlmapper.fileToURL(page.imagefile);
         UIOutput.make(tofill, ComponentIDs.IMAGE_TARGET+i, imageurl);
       }
     }
@@ -88,7 +89,7 @@ public class NavFrameProducer implements ViewComponentProducer {
     for (int i = 1; i < item.pages.size(); ++i) {
       PageInfo page = (PageInfo) item.pages.get(i);
       values[i - 1] = Integer.toString(page.sequence);
-      String text = page.text.trim();
+      String text = page.text == null? values[i - 1] : page.text.trim();
       if (text.length() == 0) {
         text = "[unnumbered]";
       }

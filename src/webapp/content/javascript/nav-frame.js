@@ -42,20 +42,28 @@ function updatePage() {
     }
   var lastpage = Number(getValue("last-page"));
   getElement("next-button").disabled = (currentpage >= lastpage);
-  var texttarget=getValue("text-target:"+currentpage);
  
   if (viewtype=="text" || viewtype=="side") {
-	  var textframe = getElementGlob(window.parent.document, "frames:" + viewtype + "::txt-frame");
+    var texttarget=getValue("text-target:"+currentpage);
+    var textframeid = "frames:" + viewtype + "::txt-frame";
+	  var textframe = getElementGlob(window.parent.document, textframeid);
 	  textframe.src = texttarget;
 	  }
   if (viewtype=="image" || viewtype=="side") {
 	  var imagetarget=getValue("image-target:"+currentpage);
-	  var imageframe = getElementGlob(window.parent.document, "frames:" + viewtype  + ":img-frame");
+	  var imgframeid = "frames:" + viewtype + "::img-frame";
+//	  var imageframe = getElementGlob(window.parent.document, "frames:" + viewtype  + "::img-frame");
+    var imageframe = parent.frames[imgframeid].document;
+//	    alert ("imageframe: " + imageframe);
+	    // + " document: " + imageframe.document);
+	  var viewedimage = getElementGlob(imageframe, "viewed_image");
+//	  alert("viewedimg: " + viewedimage);
 //  imageframe.viewed_image.src = imagetarget;
 	  var image = new Image();
 	  image.src = imagetarget;
 //	  alert("imagetarget: " + imagetarget);
-	  window.top.img_frame.document.viewed_image.src = image.src;
+          imageframe.viewed_image.src = image.src;
+	  //window.top.img_frame.document.viewed_image.src = image.src;
 	  }
 }
 

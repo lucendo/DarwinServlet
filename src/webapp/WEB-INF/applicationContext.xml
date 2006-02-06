@@ -43,6 +43,10 @@
       <ref local="itemCollectionManager" />
     </property>
   </bean>
+  
+  <bean id="missing-view"
+   class="uk.org.ponder.darwin.rsf.components.ErrorProducer">
+  </bean>
 
   <bean id="viewParametersParser" parent="siteMap"></bean>
 
@@ -52,13 +56,14 @@
         <ref local="frameset-view" />
         <ref local="navframe-view" />
         <ref local="status-view" />
+        <ref local="missing-view" />
       </list>
     </property>
   </bean>
 
   <bean id="defaultView" class="java.lang.String">
     <constructor-arg>
-      <value>/nav-frame</value>
+      <value>/missing</value>
     </constructor-arg>
   </bean>
 

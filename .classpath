@@ -8,5 +8,7 @@
 	<classpathentry kind="src" path="/Darwin"/>
 	<classpathentry kind="var" path="MAVEN_REPO/servletapi/jars/servletapi-2.3.jar"/>
 	<classpathentry kind="var" path="MAVEN_REPO/springframework/jars/spring-1.1.5.jar"/>
+	<classpathentry sourcepath="/E_DRIVE/Source/xmlpull_1_1_3_4b/src" kind="var" path="MAVEN_REPO/xpp3/jars/xpp3-1.1.3.4-RC8_min.jar"/>
+	<classpathentry sourcepath="/E_DRIVE/logging-log4j-1.2.9/src/java" kind="var" path="MAVEN_REPO/log4j/jars/log4j-1.2.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

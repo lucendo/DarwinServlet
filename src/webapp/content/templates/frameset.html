@@ -16,10 +16,10 @@ View</title>
 		rsf:id="nav-frame" />
 
 	<frameset cols="50%, 50%" name="bottom_frames" rsf:id="frames:side">
-		<frame id="txt-frame" src="dummy/1843_remarks_F1662.html#pageseq-1"
-			rsf:id="txt-frame" />
+		<frame src="dummy/1843_remarks_F1662.html#pageseq-1"
+			rsf:id="txt-frame" id="frames:side::txt-frame"/>
 
-		<frame name="img_frame" src="../img-frame.html" id="frames:side::img-frame"
+		<frame name="frames:side::img-frame" src="../img-frame.html" id="frames:side::img-frame"
 			rsf:id="scr=rewrite-url" />
 	</frameset>
 <!--  Yes, this "over-full" frameset renders just fine! The superflous sets
@@ -28,12 +28,12 @@ View</title>
 
 	<frameset cols="100%" name="bottom_frames" rsf:id="frames:image">
 
-		<frame name="img_frame" src="../img-frame.html"
+		<frame name="frames:image::img-frame" src="../img-frame.html"
 			rsf:id="scr=rewrite-url"  id="frames:image::img-frame" />
 	</frameset>
 
 	<frameset cols="100%" name="bottom_frames" rsf:id="frames:text">
-		<frame id="txt-frame" src="dummy/1843_remarks_F1662.html#pageseq-1"
+		<frame id="frames:text::txt-frame" src="dummy/1843_remarks_F1662.html#pageseq-1"
 			rsf:id="txt-frame" />
 
 	</frameset>

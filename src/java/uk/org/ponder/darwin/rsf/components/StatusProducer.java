@@ -3,11 +3,11 @@
  */
 package uk.org.ponder.darwin.rsf.components;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Iterator;
 
 import uk.org.ponder.darwin.item.ItemDetails;
-import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.parse.ItemCollectionManager;
 import uk.org.ponder.darwin.rsf.NavParams;
 import uk.org.ponder.rsf.components.UIBranchContainer;
@@ -43,6 +43,7 @@ public class StatusProducer implements ViewComponentProducer {
       UIOutput.make(present, "images", ""+manager.statistics.images);
       UIOutput.make(present, "contents", ""+manager.statistics.contents);
       UIOutput.make(present, "scanned", manager.statistics.time + "ms");
+      UIOutput.make(present, "scan-date", new SimpleDateFormat("HH:mm:ss EEE, d MMM yyyy Z").format(manager.statistics.scandate));
       if (manager.statistics.errors.isEmpty()) {
         UIOutput.make(present, "scan-errors-none");
       }

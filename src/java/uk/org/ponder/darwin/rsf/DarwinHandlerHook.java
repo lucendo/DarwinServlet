@@ -16,12 +16,11 @@ import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.parse.ContentParser;
 import uk.org.ponder.darwin.parse.Extensions;
-import uk.org.ponder.darwin.parse.RenderingParseReceiver;
 import uk.org.ponder.darwin.parse.URLMapper;
-import uk.org.ponder.iocevent.ListenerReporter;
 import uk.org.ponder.rsf.processor.HandlerHook;
 import uk.org.ponder.rsf.servlet.RootHandlerBean;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
+import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.streamutil.StreamCloseUtil;
 import uk.org.ponder.streamutil.StreamCopyUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
@@ -36,6 +35,7 @@ public class DarwinHandlerHook implements HandlerHook {
   private HandlerHook handlerhook;
   private ItemCollection collection;
   private URLMapper urlmapper;
+  private ViewStateHandler viewstatehandler;
 
   public void setHttpServletRequest(HttpServletRequest request) {
     this.request = request;
@@ -65,6 +65,9 @@ public class DarwinHandlerHook implements HandlerHook {
     this.urlmapper = urlmapper;
   }
   
+  public void setViewStateHandler(ViewStateHandler viewstatehandler) {
+    this.viewstatehandler = viewstatehandler;
+  }
   
   public boolean handle() {
     if (handlerhook == null || !handlerhook.handle()) {
@@ -95,6 +98,8 @@ public class DarwinHandlerHook implements HandlerHook {
     RenderingParseReceiver rpr = new RenderingParseReceiver();
     rpr.setURLMapper(urlmapper);
     rpr.setOutputStream(pos);
+    rpr.setItemCollection(collection);
+    rpr.setViewStateHandler(viewstatehandler);
     ContentParser cp = new ContentParser();
     InputStream is = null;
     try {

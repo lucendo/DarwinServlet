@@ -22,6 +22,7 @@
     <property name="viewParameters">
       <ref bean="viewParameters" />
     </property>
+    <property name="viewStateHandler" ref="viewStateHandler"></property>
     <property name="URLMapper">
       <ref bean="urlMapper"/>
     </property>
