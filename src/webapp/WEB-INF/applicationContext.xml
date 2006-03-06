@@ -48,9 +48,9 @@
    class="uk.org.ponder.darwin.rsf.components.ErrorProducer">
   </bean>
 
-  <bean id="viewParametersParser" parent="siteMap"></bean>
+  <bean id="siteMap" parent="siteMapDef"/>
 
-  <bean id="viewresolver" class="uk.org.ponder.rsf.view.ConcreteViewResolver">
+  <bean id="viewResolver" class="uk.org.ponder.rsf.view.ConcreteViewResolver">
     <property name="views">
       <list>
         <ref local="frameset-view" />

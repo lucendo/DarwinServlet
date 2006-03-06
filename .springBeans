@@ -6,5 +6,21 @@
 		<config>src/webapp/WEB-INF/applicationContext.xml</config>
 	</configs>
 	<configSets>
+		<configSet>
+			<name>TestRSF</name>
+			<allowBeanDefinitionOverriding>true</allowBeanDefinitionOverriding>
+			<incomplete>false</incomplete>
+			<configs>
+				<config>/J-RSFHibernate/src/conf/hibernate-applicationContext.xml</config>
+				<config>/J-RSFHibernate/src/conf/hibernate-requestContext.xml</config>
+				<config>/J-RSFUtil/src/conf/blank-applicationContext.xml</config>
+				<config>/J-RSFUtil/src/conf/blank-requestContext.xml</config>
+				<config>/J-RSFUtil/src/conf/rsf-config.xml</config>
+				<config>/J-RSFUtil/src/conf/rsf-requestscope-config.xml</config>
+				<config>src/webapp/WEB-INF/applicationContext.xml</config>
+				<config>src/webapp/WEB-INF/requestContext.xml</config>
+     		<config>src/webapp/WEB-INF/userConfig.xml</config>
+			</configs>
+		</configSet>
 	</configSets>
 </beansProjectDescription>

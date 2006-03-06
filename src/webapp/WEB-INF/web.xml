@@ -40,7 +40,7 @@
 
   <servlet-mapping>
     <servlet-name>ReasonableServlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
+    <url-pattern>/content/*</url-pattern>
   </servlet-mapping>
 
 </web-app>
