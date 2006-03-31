@@ -50,17 +50,6 @@
 
   <bean id="siteMap" parent="siteMapDef"/>
 
-  <bean id="viewResolver" class="uk.org.ponder.rsf.view.ConcreteViewResolver">
-    <property name="views">
-      <list>
-        <ref local="frameset-view" />
-        <ref local="navframe-view" />
-        <ref local="status-view" />
-        <ref local="missing-view" />
-      </list>
-    </property>
-  </bean>
-
   <bean id="defaultView" class="java.lang.String">
     <constructor-arg>
       <value>/missing</value>

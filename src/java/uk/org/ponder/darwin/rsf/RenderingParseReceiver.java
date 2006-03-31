@@ -37,6 +37,7 @@ import uk.org.ponder.xml.XMLWriter;
  * @author Antranig Basman (amb26@ponder.org.uk)
  */
 // This class is written in inestimably poor style. I apologise.
+// It is in this package because of dependence on ViewStateHandler to render links.
 public class RenderingParseReceiver extends BaseParser implements ParseReceiver {
 
   private PrintOutputStream pos;
@@ -101,6 +102,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     flushBuffer(true);
     if (Attributes.PAGE_CLASS.equals(clazz)) {
       // I am without style
+      pos.print("<p>");
       attrmap.put("onClick",
           "onPageClick(this.getAttribute('dar:pageseq')); return false;");
       String pageseq = (String) attrmap.get(Attributes.PAGESEQ_ATTR);
@@ -119,13 +121,14 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       inpagetag = true;
     }
     String exptag = "<" + tagname + " ";
+    // Deal with rewriting for embedded links and images - need to resynthesize top &c
     String urlattr = getURLAttr(exptag);
     if (urlattr != null) {
       String url = (String) attrmap.get(urlattr);
       if (url != null && !url.startsWith("http://") && !url.equals("#")) {
         if (urlattr.equals("href") && tagname.equals("a") && 
             !attrmap.containsKey("target")) {
-          
+          // It's an inter-book link
           String targetpath = urlmapper.relURLToAbsolute(url, contentpath);
           ContentInfo ci = collection.getContentInfo(targetpath);
           if (ci == null) {
@@ -154,6 +157,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
           }
         }
         else {
+          // It's a leaf link - an image (either popup or inline)
           String globalurl = urlmapper.relURLToExternal(url, contentpath);
           attrmap.put(urlattr, globalurl);
         }
@@ -174,7 +178,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       }
       inpagetag = false;
     }
-    else if ((templatesource == null || editable)
+    if ((templatesource == null || editable)
         && token != XmlPullParser.START_TAG) {
       buffer.append(text);
     }
@@ -257,6 +261,9 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       pos.write(buffer.storage, 0, buffer.size);
       buffer.clear();
     }
+  }
+
+  public void endTag(String tagname) {
   }
 
 }

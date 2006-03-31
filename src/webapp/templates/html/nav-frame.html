@@ -10,6 +10,10 @@ display: none;
 }
 .center 
 { text-align: center; }
+.zerowidth
+{ float:right ;}
+.centerzero
+{ text-align: center; }
 body {
 margin: 10px;
 }
@@ -39,7 +43,7 @@ margin: 0px;
 </div>
 <div class="center"><img src="../images/title8.jpg" width="734"
 	height="43" rsf:id="scr=rewrite-url"/></div>
-<div class="center"><input type="button" id="back-button"
+<div class="centerzero"><input type="button" id="back-button"
 	value=" &lt; Back" onclick="addPage(-1)" ondblclick="addPage(-1)"/> 
 <select
 	rsf:id="page-select" id="page-select-selection" onchange="onPageSelect()">
@@ -49,9 +53,12 @@ margin: 0px;
 	<option value="4">page 50</option>
 </select> <input type="button" id="next-button" value="Next &gt;"
 	onclick="addPage(1)" ondblclick="addPage(1)"/>
-Switch to: <a rsf:id="switch-side" href="#">Text and Image view</a>&nbsp;
-<a rsf:id="switch-image" href="#">Image view</a>&nbsp;
-<a rsf:id="switch-text" href="#">Text view</a>
+	<span class="zerowidt">
+	<span rsf:id="switch-any">&nbsp;Switch to: </span><a rsf:id="switch-side" target="_top" href="#">Text and Image view</a>&nbsp;
+<a rsf:id="switch-image" target="_top" href="#">Image view</a>&nbsp;
+<a rsf:id="switch-text" target="_top" href="#">Text view</a>
+</span>
+
 </div>
 </body>
 </html>
