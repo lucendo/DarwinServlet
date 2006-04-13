@@ -13,9 +13,13 @@ display: none;
 .zerowidth
 { float:right ;}
 .centerzero
-{ text-align: center; }
+{ text-align: right; }
 body {
 margin: 10px;
+}
+.advanced {
+font-size: 70%;
+color: #990000;
 }
 form {
 margin: 0px;
@@ -57,8 +61,12 @@ margin: 0px;
 	<span rsf:id="switch-any">&nbsp;Switch to: </span><a rsf:id="switch-side" target="_top" href="#">Text and Image view</a>&nbsp;
 <a rsf:id="switch-image" target="_top" href="#">Image view</a>&nbsp;
 <a rsf:id="switch-text" target="_top" href="#">Text view</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Search: <input rsf:id="search" type="text" size="15"/>&nbsp;
+<a rsf:id="advanced-search" href="#" class="advanced">Advanced search</a>
 </span>
-
 </div>
+
+
 </body>
 </html>
