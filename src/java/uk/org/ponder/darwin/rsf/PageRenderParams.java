@@ -4,7 +4,6 @@
 package uk.org.ponder.darwin.rsf;
 
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
-import uk.org.ponder.stringutil.StringList;
 
 /**
  * View parameters that will fetch content for a single page.
@@ -13,12 +12,10 @@ import uk.org.ponder.stringutil.StringList;
  */
 public class PageRenderParams extends SimpleViewParameters {
   public static final String VIEWID = "content";
-  private static StringList attrnames = 
-    StringList.fromString("flowtoken, endflow, errortoken, errorredirect, itemID, viewtype, pageseq");
  
-  public StringList getAttributeFields() {
-    return attrnames;
-   }
+  public String getParseSpec() {
+    return super.getParseSpec() + ", itemID, viewtype, pageseq";
+  }
 
   public PageRenderParams() {
     viewID = VIEWID;

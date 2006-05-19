@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- default goal for the project builds and installs the war in the local repository -->
-<project default="dependencies"
+<project
 xmlns:j="jelly:core"
   xmlns:maven="jelly:maven"
-  xmlns:u="jelly:util">
+  xmlns:u="jelly:util" default="full">
 
 	<!-- the common "full" goal invokes the default goal.  Used in maven -Dgoal=full multiproject:goal from .. -->
 	<goal name="full">
@@ -20,7 +20,7 @@ xmlns:j="jelly:core"
 		<maven:property defaultValue="${pom.artifactId}" var="webappName" name="darwin.deploy.webappname"/>
 		<j:set var="destination" value="${maven.tomcat.home}/webapps/${webappName}"/>
 		
-		
+    <delete dir="${destination}"/>
 		<mkdir dir="${destination}"/>
 		
 		<copy todir="${destination}">

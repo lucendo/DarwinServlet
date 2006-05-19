@@ -1,0 +1,228 @@
+/*
+ * Created on 07-May-2006
+ */
+package uk.org.ponder.darwin.rsf.components;
+
+import org.apache.lucene.document.Document;
+import org.apache.lucene.search.Hits;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.Sort;
+import org.springframework.util.StringUtils;
+
+import uk.org.ponder.darwin.item.ItemCollection;
+import uk.org.ponder.darwin.lucene.DarwinHighlighter;
+import uk.org.ponder.darwin.lucene.IndexItemSearcher;
+import uk.org.ponder.darwin.lucene.QueryBuilder;
+import uk.org.ponder.darwin.rsf.NavParams;
+import uk.org.ponder.darwin.rsf.SearchResultsParams;
+import uk.org.ponder.darwin.rsf.util.DarwinUtil;
+import uk.org.ponder.darwin.search.DocFields;
+import uk.org.ponder.darwin.search.DocTypeInterpreter;
+import uk.org.ponder.darwin.search.ItemFields;
+import uk.org.ponder.darwin.search.SearchParams;
+import uk.org.ponder.rsf.components.UIBranchContainer;
+import uk.org.ponder.rsf.components.UIContainer;
+import uk.org.ponder.rsf.components.UIForm;
+import uk.org.ponder.rsf.components.UIInternalLink;
+import uk.org.ponder.rsf.components.UIOutput;
+import uk.org.ponder.rsf.components.UISelect;
+import uk.org.ponder.rsf.components.UIVerbatim;
+import uk.org.ponder.rsf.view.ComponentChecker;
+import uk.org.ponder.rsf.view.ViewComponentProducer;
+import uk.org.ponder.rsf.viewstate.ViewParameters;
+import uk.org.ponder.rsf.viewstate.ViewParamsReporter;
+import uk.org.ponder.util.Logger;
+
+public class SearchResultsProducer implements ViewComponentProducer,
+    ViewParamsReporter {
+  public static final String VIEWID = "search-results";
+  private IndexItemSearcher itemsearcher;
+  private QueryBuilder querybuilder;
+  private ItemCollection itemcollection;
+  private DocTypeInterpreter doctypeinterpreter;
+
+  public String getViewID() {
+    return VIEWID;
+  }
+
+  public ViewParameters getViewParameters() {
+    return new SearchResultsParams();
+  }
+
+  public void setIndexItemSearcher(IndexItemSearcher itemsearcher) {
+    this.itemsearcher = itemsearcher;
+  }
+
+  public void setQueryBuilder(QueryBuilder querybuilder) {
+    this.querybuilder = querybuilder;
+  }
+
+  public void setItemCollection(ItemCollection itemcollection) {
+    this.itemcollection = itemcollection;
+  }
+  
+  public void setDocTypeInterpreter(DocTypeInterpreter doctypeinterpreter) {
+    this.doctypeinterpreter = doctypeinterpreter;
+  }
+  
+  public void fillComponents(UIContainer tofill, ViewParameters viewparamso,
+      ComponentChecker checker) {
+    SearchResultsParams viewparams = (SearchResultsParams) viewparamso;
+
+    if (viewparams.pageno == null) {
+      viewparams.pageno = new Integer(1);
+    }
+
+    SearchParams params = viewparams.params;
+
+    SearchResultsParams pagesizeparams = (SearchResultsParams) viewparams
+        .copyBase();
+    pagesizeparams.pagesize = null;
+    UIForm repage = UIForm.make(tofill, "repage-form", pagesizeparams);
+    UISelect.make(repage, "pagesize", SearchResultsParams.pagesizes,
+        SearchResultsParams.pagesizes, (viewparams.pagesize).toString());
+
+    SearchResultsParams sortparams = (SearchResultsParams) viewparams
+        .copyBase();
+    pagesizeparams.params.sort = null;
+    UIForm resort = UIForm.make(tofill, "resort-form", sortparams);
+    UISelect.make(resort, "sort", SearchParams.SORT_OPTIONS,
+        SearchParams.SORT_OPTIONS_NAMES, (viewparams.pagesize).toString());
+
+    boolean issingleitemquery = StringUtils.hasText(params.identifier);
+    boolean isfreetext = StringUtils.hasText(params.freetext);
+
+    int pagesize = viewparams.pagesize.intValue();
+    int thispage = viewparams.pageno.intValue();
+    if (thispage < 1)
+      thispage = 1;
+    if (pagesize < 5)
+      pagesize = 5;
+
+    int start = (thispage - 1) * pagesize;
+    int limit = start + pagesize;
+
+    if (thispage != 1) {
+      SearchResultsParams prevparams = (SearchResultsParams) viewparams
+          .copyBase();
+      prevparams.pageno = new Integer(thispage - 1);
+      UIInternalLink.make(tofill, "previous-page-text", prevparams);
+    }
+    else {
+      UIOutput.make(tofill, "no-previous-text");
+    }
+    SearchResultsParams gotoparams = (SearchResultsParams) viewparams
+        .copyBase();
+    gotoparams.pageno = null;
+    UIForm gotoform = UIForm.make(tofill, "goto-form", gotoparams);
+    // submit button and input field are self-sufficient in template.
+
+    try {
+      Query query = querybuilder.convertQuery(params);
+
+      UIOutput.make(tofill, "search-string", query.toString());
+
+      Sort sort = QueryBuilder.convertSort(params);
+      IndexSearcher searcher = itemsearcher.getIndexSearcher();
+
+      Hits hits = searcher.search(query, sort);
+
+      if (hits.length() == 0) {
+        UIOutput.make(tofill, "no-results");
+      }
+      else {
+        if (limit > hits.length())
+          limit = hits.length();
+        if (start >= limit)
+          start = limit - pagesize;
+        if (start < 0)
+          start = 0;
+        // 101 / 10 = 11, 100/10 = 10, 99/10 -> 10
+        int maxpage = (hits.length() + (pagesize - 1)) / pagesize;
+
+        UIOutput.make(tofill, "this-page", Integer.toString(thispage));
+        UIOutput.make(tofill, "page-max", Integer.toString(maxpage));
+        if (thispage < maxpage) {
+          SearchResultsParams nextparams = (SearchResultsParams) viewparams
+              .copyBase();
+          nextparams.pageno = new Integer(thispage + 1);
+          UIInternalLink.make(tofill, "next-page-text", nextparams);
+        }
+        else {
+          UIOutput.make(tofill, "no-next-text");
+        }
+
+        UIOutput.make(tofill, "this-page-hits", (start + 1) + "-" + limit);
+        UIOutput.make(tofill, "totalhits", Integer.toString(hits.length()));
+
+        for (int i = start; i < limit; ++i) {
+          Document hit = hits.doc(i);
+          
+        
+          NavParams navparams = findLink(hit, params.freetext);
+          
+          UIBranchContainer hitrow = UIBranchContainer.make(tofill,
+              "hit-item:", Integer.toString(i));
+          String doctype = hit.get("documenttype");
+          String datestring = hit.get(ItemFields.DATESTRING);
+          String name = hit.get("name");
+          UIOutput.make(hitrow, "document-type", doctype);
+          UIOutput.make(hitrow, "name", name);
+          UIOutput.make(hitrow, "description", hit.get("description"));
+          UIOutput.make(hitrow, "identifier", hit.get("identifier"));
+          UIOutput.make(hitrow, "date", datestring);
+       
+          if (!doctypeinterpreter.isType(doctype, DocTypeInterpreter.CORRESPONDENCE)) {
+           
+            String attribtitle = hit.get("attrib-title");
+            if (navparams != null) {
+              UIInternalLink.make(hitrow, "attrib-title-link", attribtitle, navparams);
+            }
+            else {
+              UIOutput.make(hitrow, "attrib-title", attribtitle);
+            }
+          }
+          else {
+            UIOutput.make(hitrow, "place-created", hit.get("place"));
+            if (navparams != null) {
+              UIInternalLink.make(hitrow, "name-link", name, navparams);
+            }
+            else {
+              UIOutput.make(hitrow, "name", name);
+            }
+          }
+
+          if (isfreetext) {
+            float score = hits.score(i);
+            String relperc = (int) (score * 100) + "%";
+            UIOutput.make(hitrow, "hit-weight", relperc);
+            String pagetext = hit.get(DocFields.FLAT_TEXT);
+            String rendered = DarwinHighlighter.getHighlightedHit(query,
+                pagetext, searcher.getIndexReader());
+            UIVerbatim.make(hitrow, "rendered-hit", rendered);
+          }
+        }
+      }
+
+    }
+    catch (Exception e) {
+      Logger.log.warn("Error performing query: ", e);
+    }
+  }
+
+  private NavParams findLink(Document hit, String freetext) {
+    String pageno = hit.get(DocFields.PAGESEQ_START);
+    if (pageno != null) {
+      NavParams togo = new NavParams();
+      togo.itemID = hit.get("identifier");
+      togo.pageseq = Integer.parseInt(pageno);
+      DarwinUtil.chooseBestView(togo, itemcollection);
+      togo.viewID = FramesetProducer.VIEWID;
+      togo.keywords = freetext;
+      return togo;
+    }
+    return null;
+  }
+
+}

@@ -18,10 +18,11 @@ import uk.org.ponder.rsf.viewstate.ViewParameters;
 
 public class FramesetProducer implements ViewComponentProducer {
   public static final String VIEWID = "frameset";
-  private RSACBeanLocator rbl;
   public String getViewID() {
     return VIEWID;
   }
+  private RSACBeanLocator rbl;
+  
   public void setRSACBeanLocator(RSACBeanLocator rbl) {
     this.rbl = rbl;
   }
@@ -29,8 +30,8 @@ public class FramesetProducer implements ViewComponentProducer {
 // View params for Frameset are the same as view params for Nav, except that
   // view id is different.
   public void fillComponents(UIContainer tofill, ViewParameters origviewparams, 
-      ComponentChecker checker) {
-    NavParams navparams = (NavParams) origviewparams.copyBase();
+      ComponentChecker checker) { 
+    NavParams navparams = (NavParams) origviewparams.copyBase(); 
     navparams.viewID = NavFrameProducer.VIEWID;
     
 // pass through our parameters to the Nav frame.

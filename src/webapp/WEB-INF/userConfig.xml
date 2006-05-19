@@ -8,6 +8,9 @@
   <bean id="externalContentRoot" class="java.lang.String">
     <constructor-arg><value>http://localhost:48080/Darwin/converted</value></constructor-arg>
   </bean>
+   <bean id="itemDirectory" class="java.lang.String">
+    <constructor-arg><value>E:\workspace\I-DarwinServlet\src\webapp\database</value></constructor-arg>
+  </bean>
   <bean id="indexDirectory" class="java.lang.String">
     <constructor-arg><value>e:\lucendo\darwin\index</value></constructor-arg>
   </bean>

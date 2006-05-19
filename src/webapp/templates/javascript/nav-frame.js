@@ -93,3 +93,16 @@ function onPageSelect() {
   var selected = getElement("page-select-selection").selectedIndex;
   setPage(selected + 1);
 }
+
+function handleFieldKeyPress(e, input){
+  var key=e.keyCode || e.which;
+    if (key == 13) {
+      var submitlink = getElement("search-submit");
+      alert ("Got element " + submitlink);
+      var submiturl = submitlink.href;
+      alert ("Got href " + submiturl + " input " + input);
+      var inputval = input.value;
+      alert ("Got value" + inputval);
+      top.location = submiturl + "&freetext=" + inputval ;
+      }
+}

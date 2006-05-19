@@ -17,7 +17,9 @@ import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.parse.ContentParser;
 import uk.org.ponder.darwin.parse.Extensions;
 import uk.org.ponder.darwin.parse.URLMapper;
+import uk.org.ponder.rsf.content.ContentTypeInfoRegistry;
 import uk.org.ponder.rsf.processor.HandlerHook;
+import uk.org.ponder.rsf.request.EarlyRequestParser;
 import uk.org.ponder.rsf.servlet.RootHandlerBean;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
@@ -71,7 +73,7 @@ public class DarwinHandlerHook implements HandlerHook {
   
   public boolean handle() {
     if (handlerhook == null || !handlerhook.handle()) {
-      if (requesttype.equals(ViewParameters.RENDER_REQUEST)) {
+      if (requesttype.equals(EarlyRequestParser.RENDER_REQUEST)) {
         if (viewparams instanceof PageRenderParams) {
           renderPage((PageRenderParams) viewparams);
           return true;
@@ -94,7 +96,9 @@ public class DarwinHandlerHook implements HandlerHook {
     // TODO: This is probably quite a security risk!!
     String fullpath = params.contentfile;
     
-    PrintOutputStream pos = RootHandlerBean.setupResponseWriter(request, response);
+    PrintOutputStream pos = RootHandlerBean.setupResponseWriter(
+        ContentTypeInfoRegistry.HTML_CONTENTINFO.contentTypeHeader,
+        request, response);
     RenderingParseReceiver rpr = new RenderingParseReceiver();
     rpr.setURLMapper(urlmapper);
     rpr.setOutputStream(pos);

@@ -4,7 +4,6 @@
 package uk.org.ponder.darwin.rsf;
 
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
-import uk.org.ponder.stringutil.StringList;
 
 /**
  * Specifies either the top frameset, or navigation frame.
@@ -12,12 +11,9 @@ import uk.org.ponder.stringutil.StringList;
  * 
  */
 public class NavParams extends SimpleViewParameters {
-  private static StringList attrnames = 
-    StringList.fromString("flowtoken, endflow, errortoken, errorredirect, itemID, viewtype, pageseq");
-  
-  public StringList getAttributeFields() {
-    return attrnames;
-   }  
+  public String getParseSpec() {
+    return super.getParseSpec() + ", itemID, viewtype, pageseq, keywords";
+  }
   
   public static final String IMAGE_VIEW = "image";
   public static final String TEXT_VIEW = "text";
@@ -25,4 +21,6 @@ public class NavParams extends SimpleViewParameters {
   public String itemID;
   public String viewtype;
   public int pageseq;
+  
+  public String keywords;
 }

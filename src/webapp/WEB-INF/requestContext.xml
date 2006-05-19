@@ -3,16 +3,6 @@
 	"http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
 
- <bean id="viewTemplateResolver"
-    class="uk.org.ponder.rsf.templateresolver.BasicTemplateResolver">
-    <property name="baseDirectory">
-      <value>/templates/html/</value>
-    </property>
-    <property name="consumerInfo">
-      <ref bean="consumerInfo" />
-    </property>
-  </bean>
-
   <bean id="itemCollection" factory-bean="itemCollectionManager" 
   factory-method="getItemCollection"/>
   
@@ -42,5 +32,6 @@
     <property name="itemCollectionManager">
       <ref bean="itemCollectionManager"/>
     </property>
+    <property name="indexItemSearcher" ref="indexItemSearcher"/>
   </bean>
 </beans>

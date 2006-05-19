@@ -19,6 +19,7 @@ import uk.org.ponder.darwin.parse.DocumentTag;
 import uk.org.ponder.darwin.parse.ParseReceiver;
 import uk.org.ponder.darwin.parse.URLMapper;
 import uk.org.ponder.darwin.rsf.components.FramesetProducer;
+import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.htmlutil.HTMLConstants;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.streamutil.StreamCopyUtil;
@@ -141,15 +142,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
             frameparams.itemID = ci.itemID;
             frameparams.pageseq = ci.firstpage;
             ItemDetails id = collection.getItem(ci.itemID);
-            if (id.hasimage) {
-              if (id.hastext) {
-                frameparams.viewtype = NavParams.SIDE_VIEW;
-              }
-              else {
-                frameparams.viewtype = NavParams.IMAGE_VIEW;
-              }
-            }
-            else frameparams.viewtype = NavParams.TEXT_VIEW;
+            DarwinUtil.chooseBestView(frameparams, collection);
             
             String globalurl = vsh.getFullURL(frameparams);
             attrmap.put(urlattr, globalurl);

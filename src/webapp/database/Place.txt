@@ -1,0 +1,113 @@
+20,"No place",0
+21,"London",0
+22,"New York",0
+23,"Paris",0
+24,"Moscow",0
+25,"St. Petersburg",0
+26,"Stuttgart",0
+27,"Akron, Ohio",0
+28,"Amsterdam",0
+29,"Ankara",0
+30,"Antwerp",0
+31,"Arnhem",0
+32,"Assen",0
+33,"Athens",0
+34,"Barcelona",0
+35,"Belgrade",0
+36,"Berkeley and Los Angeles",0
+37,"Berlin",0
+38,"Bielefeld",0
+39,"Boston",0
+40,"Bratislava",0
+41,"Breslau",0
+42,"Brunswick",0
+43,"Brussels",0
+44,"Bucharest",0
+45,"Budapest",0
+46,"Buenos Aires",0
+47,"Cambridge",0
+48,"Cambridge, Mass.",0
+49,"Chicago",0
+50,"Copenhagen",0
+51,"Delft",0
+52,"Detroit",0
+53,"Düsseldorff",0
+54,"Emaus, Pa.",0
+55,"Erevan",0
+56,"Erlangen",0
+57,"Évreux",0
+58,"Fagerstrand pr. Høvig",0
+59,"Felling-on-Tyne",0
+60,"Frankfurt am Main",0
+61,"Garden City, N.Y.",0
+62,"Geneva",0
+63,"Giessen",0
+64,"Glasgow",0
+65,"Gloucester, Mass.",0
+66,"Greenwich, Conn.",0
+67,"Haarlem",0
+68,"Halle am Saale",0
+69,"Hamburg",0
+70,"Häneenlinha",0
+71,"Harmondsworth",0
+72,"Heilbronn",0
+73,"Hong Kong",0
+74,"Jerusalem",0
+75,"Kharkov",0
+76,"Kiev",0
+77,"Kiev-Kharkov",0
+78,"Kingswood Tadworth, Surrey",0
+79,"Krakow",0
+80,"Kyoto",0
+81,"Lawrence, Kansas",0
+82,"Leipzig",0
+83,"Leningrad",0
+84,"Lisbon",0
+85,"Ljubljana",0
+86,"Lucknow",0
+87,"Madrid",0
+88,"Manchester",0
+89,"Melbourne",0
+90,"Mexico City",0
+91,"Milan",0
+92,"Modena",0
+93,"Montevideo",0
+94,"Munich",0
+95,"New Haven, Conn.",0
+96,"Novi Sad",0
+97,"Oporto",0
+98,"Pasadena",0
+99,"Peking",0
+100,"Philadelphia",0
+101,"Prague",0
+102,"Recife",0
+103,"Riga",0
+104,"Rome",0
+105,"San Francisco",0
+106,"Santiago de Chile",0
+107,"São Paulo",0
+108,"Seoul",0
+109,"Sesto San Giovanni",0
+110,"Shanghai",0
+111,"Shusha",0
+112,"Sofia",0
+113,"Stockholm",0
+114,"Taipei, Taiwan",0
+115,"Tartu",0
+116,"Tel Aviv",0
+117,"The Hague",0
+118,"Tiflis",0
+119,"Tokyo",0
+120,"Tübingen",0
+121,"Turin",0
+122,"Utrecht",0
+123,"Valencia",0
+124,"Vârset",0
+125,"Vidin",0
+126,"Vilnjus",0
+127,"Warsaw",0
+128,"Washington",0
+129,"Weinheim",0
+130,"Westmead, Farnborough, Hants",0
+131,"Westport, Conn.",0
+132,"Zagreb",0

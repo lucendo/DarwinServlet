@@ -97,5 +97,6 @@ fcth = ((Math.log(mh/original_h)/Math.log(mag_factor)) );
 fct = Math.min(fctw, fcth);
 
 clicks = fct;
+if (original_w < mw) clicks = 0;
 zoom();
 }
