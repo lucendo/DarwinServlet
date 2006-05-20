@@ -13,14 +13,15 @@
 	<tr>
 		<td class="align-left-top">
 		<form rsf:id="research-form" method="get">
-		<input name="Query" type="text" size="47" value="punctuated equilibrium" />
-		<input type="submit" id="Search" value="Search" />
+		<input rsf:id="freetext" type="text" size="35" value="punctuated equilibrium" />
+		<input type="submit" id="Search" value="Quick Search" />
 		<div style="margin-top:0.2em;"></div>
 		</form>
 		</td>
 	</tr>
 </table>
 <a href="/help/search.html">Search&nbsp;Help</a>
+<a href="." rsf:id="search-again">Search again</a>
 <p></p>
 
 <table width="98%" class="resultsInGreyBar">
@@ -71,6 +72,9 @@ correctly, or use fewer or more general keywords.
 			rsf:id="name">Darwin Charles Robert</span><a href="#"
 			rsf:id="name-link">Darwin Charles Robert</a>&nbsp; 
 			<span rsf:id="date">[1876][.02.24.after]</span>
+				<span
+			rsf:id="concise">Barrington D `Phil Trans' 1773: 164</span><a href="#"
+			rsf:id="concise-link">Barrington D `Phil Trans' 1773: 164</a>
 			<span
 			rsf:id="attrib-title">Barrington D `Phil Trans' 1773: 164</span><a href="#"
 			rsf:id="attrib-title-link">Barrington D `Phil Trans' 1773: 164</a> &nbsp;<span
@@ -96,15 +100,15 @@ correctly, or use fewer or more general keywords.
 
 <form rsf-id="goto-form" action="BasicResults" method="get">	
 	<a href="#"
-	rsf:id="previous-page-text">PREVIOUS</a>
-	<span rsf:id="no-previous-text">PREVIOUS</span>
+	rsf:id="previous-page">PREVIOUS</a>
+	<span rsf:id="no-previous-text"></span>
 	&nbsp;&nbsp;&nbsp; <b> Page <span rsf-id="this-page">1</span> of
 <span rsf:id="page-max">182</span>.</b> Go to page: 
-<input name="pageno" type="text" size="5" maxlength="7" /> 
+<input rsf:id="pageno" type="text" size="5" maxlength="7" /> 
 <input type="submit" id="GotoPage.Go" value="Go" />
 &nbsp;&nbsp;&nbsp; 
-<a href="#" rsf:id="next-page">NEXT </a>
-<span rsf:id="no-next-text">NEXT</span>
+<a href="#" rsf:id="next-page-text">NEXT</a>
+<span rsf:id="no-next-text"></span>
 </form>
 </div>
 </div>

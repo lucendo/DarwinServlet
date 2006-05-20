@@ -7,6 +7,8 @@ import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.parse.URLMapper;
+import uk.org.ponder.darwin.rsf.AdvancedSearchParams;
+import uk.org.ponder.darwin.rsf.SearchResultsParams;
 import uk.org.ponder.darwin.rsf.TextBlockRenderParams;
 import uk.org.ponder.darwin.rsf.NavParams;
 import uk.org.ponder.darwin.rsf.ViewParamGetter;
@@ -132,6 +134,9 @@ public class NavFrameProducer implements ViewComponentProducer {
     if (switchany) {
       UIOutput.make(tofill, "switch-any");
     }
+    
+    UIInternalLink.make(tofill, "advanced-search", new AdvancedSearchParams());
+    UIInternalLink.make(tofill, "search-submit", new SearchResultsParams());
   }
 
 }

@@ -34,4 +34,5 @@
     </property>
     <property name="indexItemSearcher" ref="indexItemSearcher"/>
   </bean>
+   
 </beans>

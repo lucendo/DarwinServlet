@@ -14,7 +14,6 @@ import uk.org.ponder.rsf.components.UIBoundBoolean;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIForm;
 import uk.org.ponder.rsf.components.UISelect;
-import uk.org.ponder.rsf.request.EarlyRequestParser;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
@@ -35,12 +34,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer, ViewParams
   public void fillComponents(UIContainer tofill, ViewParameters viewparamso, 
       ComponentChecker checker) {
     AdvancedSearchParams viewparams = (AdvancedSearchParams) viewparamso;
-    UIForm searchform = UIForm.make(tofill, "search-form");
-    searchform.type = EarlyRequestParser.RENDER_REQUEST;
-    SearchResultsParams searchresparams = new SearchResultsParams();
-    searchresparams.viewID = SearchResultsProducer.VIEWID;
-    
-    searchform.viewparams = searchresparams;
+    UIForm searchform = UIForm.make(tofill, "search-form", new SearchResultsParams());
     
     UIBoundBoolean manuscripts = UIBoundBoolean.make(searchform, "manuscripts", 
         viewparams.manuscripts);

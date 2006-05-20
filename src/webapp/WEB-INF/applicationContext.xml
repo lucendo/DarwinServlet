@@ -110,16 +110,14 @@
 
   <bean id="siteMap" parent="siteMapDef"/>
 
-  <bean id="defaultView" class="java.lang.String">
-    <constructor-arg>
-      <value>/missing</value>
-    </constructor-arg>
-  </bean>
-
   <bean name="requestAddressibleBeans"
     class="uk.org.ponder.springutil.StringListFactory">
     <property name="strings">
       <value>icmtrigger</value>
     </property>
+  </bean>
+  
+  <bean id="defaultViewProxy" class="uk.org.ponder.stringutil.StringHolder">
+    <property name="value" value="/missing"/>
   </bean>
 </beans>
