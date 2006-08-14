@@ -10,22 +10,16 @@
     </property>
   </bean>
 
- <bean id="templateResolverStrategy" class="uk.org.ponder.rsf.templateresolver.CRITemplateResolverStrategy">
-    <property name="baseDirectory">
-      <value>/templates/html/</value>
-    </property>
-    <property name="consumerInfo">
-      <ref bean="consumerInfoProxy" />
-    </property>  
-  </bean>
+ <bean id="templateResolverStrategy" 
+  class="uk.org.ponder.rsf.templateresolver.CRITemplateResolverStrategy">
+    <property name="baseDirectory" value="templates/html/"/>
+    <property name="consumerInfo" ref="consumerInfoProxy"/>
+    <property name="contextURLProvider" ref="contextURLProvider"/>
+ </bean>
 
   <bean id="urlMapper" class="uk.org.ponder.darwin.parse.URLMapper">
-    <property name="contentRoot">
-      <ref bean="contentRoot" />
-    </property>
-    <property name="externalContentRoot">
-      <ref bean="externalContentRoot" />
-    </property>
+    <property name="contentRoot" ref="contentRoot"/>
+    <property name="externalContentRoot" ref="externalContentRoot"/>
   </bean>
   
   <bean id="analyzer" class="uk.org.ponder.darwin.lucene.DarwinAnalyzer"/>
@@ -68,26 +62,18 @@
 
   <bean id="frameset-view"
     class="uk.org.ponder.darwin.rsf.components.FramesetProducer">
-    <property name="RSACBeanLocator">
-      <ref bean="RSACBeanLocator" />
-    </property>
+    <property name="RSACBeanLocator" ref="RSACBeanLocator"/>
   </bean>
 
   <bean id="navframe-view"
     class="uk.org.ponder.darwin.rsf.components.NavFrameProducer">
-    <property name="RSACBeanLocator">
-      <ref bean="RSACBeanLocator" />
-    </property>
-    <property name="URLMapper">
-      <ref bean="urlMapper"/>
-    </property>
+    <property name="RSACBeanLocator" ref="RSACBeanLocator"/>
+    <property name="URLMapper" ref="urlMapper"/>
   </bean>
 
   <bean id="status-view"
     class="uk.org.ponder.darwin.rsf.components.StatusProducer">
-    <property name="itemCollectionManager">
-      <ref local="itemCollectionManager" />
-    </property>
+    <property name="itemCollectionManager" ref="itemCollectionManager"/>
   </bean>
   
   <bean id="search-results-view"
@@ -112,9 +98,7 @@
 
   <bean name="requestAddressibleBeans"
     class="uk.org.ponder.springutil.StringListFactory">
-    <property name="strings">
-      <value>icmtrigger</value>
-    </property>
+    <property name="strings" value="icmtrigger"/>
   </bean>
   
   <bean id="defaultViewProxy" class="uk.org.ponder.stringutil.StringHolder">

@@ -1,4 +1,5 @@
 <sitemap>
+<!--  NB, this was broken in 0.6.3, look into it at some point -->
   <view key="nav-frame" type="uk.org.ponder.darwin.rsf.NavParams"/>
   <view key="frameset" type="uk.org.ponder.darwin.rsf.NavParams"/>
   <view key="content" type="uk.org.ponder.darwin.rsf.PageRenderParams"/>

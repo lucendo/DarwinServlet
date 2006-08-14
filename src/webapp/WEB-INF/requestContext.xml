@@ -7,31 +7,17 @@
   factory-method="getItemCollection"/>
   
   <bean id="handlerHook" class="uk.org.ponder.darwin.rsf.DarwinHandlerHook">
-    <property name="httpServletRequest">
-      <ref bean="httpServletRequest" />
-    </property>
-    <property name="httpServletResponse">
-      <ref bean="httpServletResponse" />
-    </property>
-    <property name="requestType">
-      <ref bean="requestType" />
-    </property>
-    <property name="itemCollection">
-      <ref bean="itemCollection" />
-    </property>
-    <property name="viewParameters">
-      <ref bean="viewParameters" />
-    </property>
-    <property name="viewStateHandler" ref="viewStateHandler"></property>
-    <property name="URLMapper">
-      <ref bean="urlMapper"/>
-    </property>
+    <property name="httpServletRequest" ref="httpServletRequest"/>
+    <property name="httpServletResponse" ref="httpServletResponse"/>
+    <property name="requestType" ref="requestType"/>
+    <property name="itemCollection" ref="itemCollection"/>
+    <property name="viewParameters" ref="viewParameters"/>
+    <property name="viewStateHandler" ref="viewStateHandler"/>
+    <property name="URLMapper" ref="urlMapper"/>
   </bean>
   
   <bean id="icmtrigger" class="uk.org.ponder.darwin.rsf.beans.ICMTrigger">
-    <property name="itemCollectionManager">
-      <ref bean="itemCollectionManager"/>
-    </property>
+    <property name="itemCollectionManager" ref="itemCollectionManager"/>
     <property name="indexItemSearcher" ref="indexItemSearcher"/>
   </bean>
    

@@ -15,38 +15,47 @@ import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
+import uk.org.ponder.rsf.viewstate.ViewParamsReporter;
 
-public class FramesetProducer implements ViewComponentProducer {
+public class FramesetProducer implements ViewComponentProducer,
+    ViewParamsReporter {
   public static final String VIEWID = "frameset";
+
   public String getViewID() {
     return VIEWID;
   }
+
+  public ViewParameters getViewParameters() {
+    return new NavParams();
+  }
+
   private RSACBeanLocator rbl;
-  
+
   public void setRSACBeanLocator(RSACBeanLocator rbl) {
     this.rbl = rbl;
   }
 
-// View params for Frameset are the same as view params for Nav, except that
+  // View params for Frameset are the same as view params for Nav, except that
   // view id is different.
-  public void fillComponents(UIContainer tofill, ViewParameters origviewparams, 
-      ComponentChecker checker) { 
-    NavParams navparams = (NavParams) origviewparams.copyBase(); 
+  public void fillComponents(UIContainer tofill, ViewParameters origviewparams,
+      ComponentChecker checker) {
+    NavParams navparams = (NavParams) origviewparams.copyBase();
     navparams.viewID = NavFrameProducer.VIEWID;
-    
-// pass through our parameters to the Nav frame.
+
+    // pass through our parameters to the Nav frame.
     UIInternalLink.make(tofill, ComponentIDs.NAV_FRAME, navparams);
-    
-// select the correct frameset type
-    UIBranchContainer frameset = UIBranchContainer.make(tofill, 
+
+    // select the correct frameset type
+    UIBranchContainer frameset = UIBranchContainer.make(tofill,
         ComponentIDs.FRAMES_PREFIX + navparams.viewtype);
-    if (navparams.viewtype.equals(NavParams.TEXT_VIEW) 
+    if (navparams.viewtype.equals(NavParams.TEXT_VIEW)
         || navparams.viewtype.equals(NavParams.SIDE_VIEW)) {
       TextBlockRenderParams params = new TextBlockRenderParams();
       params.itemID = navparams.itemID;
       params.pageseq = navparams.pageseq;
 
-      ItemCollection collection = (ItemCollection) rbl.getBeanLocator().locateBean("itemCollection");
+      ItemCollection collection = (ItemCollection) rbl.getBeanLocator()
+          .locateBean("itemCollection");
       ViewParamGetter.fillTextParams(collection, params);
       if (params.contentfile != null) {
         UIInternalLink.make(frameset, ComponentIDs.TEXT_FRAME, params);
@@ -57,7 +66,7 @@ public class FramesetProducer implements ViewComponentProducer {
         UIInternalLink.make(frameset, ComponentIDs.TEXT_FRAME, missingparam);
       }
     }
-    
-  } 
- 
+
+  }
+
 }

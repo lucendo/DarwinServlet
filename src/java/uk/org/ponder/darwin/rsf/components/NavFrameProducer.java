@@ -20,13 +20,14 @@ import uk.org.ponder.rsf.components.UISelect;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
+import uk.org.ponder.rsf.viewstate.ViewParamsReporter;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 
 /**
  * @author Antranig Basman (amb26@ponder.org.uk)
  * 
  */
-public class NavFrameProducer implements ViewComponentProducer {
+public class NavFrameProducer implements ViewComponentProducer, ViewParamsReporter {
   public static final String VIEWID = "nav-frame";
   // private ItemCollection collection;
   private RSACBeanLocator rbl;
@@ -137,6 +138,10 @@ public class NavFrameProducer implements ViewComponentProducer {
     
     UIInternalLink.make(tofill, "advanced-search", new AdvancedSearchParams());
     UIInternalLink.make(tofill, "search-submit", new SearchResultsParams());
+  }
+
+  public ViewParameters getViewParameters() {
+    return new NavParams();
   }
 
 }
