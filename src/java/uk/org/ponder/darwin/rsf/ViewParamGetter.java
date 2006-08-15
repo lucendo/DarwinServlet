@@ -12,7 +12,7 @@ public class ViewParamGetter {
       TextBlockRenderParams tofill) {
     ItemDetails details = coll.getItem(tofill.itemID);
     if (details != null) {
-      PageInfo pageinfo = (PageInfo) details.pages.get(tofill.pageseq);
+      PageInfo pageinfo = (PageInfo) details.pages.get(tofill.pageseq.intValue());
       tofill.contentfile = pageinfo.contentfile;
     }
     return tofill;

@@ -3,23 +3,31 @@
  */
 package uk.org.ponder.darwin.rsf;
 
+import java.io.CharArrayReader;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
+import org.apache.lucene.analysis.Token;
+import org.apache.lucene.analysis.TokenStream;
 import org.springframework.core.io.InputStreamSource;
 import org.xmlpull.v1.XmlPullParser;
 
 import uk.org.ponder.darwin.item.ContentInfo;
 import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
+import uk.org.ponder.darwin.lucene.DarwinAnalyzer;
 import uk.org.ponder.darwin.parse.Attributes;
 import uk.org.ponder.darwin.parse.BaseParser;
 import uk.org.ponder.darwin.parse.Constants;
 import uk.org.ponder.darwin.parse.DocumentTag;
+import uk.org.ponder.darwin.parse.PageTag;
 import uk.org.ponder.darwin.parse.ParseReceiver;
 import uk.org.ponder.darwin.parse.URLMapper;
 import uk.org.ponder.darwin.rsf.components.FramesetProducer;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
+import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.htmlutil.HTMLConstants;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.streamutil.StreamCopyUtil;
@@ -38,7 +46,8 @@ import uk.org.ponder.xml.XMLWriter;
  * @author Antranig Basman (amb26@ponder.org.uk)
  */
 // This class is written in inestimably poor style. I apologise.
-// It is in this package because of dependence on ViewStateHandler to render links.
+// It is in this package because of dependence on ViewStateHandler to render
+// links.
 public class RenderingParseReceiver extends BaseParser implements ParseReceiver {
 
   private PrintOutputStream pos;
@@ -53,6 +62,9 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   private String contentpath;
   private ItemCollection collection;
   private ViewStateHandler vsh;
+  private String keywords;
+  private Map keytoind;
+  private int hitpage;
 
   public void setOutputStream(PrintOutputStream pos) {
     this.pos = pos;
@@ -70,11 +82,19 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   public void setItemCollection(ItemCollection collection) {
     this.collection = collection;
   }
-  
+
   public void setViewStateHandler(ViewStateHandler vsh) {
     this.vsh = vsh;
   }
+
+  public void setKeywords(String keywords) {
+    this.keywords = keywords;
+  }
   
+  public void setHitPage(int hitpage) {
+    this.hitpage = hitpage;
+  }
+
   int currentpage = -1;
 
   public void metObject(Object tagobj) {
@@ -84,6 +104,8 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   boolean inpagetag = false;
+  boolean doneheader;
+  boolean dumponclose = false;
 
   public static String getURLAttr(String tagname) {
     for (int i = 0; i < HTMLConstants.tagtoURL.length; ++i) {
@@ -99,7 +121,8 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   // called by the CONTENT reader when tag is received.
-  public void protoTag(String tagname, String clazz, HashMap attrmap, boolean isempty) {
+  public void protoTag(String tagname, String clazz, HashMap attrmap,
+      boolean isempty) {
     flushBuffer(true);
     if (Attributes.PAGE_CLASS.equals(clazz)) {
       // I am without style
@@ -120,21 +143,27 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       attrmap.put(Attributes.PAGESEQ_ATTR, "" + pageseq);
       tagname = "a";
       inpagetag = true;
+      if (currentpage == hitpage + 1) {
+        dumponclose = true;    
+        doneheader = true;
+      }
     }
     String exptag = "<" + tagname + " ";
-    // Deal with rewriting for embedded links and images - need to resynthesize top &c
+    // Deal with rewriting for embedded links and images - need to resynthesize
+    // top &c
     String urlattr = getURLAttr(exptag);
     if (urlattr != null) {
       String url = (String) attrmap.get(urlattr);
       if (url != null && !url.startsWith("http://") && !url.equals("#")) {
-        if (urlattr.equals("href") && tagname.equals("a") && 
-            !attrmap.containsKey("target")) {
+        if (urlattr.equals("href") && tagname.equals("a")
+            && !attrmap.containsKey("target")) {
           // It's an inter-book link
           String targetpath = urlmapper.relURLToAbsolute(url, contentpath);
           ContentInfo ci = collection.getContentInfo(targetpath);
           if (ci == null) {
-            Logger.log.warn("Unable to find ContentInfo for target path " + targetpath + 
-                " arising from relative link URL " + url + " for content path " + contentpath);
+            Logger.log.warn("Unable to find ContentInfo for target path "
+                + targetpath + " arising from relative link URL " + url
+                + " for content path " + contentpath);
           }
           else {
             NavParams frameparams = new NavParams();
@@ -143,7 +172,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
             frameparams.pageseq = ci.firstpage;
             ItemDetails id = collection.getItem(ci.itemID);
             DarwinUtil.chooseBestView(frameparams, collection);
-            
+
             String globalurl = vsh.getFullURL(frameparams);
             attrmap.put(urlattr, globalurl);
             attrmap.put("target", "_top");
@@ -159,7 +188,36 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     pos.print("<" + tagname + " ");
     XMLUtil.dumpAttributes(attrmap, xmlw);
 
-    pos.print(isempty? "/>" :">");
+    pos.print(isempty ? "/>"
+        : ">");
+  }
+
+
+  public void endTag(String tagname) {
+  }
+
+  
+  private String getKeyword(int i) {
+    for (Iterator it = keytoind.keySet().iterator(); it.hasNext();) {
+      String keyword = (String) it.next();
+      Integer ind = (Integer) keytoind.get(keyword);
+      if (ind.intValue() == i)
+        return keyword;
+    }
+    return "";
+  }
+
+  private void dumpHeader() {
+    buffer.append("<table border=0 cellpadding=0 cellspacing=0><tr><td>"
+            + "<font face=\"\" color=black size=-1>The following search terms have been highlighted:&nbsp;</font></td>");
+    for (int i = 0; i < keytoind.size(); ++i) {
+      String keyword = getKeyword(i);
+      String bgcol = TermColours.TERM_COLOURS[i];
+      String fgcol = TermColours.getContrastColour(i);
+      buffer.append("<td bgcolor=" + bgcol + "><b><font face=\"\" color=" + fgcol
+          + " size=-1>" + keyword + "&nbsp;</font></b></td>");
+    }
+    buffer.append("</tr></table>");
   }
 
   // text received from CONTENT.
@@ -170,6 +228,14 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
         buffer.append("</a>");
       }
       inpagetag = false;
+      if (dumponclose) {
+        try {
+          dumpHeader();
+        }
+        finally {
+          dumponclose = false;
+        }
+      }
     }
     if ((templatesource == null || editable)
         && token != XmlPullParser.START_TAG) {
@@ -221,12 +287,27 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     }
   }
 
+  private void parseKeywords() {
+    if (keywords != null && !keywords.equals("")) {
+      keytoind = new HashMap();
+      String[] split = keywords.split(" ");
+      for (int i = 0; i < split.length; ++i) {
+        keytoind.put(split[i], new Integer(i));
+      }
+      if (keytoind.size() == 0) {
+        keytoind = null;
+      }
+    }
+  }
+
   public void beginFile(String contentpath) {
     this.contentpath = contentpath;
     editable = false;
     currenteditableclass = null;
     currentpage = -1;
     inpagetag = false;
+    parseKeywords();
+    doneheader = false;
     // parser.setFeature(FEATURE_XML_ROUNDTRIP, true);
     if (templatesource != null) {
       try {
@@ -246,17 +327,55 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void flushBuffer(boolean unconditional) {
-    // TODO: At this point we will highlight search hits, since we will
-    // have ViewParameters as a dependence. Before this can happen, we need
-    // to refactor ViewParameters so that the payload has no further RSF
-    // dependence.
-    if (unconditional || buffer.size > StreamCopyUtil.PROCESS_BUFFER_SIZE) {
-      pos.write(buffer.storage, 0, buffer.size);
-      buffer.clear();
+    if (unconditional
+        || (buffer.size > StreamCopyUtil.PROCESS_BUFFER_SIZE && keytoind == null)) {
+      output();
     }
   }
 
-  public void endTag(String tagname) {
+  private void outputHighlight() {
+    DarwinAnalyzer analyzer = new DarwinAnalyzer();
+    TokenStream ts = analyzer.tokenStream(DocFields.TEXT, new CharArrayReader(
+        buffer.storage, 0, buffer.size));
+    int writpos = 0;
+    while (true) {
+      try {
+        Token t = ts.next();
+        if (t == null)
+          break;
+        Integer termindi = (Integer) keytoind.get(t.termText());
+        if (termindi == null)
+          continue;
+        else {
+          pos.write(buffer.storage, writpos, t.startOffset() - writpos);
+          int termind = termindi.intValue() % TermColours.TERM_COLOURS.length;
+          String bgcol = TermColours.TERM_COLOURS[termind];
+          String fgcol = TermColours.getContrastColour(termind);
+          pos.print("<b style=\"color:" + fgcol + ";background-color:" + bgcol
+              + "\">");
+          pos.print(t.termText());
+          pos.print("</b>");
+          writpos = t.endOffset();
+        }
+
+      }
+      catch (Exception e) {
+        Logger.log.warn("Error reparsing text for highlighting", e);
+        break;
+      }
+    }
+    pos.write(buffer.storage, writpos, buffer.size - writpos);
+  }
+
+  private void output() {
+    if (keytoind == null) {
+      pos.write(buffer.storage, 0, buffer.size);
+      buffer.clear();
+    }
+    else {
+      outputHighlight();
+      buffer.clear();
+    }
   }
 
 }

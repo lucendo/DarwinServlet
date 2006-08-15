@@ -3,7 +3,12 @@
  */
 package uk.org.ponder.darwin.rsf.components;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.search.Hits;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
@@ -35,7 +40,9 @@ import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.rsf.viewstate.ViewParamsReporter;
+import uk.org.ponder.stringutil.CharWrap;
 import uk.org.ponder.util.Logger;
+import uk.org.ponder.util.UniversalRuntimeException;
 
 public class SearchResultsProducer implements ViewComponentProducer,
     ViewParamsReporter {
@@ -69,6 +76,31 @@ public class SearchResultsProducer implements ViewComponentProducer,
     this.doctypeinterpreter = doctypeinterpreter;
   }
 
+
+  private String rewriteQuery(Query unrwquery) {
+    try {
+      CharWrap togo = new CharWrap();
+      Query query = unrwquery.rewrite(itemsearcher.getIndexSearcher().getIndexReader());
+      Set terms = new HashSet();
+      query.extractTerms(terms);
+      
+      boolean first = true;
+      for (Iterator it = terms.iterator(); it.hasNext();) {
+        Term term = (Term) it.next();
+        String text = term.text();
+        if (!first) {
+          togo.append(" ");
+        }
+        first = false;
+        togo.append(text);
+      }
+      return togo.toString();
+    }
+    catch (Exception e) {
+      throw UniversalRuntimeException.accumulate(e, "Error rewriting query " + unrwquery);
+    }
+  }
+  
   public void fillComponents(UIContainer tofill, ViewParameters viewparamso,
       ComponentChecker checker) {
     SearchResultsParams viewparams = (SearchResultsParams) viewparamso;
@@ -161,8 +193,9 @@ public class SearchResultsProducer implements ViewComponentProducer,
 
         for (int i = start; i < limit; ++i) {
           Document hit = hits.doc(i);
-
-          NavParams navparams = findLink(hit, params.freetext);
+          
+          String keywords = rewriteQuery(query);
+          NavParams navparams = findLink(hit, keywords);
 
           UIBranchContainer hitrow = UIBranchContainer.make(tofill,
               "hit-item:", Integer.toString(i));
@@ -228,6 +261,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
     }
   }
 
+
   private NavParams findLink(Document hit, String freetext) {
     String pageno = hit.get(DocFields.PAGESEQ_START);
     if (pageno != null) {
@@ -236,6 +270,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
       togo.pageseq = Integer.parseInt(pageno);
       DarwinUtil.chooseBestView(togo, itemcollection);
       togo.viewID = FramesetProducer.VIEWID;
+      
       togo.keywords = freetext;
       return togo;
     }

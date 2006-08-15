@@ -52,11 +52,15 @@ public class FramesetProducer implements ViewComponentProducer,
         || navparams.viewtype.equals(NavParams.SIDE_VIEW)) {
       TextBlockRenderParams params = new TextBlockRenderParams();
       params.itemID = navparams.itemID;
-      params.pageseq = navparams.pageseq;
+      params.pageseq = new Integer(navparams.pageseq);
+      params.keywords = navparams.keywords;
+      params.hitpage = navparams.pageseq;
 
       ItemCollection collection = (ItemCollection) rbl.getBeanLocator()
           .locateBean("itemCollection");
       ViewParamGetter.fillTextParams(collection, params);
+      // This line ridiculous fix for initial anchor issue problem
+      params.pageseq = null;
       if (params.contentfile != null) {
         UIInternalLink.make(frameset, ComponentIDs.TEXT_FRAME, params);
       }

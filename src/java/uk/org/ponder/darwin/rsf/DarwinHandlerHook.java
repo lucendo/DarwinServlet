@@ -92,7 +92,7 @@ public class DarwinHandlerHook implements HandlerHook {
 
   private void renderTextBlock(TextBlockRenderParams params) {
     ItemDetails item = collection.getItem(params.itemID);
-    PageInfo pi = (PageInfo) item.pages.get(params.pageseq);
+    //PageInfo pi = (PageInfo) item.pages.get(params.pageseq.intValue());
     // TODO: This is probably quite a security risk!!
     String fullpath = params.contentfile;
     
@@ -104,6 +104,8 @@ public class DarwinHandlerHook implements HandlerHook {
     rpr.setOutputStream(pos);
     rpr.setItemCollection(collection);
     rpr.setViewStateHandler(viewstatehandler);
+    rpr.setKeywords(params.keywords);
+    rpr.setHitPage(params.hitpage);
     ContentParser cp = new ContentParser();
     InputStream is = null;
     try {

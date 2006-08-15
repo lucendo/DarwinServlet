@@ -67,7 +67,10 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
       contentparams.itemID = navparams.itemID;
       for (int i = 1; i < item.pages.size(); ++i) {
         PageInfo page = (PageInfo) item.pages.get(i);
-        contentparams.pageseq = page.sequence;
+        contentparams.pageseq = new Integer(page.sequence);
+        contentparams.keywords = navparams.keywords;
+        contentparams.hitpage = navparams.pageseq;
+        
         ViewParamGetter.fillTextParams(collection, contentparams);
         String texturl = vsh.getFullURL(contentparams);
         UIOutput.make(tofill, ComponentIDs.TEXT_TARGET + i, texturl);
