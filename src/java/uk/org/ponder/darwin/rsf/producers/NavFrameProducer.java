@@ -1,17 +1,17 @@
 /*
  * Created on 14-Dec-2005
  */
-package uk.org.ponder.darwin.rsf.components;
+package uk.org.ponder.darwin.rsf.producers;
 
 import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.parse.URLMapper;
-import uk.org.ponder.darwin.rsf.AdvancedSearchParams;
-import uk.org.ponder.darwin.rsf.SearchResultsParams;
-import uk.org.ponder.darwin.rsf.TextBlockRenderParams;
-import uk.org.ponder.darwin.rsf.NavParams;
 import uk.org.ponder.darwin.rsf.ViewParamGetter;
+import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
+import uk.org.ponder.darwin.rsf.params.NavParams;
+import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
+import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
 import uk.org.ponder.rsac.RSACBeanLocator;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;

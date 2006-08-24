@@ -1,9 +1,9 @@
 /*
  * Created on 07-May-2006
  */
-package uk.org.ponder.darwin.rsf;
+package uk.org.ponder.darwin.rsf.params;
 
-import uk.org.ponder.darwin.rsf.components.SearchResultsProducer;
+import uk.org.ponder.darwin.rsf.producers.SearchResultsProducer;
 import uk.org.ponder.darwin.search.SearchParams;
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
 

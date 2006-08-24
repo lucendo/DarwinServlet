@@ -1,14 +1,14 @@
 /*
  * Created on 07-May-2006
  */
-package uk.org.ponder.darwin.rsf.components;
+package uk.org.ponder.darwin.rsf.producers;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-import uk.org.ponder.darwin.rsf.AdvancedSearchParams;
-import uk.org.ponder.darwin.rsf.SearchResultsParams;
+import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
+import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
 import uk.org.ponder.darwin.search.ItemFieldTables;
 import uk.org.ponder.rsf.components.UIBoundBoolean;
 import uk.org.ponder.rsf.components.UIContainer;

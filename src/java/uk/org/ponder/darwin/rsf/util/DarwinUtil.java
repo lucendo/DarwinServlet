@@ -5,7 +5,7 @@ package uk.org.ponder.darwin.rsf.util;
 
 import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
-import uk.org.ponder.darwin.rsf.NavParams;
+import uk.org.ponder.darwin.rsf.params.NavParams;
 
 public class DarwinUtil {
   public static void chooseBestView(NavParams tofill, ItemCollection collection) {

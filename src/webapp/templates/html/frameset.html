@@ -6,8 +6,21 @@
 	lang="en" xmlns:rsf="http://ponder.org.uk/rsf">
 <head>
 <script language="JavaScript">
+  function updateTitle() {
+//    alert("UpdateTitle");
+    if (window.txtframe) {
+      var elements = window.txtframe.document.getElementsByTagName("title");
+//      alert("Got " + elements.length+" title elements");
+      title = elements[0].firstChild.nodeValue;
+//      alert("Title " + title);
+      window.top.document.title = title;
+    }
+  
+  }
+
   function framesetloaded() {
-  window.navframe.updatePage();
+    window.navframe.updatePage();
+    updateTitle();
   }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -44,7 +57,8 @@ View</title>
 	</frameset>
 
 	<frameset cols="100%" name="bottom_frames" rsf:id="frames:text">
-		<frame id="frames:text::txt-frame" src="dummy/1843_remarks_F1662.html#pageseq-1"
+		<frame name="txtframe" 
+        id="frames:text::txt-frame" src="dummy/1843_remarks_F1662.html#pageseq-1"
 			rsf:id="txt-frame" />
 
 	</frameset>

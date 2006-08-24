@@ -1,7 +1,7 @@
 /*
  * Created on 14-Dec-2005
  */
-package uk.org.ponder.darwin.rsf;
+package uk.org.ponder.darwin.rsf.params;
 
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
 

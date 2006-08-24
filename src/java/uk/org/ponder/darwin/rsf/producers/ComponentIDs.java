@@ -1,7 +1,7 @@
 /*
  * Created on Nov 17, 2005
  */
-package uk.org.ponder.darwin.rsf.components;
+package uk.org.ponder.darwin.rsf.producers;
 
 public class ComponentIDs {
   public static final String MESSAGEFIELD = "messagefield";

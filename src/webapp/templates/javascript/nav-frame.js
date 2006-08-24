@@ -32,9 +32,33 @@ function getSelectedPage() {
   return Number(getElement("page-select-selection").selectedIndex + 1);
 }
 
+
+function replacePage(pageurl, pageseq) {
+  return pageurl.replace(/pageseq=([^&]*)/g, "pageseq="+pageseq);
+  }
+
+function testReplace() {
+//  var totest = "http://darwin-online.org.uk/content/frameset?itemID=F339.2&viewtype=side&pageseq=1";
+//  alert("Replaced\n"+totest+"\nwith\n"+replacePage(totest, 2));
+  alert("getSI " + !!getElement("switch-image"));
+  alert("getThinG "+ !!getElement("thing"));
+}
+
+function updateLink(id, pageseq) {
+  var element = getElement(id);
+  if (element) {
+//    alert("Updating element with src " + element.href);
+    element.href = replacePage(element.href, pageseq);
+  }
+}
+
 function updatePage() {
   var viewtype = getViewType();
   var currentpage = Number(getPage());
+  updateLink("switch-image", currentpage);
+  updateLink("switch-text", currentpage);
+  updateLink("switch-side", currentpage);
+  
   getElement("back-button").disabled = (currentpage <= 1);
   if (currentpage != getSelectedPage()) {
     //getElement("page-select").options[currentpage - 1].selected = true;

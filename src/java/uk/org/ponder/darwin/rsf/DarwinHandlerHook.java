@@ -17,6 +17,8 @@ import uk.org.ponder.darwin.item.PageInfo;
 import uk.org.ponder.darwin.parse.ContentParser;
 import uk.org.ponder.darwin.parse.Extensions;
 import uk.org.ponder.darwin.parse.URLMapper;
+import uk.org.ponder.darwin.rsf.params.PageRenderParams;
+import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
 import uk.org.ponder.rsf.content.ContentTypeInfoRegistry;
 import uk.org.ponder.rsf.processor.HandlerHook;
 import uk.org.ponder.rsf.request.EarlyRequestParser;

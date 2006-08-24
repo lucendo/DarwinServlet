@@ -1,7 +1,7 @@
 /*
  * Created on 07-May-2006
  */
-package uk.org.ponder.darwin.rsf.components;
+package uk.org.ponder.darwin.rsf.producers;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -19,9 +19,10 @@ import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.lucene.DarwinHighlighter;
 import uk.org.ponder.darwin.lucene.IndexItemSearcher;
 import uk.org.ponder.darwin.lucene.QueryBuilder;
-import uk.org.ponder.darwin.rsf.AdvancedSearchParams;
-import uk.org.ponder.darwin.rsf.NavParams;
-import uk.org.ponder.darwin.rsf.SearchResultsParams;
+import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
+import uk.org.ponder.darwin.rsf.params.NavParams;
+import uk.org.ponder.darwin.rsf.params.RecordParams;
+import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.darwin.search.DocTypeInterpreter;
@@ -195,7 +196,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
           Document hit = hits.doc(i);
           
           String keywords = rewriteQuery(query);
-          NavParams navparams = findLink(hit, keywords);
+          ViewParameters navparams = findLink(hit, keywords);
 
           UIBranchContainer hitrow = UIBranchContainer.make(tofill,
               "hit-item:", Integer.toString(i));
@@ -262,7 +263,8 @@ public class SearchResultsProducer implements ViewComponentProducer,
   }
 
 
-  private NavParams findLink(Document hit, String freetext) {
+  private ViewParameters findLink(Document hit, String freetext) {
+    // We could presumably use DocFields.TYPE_ITEM here
     String pageno = hit.get(DocFields.PAGESEQ_START);
     if (pageno != null) {
       NavParams togo = new NavParams();
@@ -274,7 +276,12 @@ public class SearchResultsProducer implements ViewComponentProducer,
       togo.keywords = freetext;
       return togo;
     }
-    return null;
+    else {
+      RecordParams togo = new RecordParams();
+      togo.viewID = RecordProducer.VIEWID;
+      togo.itemID = hit.get("identifier");
+      return togo;
+    }
   }
 
 }

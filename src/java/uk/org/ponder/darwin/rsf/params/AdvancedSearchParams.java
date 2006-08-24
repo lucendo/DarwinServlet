@@ -1,9 +1,9 @@
 /*
  * Created on 07-May-2006
  */
-package uk.org.ponder.darwin.rsf;
+package uk.org.ponder.darwin.rsf.params;
 
-import uk.org.ponder.darwin.rsf.components.AdvancedSearchProducer;
+import uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer;
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
 
 /** The parameters for the search FORM itself, not for search results */

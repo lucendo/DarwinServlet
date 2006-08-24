@@ -1,7 +1,7 @@
 /*
  * Created on 06-Feb-2006
  */
-package uk.org.ponder.darwin.rsf.components;
+package uk.org.ponder.darwin.rsf.producers;
 
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIOutput;

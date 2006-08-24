@@ -61,23 +61,23 @@
   </bean>
 
   <bean id="frameset-view"
-    class="uk.org.ponder.darwin.rsf.components.FramesetProducer">
+    class="uk.org.ponder.darwin.rsf.producers.FramesetProducer">
     <property name="RSACBeanLocator" ref="RSACBeanLocator"/>
   </bean>
 
   <bean id="navframe-view"
-    class="uk.org.ponder.darwin.rsf.components.NavFrameProducer">
+    class="uk.org.ponder.darwin.rsf.producers.NavFrameProducer">
     <property name="RSACBeanLocator" ref="RSACBeanLocator"/>
     <property name="URLMapper" ref="urlMapper"/>
   </bean>
 
   <bean id="status-view"
-    class="uk.org.ponder.darwin.rsf.components.StatusProducer">
+    class="uk.org.ponder.darwin.rsf.producers.StatusProducer">
     <property name="itemCollectionManager" ref="itemCollectionManager"/>
   </bean>
   
   <bean id="search-results-view"
-    class="uk.org.ponder.darwin.rsf.components.SearchResultsProducer">
+    class="uk.org.ponder.darwin.rsf.producers.SearchResultsProducer">
      <property name="indexItemSearcher" ref="indexItemSearcher"/>
      <property name="queryBuilder" ref="queryBuilder"/>
      <property name="itemCollection" ref="itemCollectionProxy"/>
@@ -85,13 +85,17 @@
   </bean>
   
   <bean id="advanced-search-view"
-    class="uk.org.ponder.darwin.rsf.components.AdvancedSearchProducer">
+    class="uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer">
      <property name="itemFieldTables" ref="itemFieldTables"/>
   </bean>
   
+  <bean id="record-view" class="uk.org.ponder.darwin.rsf.producers.RecordProducer">
+    <property name="itemCollection" ref="itemCollectionProxy"/>
+    <property name="indexItemSearcher" ref="indexItemSearcher"/>
+  </bean>
   
   <bean id="missing-view"
-   class="uk.org.ponder.darwin.rsf.components.ErrorProducer">
+   class="uk.org.ponder.darwin.rsf.producers.ErrorProducer">
   </bean>
 
   <bean id="siteMap" parent="siteMapDef"/>

@@ -25,7 +25,8 @@ import uk.org.ponder.darwin.parse.DocumentTag;
 import uk.org.ponder.darwin.parse.PageTag;
 import uk.org.ponder.darwin.parse.ParseReceiver;
 import uk.org.ponder.darwin.parse.URLMapper;
-import uk.org.ponder.darwin.rsf.components.FramesetProducer;
+import uk.org.ponder.darwin.rsf.params.NavParams;
+import uk.org.ponder.darwin.rsf.producers.FramesetProducer;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.htmlutil.HTMLConstants;
@@ -353,7 +354,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
           String fgcol = TermColours.getContrastColour(termind);
           pos.print("<b style=\"color:" + fgcol + ";background-color:" + bgcol
               + "\">");
-          pos.print(t.termText());
+          pos.write(buffer.storage, t.startOffset(), t.endOffset() - t.startOffset());
           pos.print("</b>");
           writpos = t.endOffset();
         }

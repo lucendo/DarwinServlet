@@ -1,12 +1,12 @@
 /*
  * Created on Nov 17, 2005
  */
-package uk.org.ponder.darwin.rsf.components;
+package uk.org.ponder.darwin.rsf.producers;
 
 import uk.org.ponder.darwin.item.ItemCollection;
-import uk.org.ponder.darwin.rsf.NavParams;
-import uk.org.ponder.darwin.rsf.TextBlockRenderParams;
 import uk.org.ponder.darwin.rsf.ViewParamGetter;
+import uk.org.ponder.darwin.rsf.params.NavParams;
+import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
 import uk.org.ponder.rsac.RSACBeanLocator;
 import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
