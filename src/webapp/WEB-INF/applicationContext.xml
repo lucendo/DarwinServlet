@@ -40,9 +40,17 @@
     <property name="indexDirectory" ref="indexDirectory"/>
     <property name="expectForce" value="false"/>
   </bean>
-   <!--  
-  <bean id="indexSearcher" factory-bean="indexItemSearcher" factory-method="getIndexSearcher"/>
-  -->
+
+  <bean id="itemScanner" class="uk.org.ponder.darwin.lucene.ItemScanner">
+    <property name="indexItemSearcher" ref="indexItemSearcher"/>
+  </bean>
+
+<!--  
+  <bean id="indexSearcherTarget" factory-bean="indexItemSearcher" 
+    factory-method="getIndexSearcher"/>
+    -->
+ 
+  
   <bean id="itemFieldTables" class="uk.org.ponder.darwin.search.ItemFieldTables"
    init-method="init">
     <property name="itemDirectory" ref="itemDirectory"/>
@@ -55,9 +63,8 @@
   <bean id="itemCollectionManager"
     class="uk.org.ponder.darwin.parse.ItemCollectionManager"
     init-method="index">
-    <property name="contentRoot">
-      <ref bean="contentRoot" />
-    </property>
+    <property name="contentRoot" ref="contentRoot"/>
+    <property name="itemScanner" ref="itemScanner"/>
   </bean>
 
   <bean id="frameset-view"
