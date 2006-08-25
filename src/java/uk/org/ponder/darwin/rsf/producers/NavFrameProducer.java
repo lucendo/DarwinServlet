@@ -86,7 +86,7 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
         // contentparams.pageseq = page.sequence;
         // String imageurl = vsh.getFullURL(contentparams);
 
-        String imageurl = page.imagefile == null ? "#"
+        String imageurl = (page == null || page.imagefile == null) ? "#"
             : urlmapper.fileToURL(page.imagefile);
         UIOutput.make(tofill, ComponentIDs.IMAGE_TARGET + i, imageurl);
       }
