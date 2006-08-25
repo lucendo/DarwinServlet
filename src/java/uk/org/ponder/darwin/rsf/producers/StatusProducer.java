@@ -4,7 +4,9 @@
 package uk.org.ponder.darwin.rsf.producers;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 import uk.org.ponder.darwin.item.ItemDetails;
@@ -23,6 +25,7 @@ import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.sortutil.ObjArraySortFacade;
 import uk.org.ponder.sortutil.Sort;
+import uk.org.ponder.stringutil.StringList;
 
 public class StatusProducer implements ViewComponentProducer {
   public static final String VIEWID = "status";
@@ -50,14 +53,18 @@ public class StatusProducer implements ViewComponentProducer {
       else {
         UIOutputMultiline.make(present, "scan-errors", null, manager.statistics.errors);
       }
-      String[] idlist = new String[items.size()];
+      StringList idlist = new StringList();
       int i = 0;
       for (Iterator itemit = items.iterator(); itemit.hasNext();) {
-        idlist[i++] = ((ItemDetails)itemit.next()).ID;
+        ItemDetails details = (ItemDetails)itemit.next();
+        if (details.hasimage || details.hastext) {
+          idlist.add(details.ID);
+        }
       }
-      Sort.quicksort(new ObjArraySortFacade(idlist, null));
-      for (i = 0; i < idlist.length; ++ i) {
-        ItemDetails item = manager.getItemCollection().getItem(idlist[i]);
+      //Sort.quicksort(new ObjArraySortFacade(idlist, null));
+      Collections.sort(idlist);
+      for (i = 0; i < idlist.size(); ++ i) {
+        ItemDetails item = manager.getItemCollection().getItem(idlist.stringAt(i));
         UIBranchContainer line = UIBranchContainer.make(tofill, "linktable:imagetext");
         UIOutput.make(line, "itemid", item.ID);
         NavParams params = new NavParams();

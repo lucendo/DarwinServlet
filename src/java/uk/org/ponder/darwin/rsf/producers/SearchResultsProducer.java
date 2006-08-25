@@ -269,6 +269,10 @@ public class SearchResultsProducer implements ViewComponentProducer,
     if (pageno != null) {
       NavParams togo = new NavParams();
       togo.itemID = hit.get("identifier");
+      if (togo.itemID == null) {
+        Logger.log.warn("Warning: identifier not found for " + hit);
+        togo.itemID = hit.get("itemID");
+      }
       togo.pageseq = Integer.parseInt(pageno);
       DarwinUtil.chooseBestView(togo, itemcollection);
       togo.viewID = FramesetProducer.VIEWID;
@@ -277,9 +281,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
       return togo;
     }
     else {
-      RecordParams togo = new RecordParams();
-      togo.viewID = RecordProducer.VIEWID;
-      togo.itemID = hit.get("identifier");
+      RecordParams togo = new RecordParams(hit.get("identifier"));
       return togo;
     }
   }

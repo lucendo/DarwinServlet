@@ -34,41 +34,56 @@ public class RecordProducer implements ViewComponentProducer,
     return new RecordParams();
   }
 
-
   public void setItemCollection(ItemCollection itemcollection) {
     this.itemcollection = itemcollection;
   }
-  
+
   public void setIndexItemSearcher(IndexItemSearcher indexItemSearcher) {
     this.indexItemSearcher = indexItemSearcher;
   }
+
+  private static NavParams getNavParams(String itemID) {
+    NavParams navparams = new NavParams();
+    navparams.viewID = FramesetProducer.VIEWID;
+    navparams.itemID = itemID;
+    navparams.pageseq = 1;
+    return navparams;
+  }
   
-  public void fillComponents(UIContainer tofill, ViewParameters viewparams, 
+  public void fillComponents(UIContainer tofill, ViewParameters viewparams,
       ComponentChecker checker) {
+    Logger.log.warn("Start RP.fill");
     RecordParams recparams = (RecordParams) viewparams;
     ItemDetails item = itemcollection.getItem(recparams.itemID);
-    
+
     UIOutput.make(tofill, "identifier", recparams.itemID);
-    
-    
-   
-    if (item.hasimage && item.hastext) {
-      NavParams sideparams = new NavParams();
-      sideparams.viewtype = NavParams.SIDE_VIEW;
-      sideparams.viewID = FramesetProducer.VIEWID;
-      UIInternalLink.make(tofill, "switch-side", sideparams);
+
+    if (item != null) {
+      if (item.hasimage && item.hastext) {
+        NavParams sideparams = getNavParams(recparams.itemID);
+        sideparams.viewtype = NavParams.SIDE_VIEW;
+        UIInternalLink.make(tofill, "switch-side", sideparams);
+      }
+      if (item.hasimage) {
+        NavParams sideparams = getNavParams(recparams.itemID);
+        sideparams.viewtype = NavParams.IMAGE_VIEW;
+        UIInternalLink.make(tofill, "switch-image", sideparams);
+      }
+      if (item.hastext) {
+        NavParams sideparams = getNavParams(recparams.itemID);
+        sideparams.viewtype = NavParams.TEXT_VIEW;
+        UIInternalLink.make(tofill, "switch-text", sideparams);
+      }
     }
-    if (item.hasimage) {
-      NavParams sideparams = new NavParams();
-      sideparams.viewtype = NavParams.IMAGE_VIEW;
-      sideparams.viewID = FramesetProducer.VIEWID;
-      UIInternalLink.make(tofill, "switch-image", sideparams);
+    
+    String prev = itemcollection.adjust(recparams.itemID, ItemCollection.PREV);
+    if (prev != null) {
+      UIInternalLink.make(tofill, "prev", new RecordParams(prev));
     }
-    if (item.hastext) {
-      NavParams sideparams = new NavParams();
-      sideparams.viewtype = NavParams.TEXT_VIEW;
-      sideparams.viewID = FramesetProducer.VIEWID;
-      UIInternalLink.make(tofill, "switch-text", sideparams);
+    
+    String next = itemcollection.adjust(recparams.itemID, ItemCollection.NEXT);
+    if (next != null) {
+      UIInternalLink.make(tofill, "next", new RecordParams(next));
     }
     
     try {
@@ -82,6 +97,7 @@ public class RecordProducer implements ViewComponentProducer,
     catch (Exception e) {
       Logger.log.warn("Error performing search", e);
     }
+    Logger.log.warn("End RP.fill");
   }
 
 }
