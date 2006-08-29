@@ -31,12 +31,12 @@
 50,"Copenhagen",0
 51,"Delft",0
 52,"Detroit",0
-53,"Düsseldorff",0
+53,"DÃ¼sseldorff",0
 54,"Emaus, Pa.",0
 55,"Erevan",0
 56,"Erlangen",0
-57,"Évreux",0
-58,"Fagerstrand pr. Høvig",0
+57,"Ã‰vreux",0
+58,"Fagerstrand pr. HÃ¸vig",0
 59,"Felling-on-Tyne",0
 60,"Frankfurt am Main",0
 61,"Garden City, N.Y.",0
@@ -48,7 +48,7 @@
 67,"Haarlem",0
 68,"Halle am Saale",0
 69,"Hamburg",0
-70,"Häneenlinha",0
+70,"HÃ¤neenlinha",0
 71,"Harmondsworth",0
 72,"Heilbronn",0
 73,"Hong Kong",0
@@ -85,7 +85,7 @@
 104,"Rome",0
 105,"San Francisco",0
 106,"Santiago de Chile",0
-107,"São Paulo",0
+107,"SÃ£o Paulo",0
 108,"Seoul",0
 109,"Sesto San Giovanni",0
 110,"Shanghai",0
@@ -98,11 +98,11 @@
 117,"The Hague",0
 118,"Tiflis",0
 119,"Tokyo",0
-120,"Tübingen",0
+120,"TÃ¼bingen",0
 121,"Turin",0
 122,"Utrecht",0
 123,"Valencia",0
-124,"Vârset",0
+124,"VÃ¢rset",0
 125,"Vidin",0
 126,"Vilnjus",0
 127,"Warsaw",0

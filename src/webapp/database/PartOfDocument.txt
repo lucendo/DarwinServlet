@@ -16,3 +16,4 @@
 16,"Note"
 17,"Photo"
 18,"Printed"
+19,"Review"
