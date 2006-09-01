@@ -125,10 +125,10 @@ public class RecordProducer implements ViewComponentProducer,
       if (doctypeinterpreter.isConciseType(doctype)) {
         adder.add("Concise reference:", "reference");
         adder.add("Detailed reference:", "notes");
-        UIOutput.make(tofill, "title", "Darwin Online Bibliographic Catalogue");
+        UIOutput.make(tofill, "title", "The Freeman Bibliographic Database");
       }
       else {
-        UIOutput.make(tofill, "title", "Darwin Online Manuscript Union Catalogue");
+        UIOutput.make(tofill, "title", "The Darwin Online Manuscript Catalogue");
         adder.add("Name:", "name");
         adder.add("Attributed title:", "attributedtitle");
         //adder.add("Source date:", "sourcedate");
