@@ -69,6 +69,7 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
         PageInfo page = (PageInfo) item.pages.get(i);
         contentparams.pageseq = new Integer(page.sequence);
         contentparams.keywords = navparams.keywords;
+        contentparams.viewtype = navparams.viewtype;
         contentparams.hitpage = navparams.pageseq;
         
         ViewParamGetter.fillTextParams(collection, contentparams);

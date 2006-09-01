@@ -19,6 +19,7 @@ public class NavParams extends SimpleViewParameters {
   public static final String TEXT_VIEW = "text";
   public static final String SIDE_VIEW = "side";
   public String itemID;
+  // Added to satisfy trollish edict 30/08/06 for text links to go to side view
   public String viewtype;
   public int pageseq;
   

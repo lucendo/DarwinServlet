@@ -36,9 +36,9 @@ public class AdvancedSearchProducer implements ViewComponentProducer, ViewParams
     AdvancedSearchParams viewparams = (AdvancedSearchParams) viewparamso;
     UIForm searchform = UIForm.make(tofill, "search-form", new SearchResultsParams());
     
-    UIBoundBoolean manuscripts = UIBoundBoolean.make(searchform, "manuscripts", 
-        viewparams.manuscripts);
-    manuscripts.fossilize = false;
+    UIBoundBoolean manuscript = UIBoundBoolean.make(searchform, "manuscript", 
+        viewparams.manuscript);
+    manuscript.fossilize = false;
     UIBoundBoolean published = UIBoundBoolean.make(searchform, "published", 
         viewparams.published);
     published.fossilize = false;

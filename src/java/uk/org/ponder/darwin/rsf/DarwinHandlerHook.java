@@ -106,7 +106,7 @@ public class DarwinHandlerHook implements HandlerHook {
     rpr.setOutputStream(pos);
     rpr.setItemCollection(collection);
     rpr.setViewStateHandler(viewstatehandler);
-    rpr.setKeywords(params.keywords);
+    rpr.setViewParams(params);
     rpr.setHitPage(params.hitpage);
     ContentParser cp = new ContentParser();
     InputStream is = null;

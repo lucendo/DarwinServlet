@@ -9,8 +9,11 @@ import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.lucene.DocHit;
 import uk.org.ponder.darwin.lucene.IndexItemSearcher;
+import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
 import uk.org.ponder.darwin.rsf.params.NavParams;
 import uk.org.ponder.darwin.rsf.params.RecordParams;
+import uk.org.ponder.darwin.search.DocTypeInterpreter;
+import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
 import uk.org.ponder.rsf.components.UIOutput;
@@ -25,6 +28,7 @@ public class RecordProducer implements ViewComponentProducer,
   public static final String VIEWID = "record";
   private ItemCollection itemcollection;
   private IndexItemSearcher indexItemSearcher;
+  private DocTypeInterpreter doctypeinterpreter;
 
   public String getViewID() {
     return VIEWID;
@@ -42,6 +46,10 @@ public class RecordProducer implements ViewComponentProducer,
     this.indexItemSearcher = indexItemSearcher;
   }
 
+  public void setDocTypeInterpreter(DocTypeInterpreter doctypeinterpreter) {
+    this.doctypeinterpreter = doctypeinterpreter;
+  }
+  
   private static NavParams getNavParams(String itemID) {
     NavParams navparams = new NavParams();
     navparams.viewID = FramesetProducer.VIEWID;
@@ -50,9 +58,25 @@ public class RecordProducer implements ViewComponentProducer,
     return navparams;
   }
   
+  private static class FieldAdder {
+    private UIContainer tofill;
+    private Document hit;
+    public FieldAdder(UIContainer tofill, Document hit) {
+      this.tofill = tofill;
+      this.hit = hit;
+    }
+    public void add(String fieldname, String field) {
+      String fieldvalue = hit.get(field);
+      if (fieldvalue != null) {
+        UIBranchContainer row = UIBranchContainer.make(tofill, "field-row:");
+        UIOutput.make(row, "field-name", fieldname);
+        UIOutput.make(row, "field", fieldvalue);
+      }
+    }
+  }
+  
   public void fillComponents(UIContainer tofill, ViewParameters viewparams,
       ComponentChecker checker) {
-    Logger.log.warn("Start RP.fill");
     RecordParams recparams = (RecordParams) viewparams;
     ItemDetails item = itemcollection.getItem(recparams.itemID);
 
@@ -86,18 +110,36 @@ public class RecordProducer implements ViewComponentProducer,
       UIInternalLink.make(tofill, "next", new RecordParams(next));
     }
     
+    UIBranchContainer row = UIBranchContainer.make(tofill, "field-row:");
+    UIOutput.make(row, "field-name", "Identifier:");
+    UIOutput.make(row, "field", recparams.itemID);
+    
+    UIInternalLink.make(tofill, "advanced-search", new AdvancedSearchParams());
+    
     try {
       DocHit[] hits = indexItemSearcher.getItemHit(recparams.itemID);
       Document hit = hits[0].document;
-      String concise = hit.get("reference");
-      UIOutput.make(tofill, "concise", concise);
-      String notes = hit.get("notes");
-      UIOutput.make(tofill, "detailed", notes);
+      FieldAdder adder = new FieldAdder(tofill, hit);
+      String doctype = hit.get("documenttype");
+      
+      if (doctypeinterpreter.isConciseType(doctype)) {
+        adder.add("Concise reference:", "reference");
+        adder.add("Detailed reference:", "notes");
+        UIOutput.make(tofill, "title", "Darwin Online Bibliographic Catalogue");
+      }
+      else {
+        UIOutput.make(tofill, "title", "Darwin Online Manuscript Union Catalogue");
+        adder.add("Name:", "name");
+        adder.add("Attributed title:", "attributedtitle");
+        //adder.add("Source date:", "sourcedate");
+        adder.add("Description", "description");
+        adder.add("Document type", "documenttype");
+        adder.add("Place created", "place");
+      }
     }
     catch (Exception e) {
       Logger.log.warn("Error performing search", e);
     }
-    Logger.log.warn("End RP.fill");
   }
 
 }

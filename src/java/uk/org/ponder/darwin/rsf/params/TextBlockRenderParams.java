@@ -13,7 +13,7 @@ public class TextBlockRenderParams extends SimpleViewParameters {
   public static final String VIEWID = "contentblock";
  
   public String getParseSpec() {
-    return super.getParseSpec() + ", itemID, contentfile, keywords, hitpage";
+    return super.getParseSpec() + ", itemID, contentfile, keywords, viewtype, hitpage";
   }
   
   public String getAnchorField() {
@@ -27,6 +27,7 @@ public class TextBlockRenderParams extends SimpleViewParameters {
   public String itemID;
   public String contentfile;
   public String keywords;
+  public String viewtype;
   public int hitpage;
   
   public Integer pageseq;

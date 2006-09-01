@@ -6,113 +6,122 @@
 
   <bean id="itemCollectionProxy" parent="RSACBridgeProxy">
     <property name="targetBeanName">
-      <idref bean="itemCollection"/>
+      <idref bean="itemCollection" />
     </property>
   </bean>
 
- <bean id="templateResolverStrategy" 
-  class="uk.org.ponder.rsf.templateresolver.CRITemplateResolverStrategy">
-    <property name="baseDirectory" value="templates/html/"/>
-    <property name="consumerInfo" ref="consumerInfoProxy"/>
-    <property name="contextURLProvider" ref="contextURLProvider"/>
- </bean>
+  <bean id="templateResolverStrategy"
+    class="uk.org.ponder.rsf.templateresolver.CRITemplateResolverStrategy">
+    <property name="baseDirectory" value="templates/html/" />
+    <property name="consumerInfo" ref="consumerInfoProxy" />
+    <property name="contextURLProvider" ref="contextURLProvider" />
+  </bean>
 
   <bean id="urlMapper" class="uk.org.ponder.darwin.parse.URLMapper">
-    <property name="contentRoot" ref="contentRoot"/>
-    <property name="externalContentRoot" ref="externalContentRoot"/>
+    <property name="contentRoot" ref="contentRoot" />
+    <property name="externalContentRoot" ref="externalContentRoot" />
   </bean>
-  
-  <bean id="analyzer" class="uk.org.ponder.darwin.lucene.DarwinAnalyzer"/>
+
+  <bean id="analyzer"
+    class="uk.org.ponder.darwin.lucene.DarwinAnalyzer" />
   <!-- 
-  <bean id="indexBuilder" class="uk.org.ponder.darwin.lucene.IndexBuilder">
+    <bean id="indexBuilder" class="uk.org.ponder.darwin.lucene.IndexBuilder">
     <property name="analyser" ref="analyzer"/>
     <property name="maxPendingDocuments" value="1000"/>
     <property name="indexDirectory" ref="indexDirectory"/>
     <property name="indexItemSearcher" ref="indexItemSearcherConc"/>
-  </bean>
+    </bean>
   -->
-  <bean id="queryBuilder" class="uk.org.ponder.darwin.lucene.QueryBuilder">
+  <bean id="queryBuilder"
+    class="uk.org.ponder.darwin.lucene.QueryBuilder">
     <property name="mappingContext" ref="ELMappingContext" />
   </bean>
-  
-  <bean id="indexItemSearcher" class="uk.org.ponder.darwin.lucene.IndexItemSearcher"
+
+  <bean id="indexItemSearcher"
+    class="uk.org.ponder.darwin.lucene.IndexItemSearcher"
     init-method="open" destroy-method="close">
-    <property name="indexDirectory" ref="indexDirectory"/>
-    <property name="expectForce" value="false"/>
+    <property name="indexDirectory" ref="indexDirectory" />
+    <property name="expectForce" value="false" />
   </bean>
 
-  <bean id="itemScanner" class="uk.org.ponder.darwin.lucene.ItemScanner">
-    <property name="indexItemSearcher" ref="indexItemSearcher"/>
+  <bean id="itemScanner"
+    class="uk.org.ponder.darwin.lucene.ItemScanner">
+    <property name="indexItemSearcher" ref="indexItemSearcher" />
   </bean>
 
-<!--  
-  <bean id="indexSearcherTarget" factory-bean="indexItemSearcher" 
+  <!--  
+    <bean id="indexSearcherTarget" factory-bean="indexItemSearcher" 
     factory-method="getIndexSearcher"/>
-    -->
- 
-  
-  <bean id="itemFieldTables" class="uk.org.ponder.darwin.search.ItemFieldTables"
-   init-method="init">
-    <property name="itemDirectory" ref="itemDirectory"/>
+  -->
+
+
+  <bean id="itemFieldTables"
+    class="uk.org.ponder.darwin.search.ItemFieldTables"
+    init-method="init">
+    <property name="itemDirectory" ref="itemDirectory" />
   </bean>
-  
-  <bean id="docTypeInterpreter" class="uk.org.ponder.darwin.search.DocTypeInterpreter">
-    <property name="itemFieldTables" ref="itemFieldTables"/>
+
+  <bean id="docTypeInterpreter"
+    class="uk.org.ponder.darwin.search.DocTypeInterpreter">
+    <property name="itemFieldTables" ref="itemFieldTables" />
   </bean>
 
   <bean id="itemCollectionManager"
     class="uk.org.ponder.darwin.parse.ItemCollectionManager"
     init-method="index">
-    <property name="contentRoot" ref="contentRoot"/>
-    <property name="itemScanner" ref="itemScanner"/>
+    <property name="contentRoot" ref="contentRoot" />
+    <property name="itemScanner" ref="itemScanner" />
   </bean>
 
   <bean id="frameset-view"
     class="uk.org.ponder.darwin.rsf.producers.FramesetProducer">
-    <property name="RSACBeanLocator" ref="RSACBeanLocator"/>
+    <property name="RSACBeanLocator" ref="RSACBeanLocator" />
   </bean>
 
   <bean id="navframe-view"
     class="uk.org.ponder.darwin.rsf.producers.NavFrameProducer">
-    <property name="RSACBeanLocator" ref="RSACBeanLocator"/>
-    <property name="URLMapper" ref="urlMapper"/>
+    <property name="RSACBeanLocator" ref="RSACBeanLocator" />
+    <property name="URLMapper" ref="urlMapper" />
   </bean>
 
   <bean id="status-view"
     class="uk.org.ponder.darwin.rsf.producers.StatusProducer">
-    <property name="itemCollectionManager" ref="itemCollectionManager"/>
-  </bean>
-  
-  <bean id="search-results-view"
-    class="uk.org.ponder.darwin.rsf.producers.SearchResultsProducer">
-     <property name="indexItemSearcher" ref="indexItemSearcher"/>
-     <property name="queryBuilder" ref="queryBuilder"/>
-     <property name="itemCollection" ref="itemCollectionProxy"/>
-     <property name="docTypeInterpreter" ref="docTypeInterpreter"/>
-  </bean>
-  
-  <bean id="advanced-search-view"
-    class="uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer">
-     <property name="itemFieldTables" ref="itemFieldTables"/>
-  </bean>
-  
-  <bean id="record-view" class="uk.org.ponder.darwin.rsf.producers.RecordProducer">
-    <property name="itemCollection" ref="itemCollectionProxy"/>
-    <property name="indexItemSearcher" ref="indexItemSearcher"/>
-  </bean>
-  
-  <bean id="missing-view"
-   class="uk.org.ponder.darwin.rsf.producers.ErrorProducer">
+    <property name="itemCollectionManager" ref="itemCollectionManager" />
   </bean>
 
-  <bean id="siteMap" parent="siteMapDef"/>
+  <bean id="search-results-view"
+    class="uk.org.ponder.darwin.rsf.producers.SearchResultsProducer">
+    <property name="indexItemSearcher" ref="indexItemSearcher" />
+    <property name="queryBuilder" ref="queryBuilder" />
+    <property name="itemCollection" ref="itemCollectionProxy" />
+    <property name="docTypeInterpreter" ref="docTypeInterpreter" />
+  </bean>
+
+  <bean id="advanced-search-view"
+    class="uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer">
+    <property name="itemFieldTables" ref="itemFieldTables" />
+  </bean>
+
+  <bean id="record-view"
+    class="uk.org.ponder.darwin.rsf.producers.RecordProducer">
+    <property name="itemCollection" ref="itemCollectionProxy" />
+    <property name="indexItemSearcher" ref="indexItemSearcher" />
+    <property name="docTypeInterpreter" ref="docTypeInterpreter" />
+  </bean>
+
+  <bean id="missing-view"
+    class="uk.org.ponder.darwin.rsf.producers.ErrorProducer">
+  </bean>
+
+  <bean id="siteMap" parent="siteMapDef" />
 
   <bean name="requestAddressibleBeans"
     class="uk.org.ponder.springutil.StringListFactory">
-    <property name="strings" value="icmtrigger"/>
+    <property name="strings" value="icmtrigger" />
   </bean>
-  
-  <bean id="defaultViewProxy" class="uk.org.ponder.stringutil.StringHolder">
-    <property name="value" value="/missing"/>
+
+  <bean id="defaultViewProxy"
+    class="uk.org.ponder.stringutil.StringHolder">
+    <property name="value" value="/missing" />
   </bean>
 </beans>

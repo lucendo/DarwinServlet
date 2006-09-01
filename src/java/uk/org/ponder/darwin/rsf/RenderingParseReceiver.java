@@ -22,10 +22,10 @@ import uk.org.ponder.darwin.parse.Attributes;
 import uk.org.ponder.darwin.parse.BaseParser;
 import uk.org.ponder.darwin.parse.Constants;
 import uk.org.ponder.darwin.parse.DocumentTag;
-import uk.org.ponder.darwin.parse.PageTag;
 import uk.org.ponder.darwin.parse.ParseReceiver;
 import uk.org.ponder.darwin.parse.URLMapper;
 import uk.org.ponder.darwin.rsf.params.NavParams;
+import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
 import uk.org.ponder.darwin.rsf.producers.FramesetProducer;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
@@ -63,9 +63,9 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   private String contentpath;
   private ItemCollection collection;
   private ViewStateHandler vsh;
-  private String keywords;
   private Map keytoind;
   private int hitpage;
+  private TextBlockRenderParams viewparams;
 
   public void setOutputStream(PrintOutputStream pos) {
     this.pos = pos;
@@ -88,10 +88,10 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     this.vsh = vsh;
   }
 
-  public void setKeywords(String keywords) {
-    this.keywords = keywords;
+  public void setViewParams(TextBlockRenderParams viewparams) {
+    this.viewparams = viewparams;
   }
-  
+
   public void setHitPage(int hitpage) {
     this.hitpage = hitpage;
   }
@@ -128,8 +128,6 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     if (Attributes.PAGE_CLASS.equals(clazz)) {
       // I am without style
       pos.print("<p>");
-      attrmap.put("onClick",
-          "onPageClick(this.getAttribute('dar:pageseq')); return false;");
       String pageseq = (String) attrmap.get(Attributes.PAGESEQ_ATTR);
       if (pageseq == null) {
         pageseq = Integer.toString(currentpage);
@@ -138,14 +136,30 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       else {
         currentpage = Integer.parseInt(pageseq);
       }
-      attrmap.put("name", // "pageseq-" +
-          "" + pageseq);
-      attrmap.put("href", "#");
-      attrmap.put(Attributes.PAGESEQ_ATTR, "" + pageseq);
+      if (viewparams.viewtype.equals(NavParams.TEXT_VIEW)) {
+        ItemDetails item = collection.getItem(viewparams.itemID);
+        if (item.hasimage && item.hastext) {
+          attrmap.put("target", "_top");
+          NavParams navparams = new NavParams();
+          navparams.viewID = FramesetProducer.VIEWID;
+          navparams.viewtype = NavParams.SIDE_VIEW;
+          navparams.itemID = item.ID;
+          navparams.pageseq = currentpage - 1;
+          String url = vsh.getFullURL(navparams);
+          attrmap.put("href", url);
+        }
+      }
+      else {
+        attrmap.put("onClick",
+            "onPageClick(this.getAttribute('dar:pageseq')); return false;");
+        attrmap.put("href", "#");
+        attrmap.put(Attributes.PAGESEQ_ATTR, "" + pageseq);
+      }
+      attrmap.put("name", pageseq);
       tagname = "a";
       inpagetag = true;
       if (currentpage == hitpage + 1) {
-        dumponclose = true;    
+        dumponclose = true;
         doneheader = true;
       }
     }
@@ -193,11 +207,9 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
         : ">");
   }
 
-
   public void endTag(String tagname) {
   }
 
-  
   private String getKeyword(int i) {
     for (Iterator it = keytoind.keySet().iterator(); it.hasNext();) {
       String keyword = (String) it.next();
@@ -209,16 +221,19 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void dumpHeader() {
-    buffer.append("<table border=0 cellpadding=0 cellspacing=0><tr><td>"
-            + "<font face=\"\" color=black size=-1>The following search terms have been highlighted:&nbsp;</font></td>");
+    if (keytoind != null && keytoind.size() > 0) {
+    buffer
+        .append("<table border=0 cellpadding=0 cellspacing=0><tr><td bgcolor=#ffc0c0>"
+            + "<font face=\"\"  color=black size=-1>The following search terms have been highlighted:&nbsp;</font></td>");
     for (int i = 0; i < keytoind.size(); ++i) {
       String keyword = getKeyword(i);
       String bgcol = TermColours.TERM_COLOURS[i];
       String fgcol = TermColours.getContrastColour(i);
-      buffer.append("<td bgcolor=" + bgcol + "><b><font face=\"\" color=" + fgcol
-          + " size=-1>" + keyword + "&nbsp;</font></b></td>");
+      buffer.append("<td bgcolor=" + bgcol + "><b><font face=\"\" color="
+          + fgcol + " size=-1>" + keyword + "&nbsp;</font></b></td>");
     }
     buffer.append("</tr></table>");
+    }
   }
 
   // text received from CONTENT.
@@ -247,10 +262,12 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   // status change from CONTENT
   public void beginEditable(String editclass) {
     editable = true;
+    currenteditableclass = editclass;
   }
 
   // status change from CONTENT
   public void endEditable(String editclass) {
+    currenteditableclass = null;
     if (templatesource != null) {
       if (editclass.equals(Constants.TITLE)) {
         scanTemplate(Constants.BODY);
@@ -289,7 +306,8 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void parseKeywords() {
-    if (keywords != null && !keywords.equals("")) {
+    String keywords = viewparams.keywords;
+    if (keywords != null && !keywords.trim().equals("")) {
       keytoind = new HashMap();
       String[] split = keywords.split(" ");
       for (int i = 0; i < split.length; ++i) {
@@ -354,7 +372,8 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
           String fgcol = TermColours.getContrastColour(termind);
           pos.print("<b style=\"color:" + fgcol + ";background-color:" + bgcol
               + "\">");
-          pos.write(buffer.storage, t.startOffset(), t.endOffset() - t.startOffset());
+          pos.write(buffer.storage, t.startOffset(), t.endOffset()
+              - t.startOffset());
           pos.print("</b>");
           writpos = t.endOffset();
         }
@@ -369,7 +388,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void output() {
-    if (keytoind == null) {
+    if (keytoind == null || !"body".equals(currenteditableclass)) {
       pos.write(buffer.storage, 0, buffer.size);
       buffer.clear();
     }

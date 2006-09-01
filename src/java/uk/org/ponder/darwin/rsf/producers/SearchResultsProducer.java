@@ -88,6 +88,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
       boolean first = true;
       for (Iterator it = terms.iterator(); it.hasNext();) {
         Term term = (Term) it.next();
+        if (!term.field().equals("text")) continue;
         String text = term.text();
         if (!first) {
           togo.append(" ");
@@ -162,9 +163,15 @@ public class SearchResultsProducer implements ViewComponentProducer,
       Sort sort = QueryBuilder.convertSort(params);
       IndexSearcher searcher = itemsearcher.getIndexSearcher();
 
-      Hits hits = searcher.search(query, sort);
+      Hits hits = null;
+      try {
+        hits = searcher.search(query, sort);
+      }
+      catch (Exception e) {
+        Logger.log.warn("Error performing search", e);
+      }
 
-      if (hits.length() == 0) {
+      if (hits == null || hits.length() == 0) {
         UIOutput.make(tofill, "no-results");
       }
       else {
@@ -224,7 +231,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
             if (!doctypeinterpreter.isType(doctype,
                 DocTypeInterpreter.CORRESPONDENCE)) {
 
-              String attribtitle = hit.get("attrib-title");
+              String attribtitle = hit.get("attributedtitle");
               if (navparams != null) {
                 UIInternalLink.make(hitrow, "attrib-title-link", attribtitle,
                     navparams);

@@ -57,19 +57,20 @@ function MM_swapImage() { //v3.0
 <form method="get" rsf:id="search-form"><label for="free-text">Free Text:</label> 
 <input
 	name="freetext" type="text"></input> Free text search within the body of the texts <br />
-<label for="name">Name: </label><input name="name" type="text" style="width: 250px;"></input> Name of author, editor or other contributor<br />
+<label for="name">Name: </label>
+<input name="name" type="text" style="width: 250px;"></input> Name of author, editor or other contributor<br />
 <label for="dateafter">After date:</label>
 <input name="afterdate" style="width: 100px"></input>
 Date in format YYYY-MM-DD (MM, DD optional)<br />
 <label for="datebefore">Before date:</label>
 <input name="beforedate" style="width: 100px">
 </input>Date in format YYYY-MM-DD (MM, DD optional)<br />
-<label for="name">Reference: </label><input name="reference"
+<label for="reference">Reference: </label><input name="reference"
 	type="text"></input><br />
 
-  <label for="name">Place: </label><input name="place"
+  <label for="place">Place: </label><input name="place"
 	type="text"></input><br />
-	<label for="name">Language(s): </label><select rsf:id="language" name="language"
+	<label for="language">Language(s): </label><select rsf:id="language" name="language"
 	type="text" multiple="true" size="8" style="width:120px">
 	<option value="1">English</option>
 	<option value="2">French</option>
@@ -93,11 +94,11 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
 	<label for="name">Publisher: </label><input name="publisher"
 	type="text"></input><br />
 <label for="manuscripts">Item types: </label>Manuscripts<input
-	name="manuscripts" rsf:id="manuscripts" type="checkbox"/>Published works<input
+	name="manuscript" rsf:id="manuscript" type="checkbox"/>Published works<input
 	name="published" rsf:id="published" type="checkbox"/><br />
 <label for="fulltext">Storage types: </label>Have full text<input
-	name="havetext" type="checkbox"/>Have digital images<input
-	name="haveimages" type="checkbox"/><br />
+	name="havetext" value="true" type="checkbox"/>Have digital images<input
+	name="haveimages" value="true" type="checkbox"/><br />
 	
 <div style="text-align: center;">
 <input type="submit" value="Search" style="font-size: 105%" />

@@ -1,50 +1,48 @@
 body {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	color: #000000;
 	margin-top: 39;
 	margin-right: 10%;
 	margin-bottom: 39;
 	margin-left: 10%;
+		background-color: #FFFFCC;
 }
 
 td {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	color: #000000;
 }
 
 th {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	color: #000000;
-}font {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	color: #000000;
-}
-body {
-	background-color: #FFFFCC;
+
 }
 h1 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 24pt;
 	color: #990000;
 	font-weight: normal;
 	text-decoration: none;
 }
 h2 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 126%;
 	font-weight: normal;
 	color: #990000;
 }
-p {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 100%;
-	color: #000000;
+a:link {
+	color: #990000;
 }
+a:visited {
+	color: #660000;
+}
+a:hover {
+	color: #FF0000;
+}
+
 .style1 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	
 	font-style: normal;
 	line-height: normal;
@@ -53,17 +51,12 @@ p {
 	color: #000000;
 }
 h3 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 126%;
 	font-weight: normal;
 	color: #000000;
 }
-small {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 90%;
-	font-weight: normal;
-	color: #000000;
-}
+
 .style2 {
 	font-size: 81%;
 	color: #000000;
@@ -71,17 +64,25 @@ small {
 .style3 {
 	color: #FF0000;
 }
+.style4 {
+	color: #990000;
+	font-weight: bold;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 90%;
+}
+.style5 {
+	font-family: "Times New Roman", Times, serif;
+}
 .ednote {
-	font-size: small;
+	font-size: 81%;
 	color: #FF0000;
 }
 h5 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	color: #000000;
 	font-size: 144%;
 }
 p {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 12pt;
+	font-family: "Times New Roman", Times, serif;
 	color: #000000;
 }

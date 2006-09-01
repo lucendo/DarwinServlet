@@ -54,6 +54,7 @@ public class FramesetProducer implements ViewComponentProducer,
       params.itemID = navparams.itemID;
       params.pageseq = new Integer(navparams.pageseq);
       params.keywords = navparams.keywords;
+      params.viewtype = navparams.viewtype;
       params.hitpage = navparams.pageseq;
 
       ItemCollection collection = (ItemCollection) rbl.getBeanLocator()
