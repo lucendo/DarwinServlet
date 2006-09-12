@@ -29,9 +29,9 @@ import uk.org.ponder.rsf.viewstate.ViewStateHandler;
  */
 public class NavFrameProducer implements ViewComponentProducer, ViewParamsReporter {
   public static final String VIEWID = "nav-frame";
-  // private ItemCollection collection;
-  private RSACBeanLocator rbl;
+  private ItemCollection collection;
   private URLMapper urlmapper;
+  private ViewStateHandler viewStateHandler;
 
   public String getViewID() {
     return VIEWID;
@@ -41,13 +41,12 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
     this.urlmapper = urlmapper;
   }
 
-  //
-  // public void setItemCollection(ItemCollection collection) {
-  // this.collection = collection;
-  // }
-
-  public void setRSACBeanLocator(RSACBeanLocator rbl) {
-    this.rbl = rbl;
+  public void setItemCollection(ItemCollection collection) {
+    this.collection = collection;
+  }
+  
+  public void setViewStateHandler(ViewStateHandler viewStateHandler) {
+    this.viewStateHandler = viewStateHandler;
   }
 
   public void fillComponents(UIContainer tofill, ViewParameters origviewparams,
@@ -55,11 +54,14 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
 
     NavParams navparams = (NavParams) origviewparams;
 
-    ItemCollection collection = (ItemCollection) rbl.getBeanLocator()
-        .locateBean("itemCollection");
     ItemDetails item = collection.getItem(navparams.itemID);
-    ViewStateHandler vsh = (ViewStateHandler) rbl.getBeanLocator().locateBean(
-        "viewStateHandler");
+    
+    AdvancedSearchParams bibparams = new AdvancedSearchParams();
+    bibparams.published = true;
+    UIInternalLink.make(tofill, "search-bibliography", bibparams);
+    AdvancedSearchParams manparams = new AdvancedSearchParams();
+    bibparams.manuscript = true;
+    UIInternalLink.make(tofill, "search-manuscripts", manparams);
 
     if (navparams.viewtype.equals(NavParams.TEXT_VIEW)
         || navparams.viewtype.equals(NavParams.SIDE_VIEW)) {
@@ -73,7 +75,7 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
         contentparams.hitpage = navparams.pageseq;
         
         ViewParamGetter.fillTextParams(collection, contentparams);
-        String texturl = vsh.getFullURL(contentparams);
+        String texturl = viewStateHandler.getFullURL(contentparams);
         UIOutput.make(tofill, ComponentIDs.TEXT_TARGET + i, texturl);
       }
     }

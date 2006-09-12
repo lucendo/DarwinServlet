@@ -34,6 +34,7 @@ import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.streamutil.StreamCopyUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
 import uk.org.ponder.stringutil.CharWrap;
+import uk.org.ponder.stringutil.URLUtil;
 import uk.org.ponder.util.Logger;
 import uk.org.ponder.util.UniversalRuntimeException;
 import uk.org.ponder.xml.XMLUtil;
@@ -169,29 +170,34 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     String urlattr = getURLAttr(exptag);
     if (urlattr != null) {
       String url = (String) attrmap.get(urlattr);
-      if (url != null && !url.startsWith("http://") && !url.equals("#")) {
-        if (urlattr.equals("href") && tagname.equals("a")
-            && !attrmap.containsKey("target")) {
-          // It's an inter-book link
-          String targetpath = urlmapper.relURLToAbsolute(url, contentpath);
-          ContentInfo ci = collection.getContentInfo(targetpath);
-          if (ci == null) {
-            Logger.log.warn("Unable to find ContentInfo for target path "
-                + targetpath + " arising from relative link URL " + url
-                + " for content path " + contentpath);
-          }
-          else {
-            NavParams frameparams = new NavParams();
-            frameparams.viewID = FramesetProducer.VIEWID;
-            frameparams.itemID = ci.itemID;
-            frameparams.pageseq = ci.firstpage;
-            ItemDetails id = collection.getItem(ci.itemID);
-            DarwinUtil.chooseBestView(frameparams, collection);
+      if (url != null) {
+        if (!URLUtil.isAbsolute(url) && !url.equals("#")) {
+          if (urlattr.equals("href") && tagname.equals("a")
+              && !attrmap.containsKey("target")) {
+            // It's an inter-book link
+            String targetpath = urlmapper.relURLToAbsolute(url, contentpath);
+            ContentInfo ci = collection.getContentInfo(targetpath);
+            if (ci == null) {
+              Logger.log.warn("Unable to find ContentInfo for target path "
+                  + targetpath + " arising from relative link URL " + url
+                  + " for content path " + contentpath);
+            }
+            else {
+              NavParams frameparams = new NavParams();
+              frameparams.viewID = FramesetProducer.VIEWID;
+              frameparams.itemID = ci.itemID;
+              frameparams.pageseq = ci.firstpage;
+              ItemDetails id = collection.getItem(ci.itemID);
+              DarwinUtil.chooseBestView(frameparams, collection);
 
-            String globalurl = vsh.getFullURL(frameparams);
-            attrmap.put(urlattr, globalurl);
-            attrmap.put("target", "_top");
+              String globalurl = vsh.getFullURL(frameparams);
+              attrmap.put(urlattr, globalurl);
+              attrmap.put("target", "_top");
+            }
           }
+        }
+        else if (URLUtil.isAbsolute(url)) {
+          attrmap.put("target", "_top");
         }
         else {
           // It's a leaf link - an image (either popup or inline)
@@ -222,17 +228,17 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
 
   private void dumpHeader() {
     if (keytoind != null && keytoind.size() > 0) {
-    buffer
-        .append("<table border=0 cellpadding=0 cellspacing=0><tr><td bgcolor=#ffc0c0>"
-            + "<font face=\"\"  color=black size=-1>The following search terms have been highlighted:&nbsp;</font></td>");
-    for (int i = 0; i < keytoind.size(); ++i) {
-      String keyword = getKeyword(i);
-      String bgcol = TermColours.TERM_COLOURS[i];
-      String fgcol = TermColours.getContrastColour(i);
-      buffer.append("<td bgcolor=" + bgcol + "><b><font face=\"\" color="
-          + fgcol + " size=-1>" + keyword + "&nbsp;</font></b></td>");
-    }
-    buffer.append("</tr></table>");
+      buffer
+          .append("<table border=0 cellpadding=0 cellspacing=0><tr><td bgcolor=#ffc0c0>"
+              + "<font face=\"\"  color=black size=-1>The following search terms have been highlighted:&nbsp;</font></td>");
+      for (int i = 0; i < keytoind.size(); ++i) {
+        String keyword = getKeyword(i);
+        String bgcol = TermColours.TERM_COLOURS[i];
+        String fgcol = TermColours.getContrastColour(i);
+        buffer.append("<td bgcolor=" + bgcol + "><b><font face=\"\" color="
+            + fgcol + " size=-1>" + keyword + "&nbsp;</font></b></td>");
+      }
+      buffer.append("</tr></table>");
     }
   }
 
@@ -263,6 +269,25 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   public void beginEditable(String editclass) {
     editable = true;
     currenteditableclass = editclass;
+    if (editclass.equals(Constants.BODY)) {
+      dumpRefresher();
+    }
+  }
+
+  private void dumpRefresher() {
+    NavParams frameparams = new NavParams();
+    frameparams.viewID = FramesetProducer.VIEWID;
+    frameparams.itemID = viewparams.itemID;
+    frameparams.pageseq = viewparams.hitpage;
+    
+    DarwinUtil.chooseBestView(frameparams, collection);
+
+    String frameset = vsh.getFullURL(frameparams);
+    buffer.append("<SCRIPT TYPE=\"text/javascript\">\n"
+        + "if (parent.location.href == self.location.href) {\n"
+        + "if (window.location.href.replace)\n" + "window.location.replace('"
+        + frameset + "');" + " else\n " + " window.location.href = '"
+        + frameset + "';\n" + " }\n" + "</SCRIPT>");
   }
 
   // status change from CONTENT

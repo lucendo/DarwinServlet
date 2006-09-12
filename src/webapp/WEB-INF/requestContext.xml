@@ -10,10 +10,8 @@
     <property name="httpServletRequest" ref="httpServletRequest"/>
     <property name="httpServletResponse" ref="httpServletResponse"/>
     <property name="requestType" ref="requestType"/>
-    <property name="itemCollection" ref="itemCollection"/>
     <property name="viewParameters" ref="viewParameters"/>
-    <property name="viewStateHandler" ref="viewStateHandler"/>
-    <property name="URLMapper" ref="urlMapper"/>
+    <property name="pageRenderer" ref="pageRenderer"/>
   </bean>
   
   <bean id="icmtrigger" class="uk.org.ponder.darwin.rsf.beans.ICMTrigger">

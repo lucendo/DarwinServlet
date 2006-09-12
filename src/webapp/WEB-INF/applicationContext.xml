@@ -54,6 +54,11 @@
     factory-method="getIndexSearcher"/>
   -->
 
+  <bean id="pageRenderer" class="uk.org.ponder.darwin.rsf.PageRenderer">
+    <property name="itemCollection" ref="itemCollectionProxy"/>
+    <property name="viewStateHandler" ref="viewStateHandler"/>
+    <property name="URLMapper" ref="urlMapper"/>
+  </bean>
 
   <bean id="itemFieldTables"
     class="uk.org.ponder.darwin.search.ItemFieldTables"
@@ -76,12 +81,14 @@
   <bean id="frameset-view"
     class="uk.org.ponder.darwin.rsf.producers.FramesetProducer">
     <property name="RSACBeanLocator" ref="RSACBeanLocator" />
+    <property name="pageRenderer" ref="pageRenderer"/>
   </bean>
 
   <bean id="navframe-view"
     class="uk.org.ponder.darwin.rsf.producers.NavFrameProducer">
-    <property name="RSACBeanLocator" ref="RSACBeanLocator" />
     <property name="URLMapper" ref="urlMapper" />
+    <property name="itemCollection" ref="itemCollectionProxy"/>
+    <property name="viewStateHandler" ref="viewStateHandler"/>
   </bean>
 
   <bean id="status-view"
@@ -100,6 +107,7 @@
   <bean id="advanced-search-view"
     class="uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer">
     <property name="itemFieldTables" ref="itemFieldTables" />
+    <property name="docTypeInterpreter" ref="docTypeInterpreter"/>
   </bean>
 
   <bean id="record-view"
@@ -115,9 +123,8 @@
 
   <bean id="siteMap" parent="siteMapDef" />
 
-  <bean name="requestAddressibleBeans"
-    class="uk.org.ponder.springutil.StringListFactory">
-    <property name="strings" value="icmtrigger" />
+  <bean parent="requestAddressibleParent">
+    <property name="value" value="icmtrigger" />
   </bean>
 
   <bean id="defaultViewProxy"

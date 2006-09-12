@@ -56,3 +56,7 @@
 57,"Scientific Opinion: A Weekly Record of Scientific Progress at Home & Abroad"
 58,"Cottage Gardener and Country Gentleman"
 59,"Bienen Zeitung"
+60,"Entomologist"
+61,"Transactions of the Entomological Society of London"
+62,"Proceedings of the Entomological Society of London"
+63,"Proceedings of the Royal Society of London"

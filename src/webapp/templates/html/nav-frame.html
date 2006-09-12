@@ -26,10 +26,13 @@ margin: 0px;
 </style>
 <script type="text/javascript" src="../javascript/nav-frame.js" >
 </script>
+<script type="text/javascript" src="../../MM_images_site.js" >
+</script>
 <title>Forms for navigation</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
-<body>
+<!-- http://localhost:48080/Darwin/content/nav-frame -->
+<body onload="MM_preloadImages('../writings2.jpg','../bibliography2.jpg','../mscatalogue2.jpg','../who2.jpg','../acknowledgements2.jpg')">
 <div class="hidden">
 <div rsf:id="text-target:" id="text-target:1">dummy/1843_remarks_F1662.html#pageseq-1</div>
 <div rsf:id="text-target:" id="text-target:2">dummy/1843_remarks_F1662.html#pageseq-2</div>
@@ -44,30 +47,43 @@ margin: 0px;
 <div rsf:id="view-type" id="view-type">side</div>
 <a rsf:id="search-submit" id="search-submit" href="#">Blank</a>
 </div>
-<div class="center"><img src="../../title8.jpg" width="734"
-	height="43" /></div>
-<div class="centerzero">
-<a href="../../tempcontents.html" target="_top">Table of contents</a>&nbsp;
-<input type="button" id="back-button"
-	value=" &lt; Back" onclick="addPage(-1)" ondblclick="addPage(-1)"/> 
-<select
-	rsf:id="page-select" id="page-select-selection" onchange="onPageSelect()">
-	<option value="1" selected="true">page 47</option>
-	<option value="2">page 48</option>
-	<option value="3">page 49</option>
-	<option value="4">page 50</option>
-</select> <input type="button" id="next-button" value="Next &gt;"
-	onclick="addPage(1)" ondblclick="addPage(1)"/>
-	<span class="zerowidt">
-	<span rsf:id="switch-any">&nbsp;Switch to: </span><a rsf:id="switch-side" target="_top" href="#">Text and Image view</a>&nbsp;
-<a rsf:id="switch-image" id="switch-image" target="_top" href="#">Image view</a>&nbsp;
-<a rsf:id="switch-text" target="_top" href="#">Text view</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-Search:
-<input type="text" size="15" onkeypress="handleFieldKeyPress(event,this)"/>&nbsp;
-<a rsf:id="advanced-search" target="_top" href="#" class="advanced">Advanced search</a>
-</span>
+<div class="center">
+<p><a href="http://darwin-online.org.uk/" target="_top"><img
+  src="../../title8.jpg" width="734" height="43" border="0" /></a><br />
+<a href="../../tempcontents.html" target="_top" onmouseout="MM_swapImgRestore()"
+  onmouseover="MM_swapImage('Writings','','../writings2.jpg',1)"><img
+  src="../../writings1.jpg" alt="Darwin's Writings" name="Writings"
+  width="163" height="22" hspace="1" border="0" id="Writings" /></a><a
+  href="../../Freeman_intro.html" rsf:id="search-bibliography" target="_top" onmouseout="MM_swapImgRestore()"
+  onmouseover="MM_swapImage('Bibliography','','../bibliography2.jpg',1)"><img
+  src="../../bibliography1.jpg" alt="Bibliography" name="Bibliography"
+  width="119" height="22" hspace="1" border="0" id="Bibliography" /></a><a
+  href="../../MScatintro.html" rsf:id="search-manuscripts" target="_top" onmouseout="MM_swapImgRestore()"
+  onmouseover="MM_swapImage('MS Catalogue','','../mscatalogue2.jpg',1)"><img
+  src="../../mscatalogue1.jpg" alt="Manuscript Catalogue"
+  name="MS Catalogue" width="132" height="22" hspace="1" border="0"
+  id="MS Catalogue" /></a>
+<span class="zerowidt"> Search site: <input name="text"
+  type="text" onkeypress="handleFieldKeyPress(event,this)" size="15" />
+&nbsp; <a rsf:id="advanced-search" target="_top" href="#"
+  class="advanced">Advanced search</a></span></p>
 </div>
+<div class="centerzero"><a href="../../tempcontents.html"></a> <input
+  type="button" id="back-button" value=" &lt; Back"
+  onclick="addPage(-1)" ondblclick="addPage(-1)" /> <select
+  rsf:id="page-select" id="page-select-selection"
+  onchange="onPageSelect()">
+  <option value="1" selected="true">page 47</option>
+  <option value="2">page 48</option>
+  <option value="3">page 49</option>
+  <option value="4">page 50</option>
+</select> <input type="button" id="next-button" value="Next &gt;"
+  onclick="addPage(1)" ondblclick="addPage(1)" /> <span class="zerowidt">
+<span rsf:id="switch-any">&nbsp;Switch to: </span><a
+  rsf:id="switch-side" target="_top" href="#">Text &amp; Image view</a>&nbsp;
+<a rsf:id="switch-image" id="switch-image" target="_top" href="#">Image
+view</a>&nbsp; <a rsf:id="switch-text" target="_top" href="#">Text view</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
 
 
 </body>

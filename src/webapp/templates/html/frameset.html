@@ -29,7 +29,7 @@ View</title>
 </head>
 
 
-<frameset rows="95, *" onload="framesetloaded()">
+<frameset rows="135, *" onload="framesetloaded()">
 	<frame id="nav-frame" name="navframe" src="nav-frame.html"
 		rsf:id="nav-frame" />
 
@@ -40,7 +40,7 @@ View</title>
 		<frameset rows="50, *" border="0">
 		  <frame name="frames:side::toolbar" src="../toolbarlb2.html" 
 		  rsf:id="scr=rewrite-url" frameborder="0" scrolling="no" />
-	    	<frame src="../img-frame.html" rsf:id="scr=rewrite-url" name="imageframe" />
+	    	<frame src="../img-frame.html" name="imageframe" />
 			</frameset>
 	</frameset>
 <!--  Yes, this "over-full" frameset renders just fine! The superflous sets
@@ -52,7 +52,7 @@ View</title>
 	<frameset rows="50, *" border="0">
 		  <frame name="frames:image::toolbar" src="../toolbarlb2.html" 
 		  rsf:id="scr=rewrite-url" frameborder="0" scrolling="no" />
-	    	<frame src="../img-frame.html" rsf:id="scr=rewrite-url" name="imageframe" />
+	    	<frame src="../img-frame.html" name="imageframe" />
 			</frameset>
 	</frameset>
 
@@ -62,6 +62,11 @@ View</title>
 			rsf:id="txt-frame" />
 
 	</frameset>
+<noframes>
+  <body>
+  <a href="dummy/1843_remarks_F1662.html#pageseq-1" rsf:id="noframes">View content directly (noframes)</a>
+  </body>
+</noframes>
 </frameset>
 
 </html>

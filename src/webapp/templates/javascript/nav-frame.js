@@ -74,8 +74,8 @@ function updatePage() {
 	  textframe.src = texttarget;
 	  }
   if (viewtype=="image" || viewtype=="side") {
-	  var imagetarget=getValue("image-target:"+currentpage);
-	  var imgframeid = "frames:" + viewtype + "::toolbar";
+	var imagetarget=getValue("image-target:"+currentpage);
+    var imgframeid = "frames:" + viewtype + "::toolbar";
     var imageframe = parent.frames[imgframeid];
 //	    alert ("imageframe: " + imageframe);
 	    // + " document: " + imageframe.document);
