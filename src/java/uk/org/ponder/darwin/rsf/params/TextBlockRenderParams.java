@@ -14,7 +14,7 @@ public class TextBlockRenderParams extends SimpleViewParameters {
  
   public String getParseSpec() {
     return super.getParseSpec() + 
-      ", itemID, basepage, pageseq, keywords, viewtype, hitpage";
+      ", itemID, basepage, keywords, viewtype, hitpage";
   }
   
   public String getAnchorField() {
