@@ -60,7 +60,7 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
     bibparams.published = true;
     UIInternalLink.make(tofill, "search-bibliography", bibparams);
     AdvancedSearchParams manparams = new AdvancedSearchParams();
-    bibparams.manuscript = true;
+    manparams.manuscript = true;
     UIInternalLink.make(tofill, "search-manuscripts", manparams);
 
     if (navparams.viewtype.equals(NavParams.TEXT_VIEW)
