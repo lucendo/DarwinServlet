@@ -125,16 +125,17 @@ public class RecordProducer implements ViewComponentProducer,
       if (doctypeinterpreter.isConciseType(doctype)) {
         adder.add("Concise reference:", "reference");
         adder.add("Detailed reference:", "notes");
-        UIOutput.make(tofill, "title", "The Freeman Bibliographic Database");
+        UIOutput.make(tofill, "title", "The Freeman Bibliographical Database");
       }
       else {
         UIOutput.make(tofill, "title", "The Darwin Online Manuscript Catalogue");
         adder.add("Name:", "name");
         adder.add("Attributed title:", "attributedtitle");
         //adder.add("Source date:", "sourcedate");
-        adder.add("Description", "description");
-        adder.add("Document type", "documenttype");
-        adder.add("Place created", "place");
+        adder.add("Description:", "description");
+        adder.add("Document type:", "documenttype");
+        adder.add("Place created:", "place");
+        adder.add("Cross reference:", "xref");
       }
     }
     catch (Exception e) {

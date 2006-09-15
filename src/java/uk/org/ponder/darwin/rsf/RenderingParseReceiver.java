@@ -195,14 +195,14 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
               attrmap.put("target", "_top");
             }
           }
+          else {
+            // It's a leaf link - an image (either popup or inline)
+            String globalurl = urlmapper.relURLToExternal(url, contentpath);
+            attrmap.put(urlattr, globalurl);
+          }
         }
         else if (URLUtil.isAbsolute(url)) {
           attrmap.put("target", "_top");
-        }
-        else {
-          // It's a leaf link - an image (either popup or inline)
-          String globalurl = urlmapper.relURLToExternal(url, contentpath);
-          attrmap.put(urlattr, globalurl);
         }
       }
     }
@@ -413,7 +413,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void output() {
-    if (keytoind == null || !"body".equals(currenteditableclass)) {
+    if (keytoind == null || !"body".equals(currenteditableclass) || inpagetag) {
       pos.write(buffer.storage, 0, buffer.size);
       buffer.clear();
     }
