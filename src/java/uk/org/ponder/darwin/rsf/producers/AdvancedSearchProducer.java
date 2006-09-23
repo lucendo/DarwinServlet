@@ -75,10 +75,10 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     }
     else {
       if (viewparams.published) {
-        UIBoundBoolean.make(searchform, "published", null);
+        UIBoundBoolean.make(searchform, "published");
       }
       if (viewparams.manuscript) {
-        UIBoundBoolean.make(searchform, "manuscript", null);
+        UIBoundBoolean.make(searchform, "manuscript");
       }
     }
 
