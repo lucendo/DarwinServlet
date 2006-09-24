@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rsf="http://ponder.org.uk/rsf">
+<!-- #BeginTemplate "/Templates/site.dwt" -->
+<!-- DW6 -->
+<head>
+<!-- #BeginEditable "doctitle" -->
+<title>Advanced Search - The Complete Work of Charles Darwin Online</title>
+<!-- #EndEditable -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../darwinsite.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../MM_images.js" >
+</script>
+<style type="text/css">
+</style>
+</head>
+<body alink="#FF9999" onload="MM_preloadImages('../bibliography2.jpg','../mscatalogue2.jpg','../acknowledgements2.jpg','../writings2.jpg','../who2.jpg')" >
+
+<p align="center"><a href="http://darwin-online.org.uk/"><img src="../title16.jpg" width="721" height="89" border="0" /></a><br />
+<a href="../list.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Contents','','../contents2.jpg',1)"><img src="../contents1.jpg" alt="Table of contents" name="Contents" width="84" height="22" hspace="1" border="0" id="Contents" /></a><a href="../list.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Contents','','../contents2.jpg',1)"></a><a href="../Freeman_intro.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Bibliography','','../bibliography2.jpg',1)"><img src="../bibliography1.jpg" alt="Bibliography" name="Bibliography" width="119" height="22" hspace="1" border="0" id="Bibliography" /></a><a href="../MScatintro.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('MS Catalogue','','../mscatalogue2.jpg',1)"><img src="../mscatalogue1.jpg" alt="Manuscript Catalogue" name="MS Catalogue" width="132" height="22" hspace="1" border="0" id="MS Catalogue" /></a><a href="who.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Who','','../who2.jpg',1)"><img src="../who1.jpg" alt="Who's Who" name="Who" width="108" height="22" hspace="1" border="0" id="Who" /></a><a href="../acknowledgements.html" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Acknowledgements','','../acknowledgements2.jpg',1)"><img src="../acknowledgements1.jpg" alt="Acknowledgements" name="Acknowledgements" width="180" height="22" hspace="1" border="0" id="Acknowledgements" /></a></p>
+<!-- #BeginEditable "body" --> 
+
+<h1 align="center" rsf:id="title">Advanced Search</h1>
+
+<form method="get" rsf:id="search-form">
+<label for="free-text">Free Text:</label> 
+<input
+	name="freetext" type="text"></input> (Free text search within the body of the texts) <br />
+<label for="identifier">Identifier:</label> 
+<input name="identifier" type="text"></input> 
+  <span rsf:id="identifier-title">(The call number in each institution's catalogue, e.g. CUL-Dar99.94v)</span> <br />
+<label for="name">Name(s): </label>
+<input name="name" type="text" style="width: 250px;"></input> (Name of author, editor or other contributor)<br />
+<label for="dateafter">After date:</label>
+<input name="afterdate" style="width: 100px"></input>
+Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
+<label for="datebefore">Before date:</label>
+<input name="beforedate" style="width: 100px">
+</input>Date in format YYYY-MM-DD (MM, DD optional)<br />
+<label for="name">Attributed Title: </label><input name="attributedtitle"
+	type="text"></input>(e.g. Voyage of the Beagle)<br />
+
+<div rsf:id="descriptionbranch:">
+<label for="description">Description: </label><input name="description"
+  type="text"></input>(e.g. 'draft Expression queries')<br />
+</div>
+
+<div rsf:id="languagebranch:">
+<label for="exacttitle">Exact Title: </label><input name="exacttitle"
+  type="text"></input>(e.g. Journal of researches)<br />
+
+  <label for="place">Place: </label><input name="place"
+	type="text"></input>(e.g. London)<br />
+  <label for="name">Publisher: </label><input name="publisher"
+  type="text"></input>(e.g. John Murray)<br />
+  <label for="periodical">Periodical: </label><input name="periodical"
+  type="text"></input>(e.g. Bienen Zeitung)<br />
+	<label for="language">Language(s): </label><select rsf:id="language" name="language"
+	type="text" multiple="true" size="8" style="width:120px">
+	<option value="1">English</option>
+	<option value="2">French</option>
+	<option value="3">Danish</option>
+	<option value="4">Dutch</option>
+	<option value="5">German</option>
+	<option value="6">Russian</option>
+	</select><br />
+</div>
+<label for="documenttype">Document Type(s): </label><select rsf:id="documenttype" name="documenttype"
+	type="text" multiple="true" size="5">	
+	<option value="1">Abstract</option>
+	<option value="2">Note</option>
+	<option value="3">Correspondence</option>
+	<option value="4">Figure</option>
+	<option value="4">Printed</option>	
+	</select><br />
+		
+
+<div rsf:id="itemtypebranch:">
+<label for="manuscripts">Item types: </label>Manuscripts<input
+	name="manuscript" rsf:id="manuscript" type="checkbox"/>Published works<input
+	name="published" rsf:id="published" type="checkbox"/><br />
+</div>
+<input type="hidden" rsf:id="manuscript" value="true"/>
+<input type="hidden" rsf:id="published" value="true"/>
+
+<label for="fulltext">Storage types: </label>Available full text<input
+	name="havetext" value="true" type="checkbox"/>Available digital images<input
+	name="haveimages" value="true" type="checkbox"/><br />
+	
+<div style="text-align: center;">
+<input type="submit" value="Search" style="font-size: 105%" />
+</div>
+</form>
+<!-- #EndEditable -->
+
+<p align="center"><a href="http://darwin-online.org.uk" target="_top">Return
+to homepage</a></p>
+<p align="left">The materials provided on this website may be freely
+cited, downloaded and printed for private study or distribution to
+students but reposting on other websites, publishing, or other
+reproductions are subject to written permission. Contact Dr. <a
+	href="http://darwin-online.org.uk/people/van_wyhe.html" target="_blank">John
+van Wyhe</a>.</p>
+<p align="left"><strong class="style4">© 2002-6 The Complete Work of
+Charles Darwin Online</strong> - University of Cambridge - CRASSH 17
+Mill Lane - Cambridge - CB2 1RX - <span class="style4">fax:</span> +44
+(0)1223 (7)65276</p>
+<p align="center"><em>Sponsored by:</em></p>
+<p align="center"><a href="http://www.ahrb.ac.uk/" target="_blank"> </a></p>
+
+<p align="center"><a href="http://www.darwinforum.org.uk/trust.htm"
+	target="_blank"></a></p>
+</body>
+<!-- #EndTemplate -->
+</html>
