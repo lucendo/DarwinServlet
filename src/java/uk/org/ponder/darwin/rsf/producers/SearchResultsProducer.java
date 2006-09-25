@@ -228,7 +228,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
             UIOutput.make(hitrow, "name", name);
             String description =  hit.get("description");
             if (description != null) {
-              UIOutput.make(hitrow, "description");
+              UIOutput.make(hitrow, "description", description);
             }
         
             if (!doctypeinterpreter.isType(doctype,
