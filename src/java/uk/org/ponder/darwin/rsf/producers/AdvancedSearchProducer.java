@@ -3,6 +3,7 @@
  */
 package uk.org.ponder.darwin.rsf.producers;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     boolean advanced = !(viewparams.manuscript ^ viewparams.published);
 
     String title = "Advanced search";
-    String identifiertitle = "(identifier)";
+    String identifiertitle = "(identifier)   should be ('F', 'A' or manuscript catalogue number)";
     if (viewparams.manuscript) {
       title = "Darwin Online Manuscript Catalogue";
       identifiertitle = "(the call number in each institution's catalogue, e.g. CUL-Dar99.94v)";
@@ -88,6 +89,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
       Collection languagec = ((TreeMap) subtablemap.get("Language")).values();
       String[] languages = (String[]) languagec.toArray(new String[languagec
           .size()]);
+      Arrays.sort(languages);
 
       UISelect.make(langbranch, "language", languages, languages, null);
     }
@@ -98,6 +100,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     TreeMap doctypemap = (TreeMap) subtablemap.get("PartOfDocument");
     String[] doctypes = getDocTypes(doctypemap, viewparams.manuscript,
         viewparams.published);
+    Arrays.sort(doctypes);
 
     UISelect.make(searchform, "documenttype", doctypes, doctypes, null);
   }

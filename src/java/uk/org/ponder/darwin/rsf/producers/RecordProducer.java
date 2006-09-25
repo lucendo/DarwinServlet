@@ -120,6 +120,7 @@ public class RecordProducer implements ViewComponentProducer,
       DocHit[] hits = indexItemSearcher.getItemHit(recparams.itemID);
       Document hit = hits[0].document;
       FieldAdder adder = new FieldAdder(tofill, hit);
+      adder.add("Date:", "displaydate");
       String doctype = hit.get("documenttype");
       
       if (doctypeinterpreter.isConciseType(doctype)) {

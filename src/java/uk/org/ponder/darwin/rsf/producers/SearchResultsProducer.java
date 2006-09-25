@@ -26,7 +26,6 @@ import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.darwin.search.DocTypeInterpreter;
-import uk.org.ponder.darwin.search.ItemFields;
 import uk.org.ponder.darwin.search.SearchParams;
 import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
@@ -121,7 +120,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
     UIForm resort = UIForm.make(tofill, "resort-form",
         EarlyRequestParser.RENDER_REQUEST);
     UISelect.make(resort, "sort", SearchParams.SORT_OPTIONS,
-        SearchParams.SORT_OPTIONS_NAMES, Integer.toString(viewparams.pagesize));
+        SearchParams.SORT_OPTIONS_NAMES, params.sort);
 
     UIForm research = UIForm.make(tofill, "research-form",
         new SearchResultsParams());
@@ -224,10 +223,14 @@ public class SearchResultsProducer implements ViewComponentProducer,
             }
           }
           else {
-            String datestring = hit.get(ItemFields.DATESTRING);
+            String datestring = hit.get("displaydate");
             UIOutput.make(hitrow, "date", datestring);
             UIOutput.make(hitrow, "name", name);
-            UIOutput.make(hitrow, "description", hit.get("description"));
+            String description =  hit.get("description");
+            if (description != null) {
+              UIOutput.make(hitrow, "description");
+            }
+        
             if (!doctypeinterpreter.isType(doctype,
                 DocTypeInterpreter.CORRESPONDENCE)) {
 
@@ -241,7 +244,10 @@ public class SearchResultsProducer implements ViewComponentProducer,
               }
             }
             else {
-              UIOutput.make(hitrow, "place-created", hit.get("place"));
+              String place = hit.get("place");
+              if (place != null) {
+                UIOutput.make(hitrow, "place-created", place);
+              }
               if (navparams != null) {
                 UIInternalLink.make(hitrow, "name-link", name, navparams);
               }
@@ -259,6 +265,9 @@ public class SearchResultsProducer implements ViewComponentProducer,
             String rendered = DarwinHighlighter.getHighlightedHit(query,
                 pagetext, searcher.getIndexReader());
             UIVerbatim.make(hitrow, "rendered-hit", rendered);
+          }
+          else {
+            UIOutput.make(hitrow, "hit-weight", (1 + i) + ". ");
           }
         }
       }

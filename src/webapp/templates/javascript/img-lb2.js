@@ -15,6 +15,7 @@ var mag_factor = 1.1;  // this is the magnification factor 1.1 = 10%
 var clicks = 0;
 
 var bse, first_pag, final_pag, pag, first_time;
+var fit_width_mode = 0, fit_both_mode = 0;
 
 var new_page = 0;
 var currentimage;
@@ -24,8 +25,16 @@ function imageloaded() {
 
 original_w = currentimage.width;
 original_h = currentimage.height;
+
 if (new_page == 1) {
   new_page = 0;
+  clear_modes();
+  set_initial_zoom();
+  }
+if (fit_width_mode) {
+  fit_width();
+  }
+if (fit_both_mode) {
   fit_both();
   }
 zoom();
@@ -45,24 +54,29 @@ original_h = image.height;
 //parent.document.viewed_image.src = image.src;
 }
 
+function clear_modes() {
+  fit_width_mode = 0;
+  fit_both_mode = 0;
+}
+
 function bigger() {
     // this function increases the size of the image
     clicks +=1;
-    // the following 4 lines apply the magnification
+    clear_modes();
     zoom();
 }
 
 function smaller() {
     // this function decreases the image size
     clicks -= 1;
-    // the next 4 lines apply the image zoom out
-    
+    clear_modes();  
     zoom();
     }
 
 function orig_size() {
     // reverts image to its original size
     clicks = 0;
+    clear_modes();
     zoom();
 }
 
@@ -74,15 +88,32 @@ current_image.width = original_w*Math.pow(mag_factor,clicks);
 current_image.height = original_h*Math.pow(mag_factor,clicks);
 }
 
-function fit_width() {
-    // this function resizes the image to fill the current window width
+
+function set_initial_zoom() {
+  var fct = compute_fit_width();
+  if (fct < 0) {
+    fit_width();
+  }
+  else {
+    orig_size();
+  }
+}
+
+function compute_fit_width() {
 
 var fct;
     // the next 4 lines determine the magnification factor to fill the window width and applies it to the height
 mg = document.body.clientWidth - 20;
 fct = ((Math.log(mg/original_w)/Math.log(mag_factor)));
-clicks = fct;
+return fct;
+}
+
+function fit_width() {
+    // this function resizes the image to fill the current window width
+clicks = compute_fit_width();
+fit_width_mode = 1;
 zoom();
+
 }
 
 function fit_both() {
@@ -98,5 +129,6 @@ fct = Math.min(fctw, fcth);
 
 clicks = fct;
 if (original_w < mw) clicks = 0;
+fit_both_mode = 1;
 zoom();
 }

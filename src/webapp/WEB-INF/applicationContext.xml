@@ -12,7 +12,7 @@
 
   <bean id="templateResolverStrategy"
     class="uk.org.ponder.rsf.templateresolver.CRITemplateResolverStrategy">
-    <property name="baseDirectory" value="templates/html/" />
+    <property name="baseDirectory" value="templates/" />
     <property name="consumerInfo" ref="consumerInfoProxy" />
     <property name="contextURLProvider" ref="contextURLProvider" />
   </bean>

@@ -3,7 +3,7 @@
   "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
   <bean id="contentRoot" class="java.lang.String">
-    <constructor-arg><value>E:\darwin\converted</value></constructor-arg>
+    <constructor-arg><value>E:\workspace\DarwinServlet\src\webapp\converted</value></constructor-arg>
   </bean>
   <bean id="externalContentRoot" class="java.lang.String">
     <constructor-arg><value>http://localhost:48080/Darwin/converted</value></constructor-arg>

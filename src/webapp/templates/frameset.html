@@ -1,0 +1,73 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/TR/1999/REC-html-in-xml" xml:lang="en"
+	lang="en" xmlns:rsf="http://ponder.org.uk/rsf">
+<head>
+<script language="JavaScript">
+  function updateTitle() {
+//    alert("UpdateTitle");
+    if (window.txtframe) {
+      var elements = window.txtframe.document.getElementsByTagName("title");
+//      alert("Got " + elements.length+" title elements");
+      title = elements[0].firstChild.nodeValue;
+//      alert("Title " + title);
+      window.top.document.title = title;
+    }
+  
+  }
+
+  function framesetloaded() {
+    window.navframe.updatePage();
+    updateTitle();
+  }
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="http://darwin-online.org.uk/favicon.ico"/>
+<title rsf:id="frame-title">Darwin Online - Side-by-side Text and Image
+View</title>
+</head>
+
+
+<frameset rows="135, *" onload="framesetloaded()">
+	<frame id="nav-frame" name="navframe" src="nav-frame.html"
+		rsf:id="nav-frame" />
+
+	<frameset cols="50%, 50%" name="bottom_frames" rsf:id="frames:side">
+		<frame src="dummy/1843_remarks_F1662.html#pageseq-1"
+			rsf:id="txt-frame" id="frames:side::txt-frame"/>
+
+		<frameset rows="50, *" border="0">
+		  <frame name="frames:side::toolbar" src="toolbarlb2.html" 
+		  rsf:id="scr=rewrite-url" frameborder="0" scrolling="no" />
+	    	<frame src="img-frame.html" name="imageframe" />
+			</frameset>
+	</frameset>
+<!--  Yes, this "over-full" frameset renders just fine! The superflous sets
+ look like they are simply elided by browsers... one up for the RSF template
+ system. -->
+
+	<frameset cols="100%" name="bottom_frames" rsf:id="frames:image">
+
+	<frameset rows="50, *" border="0">
+		  <frame name="frames:image::toolbar" src="toolbarlb2.html" 
+		  rsf:id="scr=rewrite-url" frameborder="0" scrolling="no" />
+	    	<frame src="img-frame.html" name="imageframe" />
+			</frameset>
+	</frameset>
+
+	<frameset cols="100%" name="bottom_frames" rsf:id="frames:text">
+		<frame name="txtframe" 
+        id="frames:text::txt-frame" src="dummy/1843_remarks_F1662.html#pageseq-1"
+			rsf:id="txt-frame" />
+
+	</frameset>
+<noframes>
+  <body>
+  <a href="html/dummy/1843_remarks_F1662.html#pageseq-1" rsf:id="noframes">View content directly (noframes)</a>
+  </body>
+</noframes>
+</frameset>
+
+</html>
