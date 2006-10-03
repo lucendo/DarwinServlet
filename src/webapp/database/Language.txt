@@ -1,5 +1,5 @@
-1,"en-GB","English"
-2,"fr","French"
+1,"English","English"
+2,"French","French"
 161,"Danish","Danish"
 162,"Dutch","Dutch"
 163,"English Braille","English Braille"
@@ -34,3 +34,4 @@
 192,"Turkish","Turkish"
 193,"Yiddish","Yiddish"
 210,"Armenian","Armenian"
+211,"Catalan","Catalan"

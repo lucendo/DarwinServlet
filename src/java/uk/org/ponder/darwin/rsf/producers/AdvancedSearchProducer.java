@@ -51,13 +51,13 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     boolean advanced = !(viewparams.manuscript ^ viewparams.published);
 
     String title = "Advanced search";
-    String identifiertitle = "(identifier)   should be ('F', 'A' or manuscript catalogue number)";
+    String identifiertitle = "('F', 'A' or manuscript catalogue number)";
     if (viewparams.manuscript) {
       title = "Darwin Online Manuscript Catalogue";
-      identifiertitle = "(the call number in each institution's catalogue, e.g. CUL-Dar99.94v)";
+      identifiertitle = "(e.g. CUL-Dar99.94v)";
     }
     if (viewparams.published) {
-      title = "Freeman Bibliographic Database";
+      title = "Freeman Bibliographical Database";
       identifiertitle = "(Freeman's 'F' or Ancillary 'A' number. e.g. F373)";
     }
 

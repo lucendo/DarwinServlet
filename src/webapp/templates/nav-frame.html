@@ -14,7 +14,10 @@ display: none;
 .centerzero
 { text-align: center; }
 body {
-margin: 10px;
+margin: 0px;
+margin-top: -7px; /* Negative margin required in NS/FF, ignored by others */
+padding: 0px;
+border: 0px;
 }
 .advanced {
 font-size: 70%;
@@ -35,14 +38,14 @@ margin: 0px;
 <!-- http://localhost:48080/Darwin/content/nav-frame -->
 <body onload="MM_preloadImages('../writings2.jpg','../bibliography2.jpg','../mscatalogue2.jpg','../who2.jpg','../acknowledgements2.jpg')">
 <div class="hidden">
-<div rsf:id="text-target:" id="text-target:1">dummy/1843_remarks_F1662.html#pageseq-1</div>
-<div rsf:id="text-target:" id="text-target:2">dummy/1843_remarks_F1662.html#pageseq-2</div>
-<div rsf:id="text-target:" id="text-target:3">dummy/1843_remarks_F1662.html#pageseq-3</div>
-<div rsf:id="text-target:" id="text-target:4">dummy/1843_remarks_F1662.html#pageseq-4</div>
-<div rsf:id="image-target:" id="image-target:1">dummy/1843_remarks_F1662_1.png</div>
-<div rsf:id="image-target:" id="image-target:2">dummy/1843_remarks_F1662_2.png</div>
-<div rsf:id="image-target:" id="image-target:3">dummy/1843_remarks_F1662_3.png</div>
-<div rsf:id="image-target:" id="image-target:4">dummy/1843_remarks_F1662_4.png</div>
+<div rsf:id="text-target:" id="text-target:1">html/dummy/1843_remarks_F1662.html#pageseq-1</div>
+<div rsf:id="text-target:" id="text-target:2">html/dummy/1843_remarks_F1662.html#pageseq-2</div>
+<div rsf:id="text-target:" id="text-target:3">html/dummy/1843_remarks_F1662.html#pageseq-3</div>
+<div rsf:id="text-target:" id="text-target:4">html/dummy/1843_remarks_F1662.html#pageseq-4</div>
+<div rsf:id="image-target:" id="image-target:1">html/dummy/1843_remarks_F1662_1.png</div>
+<div rsf:id="image-target:" id="image-target:2">html/dummy/1843_remarks_F1662_2.png</div>
+<div rsf:id="image-target:" id="image-target:3">html/dummy/1843_remarks_F1662_3.png</div>
+<div rsf:id="image-target:" id="image-target:4">html/dummy/1843_remarks_F1662_4.png</div>
 <div rsf:id="current-page" id="current-page">1</div>
 <div rsf:id="last-page" id="last-page">4</div>
 <div rsf:id="view-type" id="view-type">side</div>
@@ -64,7 +67,7 @@ margin: 0px;
   src="../mscatalogue1.jpg" alt="Manuscript Catalogue"
   name="MS Catalogue" width="132" height="22" hspace="1" border="0"
   id="MS Catalogue" /></a>
-<span class="zerowidt"> Search site: <input name="text"
+<span class="zerowidt">&nbsp;&nbsp;&nbsp;Search site: <input name="text"
   type="text" onkeypress="handleFieldKeyPress(event,this)" size="15" />
 &nbsp; <a rsf:id="advanced-search" target="_top" href="#"
   class="advanced">Advanced search</a></span></p>
@@ -80,7 +83,7 @@ margin: 0px;
   <option value="4">page 50</option>
 </select> <input type="button" id="next-button" value="Next &gt;"
   onclick="addPage(1)" ondblclick="addPage(1)" /> <span class="zerowidt">
-<span rsf:id="switch-any">&nbsp;Switch to: </span><a
+<span rsf:id="switch-any">&nbsp;&nbsp;&nbsp;Switch to: </span><a
   rsf:id="switch-side" target="_top" href="#">Text &amp; Image view</a>&nbsp;
 <a rsf:id="switch-image" id="switch-image" target="_top" href="#">Image
 view</a>&nbsp; <a rsf:id="switch-text" target="_top" href="#">Text view</a>

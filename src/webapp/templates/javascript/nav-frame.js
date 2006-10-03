@@ -82,10 +82,9 @@ function updatePage() {
 //	  var viewedimage = getElementGlob(imageframe, "viewed_image");
 //	  alert("viewedimg: " + viewedimage);
 //  imageframe.viewed_image.src = imagetarget;
-	  var image = new Image();
-	  image.src = imagetarget;
+	
 //	  alert("imagetarget: " + imagetarget);
-    imageframe.init(image);
+    imageframe.init(imagetarget);
 //    imageframe.viewed_image.src = image.src;
 	  //window.top.img_frame.document.viewed_image.src = image.src;
 	  }

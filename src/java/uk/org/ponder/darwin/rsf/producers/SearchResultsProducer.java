@@ -76,18 +76,19 @@ public class SearchResultsProducer implements ViewComponentProducer,
     this.doctypeinterpreter = doctypeinterpreter;
   }
 
-
   private String rewriteQuery(Query unrwquery) {
     try {
       CharWrap togo = new CharWrap();
-      Query query = unrwquery.rewrite(itemsearcher.getIndexSearcher().getIndexReader());
+      Query query = unrwquery.rewrite(itemsearcher.getIndexSearcher()
+          .getIndexReader());
       Set terms = new HashSet();
       query.extractTerms(terms);
-      
+
       boolean first = true;
       for (Iterator it = terms.iterator(); it.hasNext();) {
         Term term = (Term) it.next();
-        if (!term.field().equals("text")) continue;
+        if (!term.field().equals("text"))
+          continue;
         String text = term.text();
         if (!first) {
           togo.append(" ");
@@ -98,10 +99,11 @@ public class SearchResultsProducer implements ViewComponentProducer,
       return togo.toString();
     }
     catch (Exception e) {
-      throw UniversalRuntimeException.accumulate(e, "Error rewriting query " + unrwquery);
+      throw UniversalRuntimeException.accumulate(e, "Error rewriting query "
+          + unrwquery);
     }
   }
-  
+
   public void fillComponents(UIContainer tofill, ViewParameters viewparamso,
       ComponentChecker checker) {
     SearchResultsParams viewparams = (SearchResultsParams) viewparamso;
@@ -128,7 +130,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
 
     UIInternalLink.make(tofill, "search-again", new AdvancedSearchParams());
 
-    boolean issingleitemquery = StringUtils.hasText(params.identifier);
+    boolean issingleitemquery = StringUtils.hasText(params.searchid);
     boolean isfreetext = StringUtils.hasText(params.freetext);
 
     int pagesize = viewparams.pagesize;
@@ -200,64 +202,48 @@ public class SearchResultsProducer implements ViewComponentProducer,
 
         for (int i = start; i < limit; ++i) {
           Document hit = hits.doc(i);
-          
+
           String keywords = rewriteQuery(query);
-          ViewParameters navparams = findLink(hit, keywords);
 
           UIBranchContainer hitrow = UIBranchContainer.make(tofill,
               "hit-item:", Integer.toString(i));
           String doctype = hit.get("documenttype");
-      
+
           String name = hit.get("name");
           UIOutput.make(hitrow, "document-type", doctype);
 
-          UIOutput.make(hitrow, "identifier", hit.get("identifier"));
+          ViewParameters navparams = findLink(hit, keywords);
+          UIInternalLink.make(hitrow, "identifier-link", hit.get("identifier"),
+              navparams);
 
           if (doctypeinterpreter.isConciseType(doctype)) {
             String concise = hit.get("reference");
-            if (navparams != null) {
-              UIInternalLink.make(hitrow, "concise-link", concise, navparams);
-            }
-            else {
-              UIOutput.make(hitrow, "concise", concise);
-            }
+            UIOutput.make(hitrow, "title", concise);
           }
           else {
             String datestring = hit.get("displaydate");
-            UIOutput.make(hitrow, "date", datestring);
-            UIOutput.make(hitrow, "name", name);
-            String description =  hit.get("description");
-            if (description != null) {
-              UIOutput.make(hitrow, "description", description);
+            UIOutput.make(hitrow, "date:", datestring);
+
+            String title = hit.get("searchtitle");
+            if (title != null) {
+              UIOutput.make(hitrow, "title", title);
             }
-        
+
             if (!doctypeinterpreter.isType(doctype,
                 DocTypeInterpreter.CORRESPONDENCE)) {
-
-              String attribtitle = hit.get("attributedtitle");
-              if (navparams != null) {
-                UIInternalLink.make(hitrow, "attrib-title-link", attribtitle,
-                    navparams);
-              }
-              else {
-                UIOutput.make(hitrow, "attrib-title", attribtitle);
-              }
+              UIOutput.make(hitrow, "name", name);
             }
             else {
               String place = hit.get("place");
               if (place != null) {
-                UIOutput.make(hitrow, "place-created", place);
-              }
-              if (navparams != null) {
-                UIInternalLink.make(hitrow, "name-link", name, navparams);
-              }
-              else {
-                UIOutput.make(hitrow, "name", name);
+                UIOutput.make(hitrow, "place-created:", place);
               }
             }
           }
 
           if (isfreetext) {
+            UIOutput.make(hitrow, "page-annot:", Integer
+                .toString(((NavParams) navparams).pageseq));
             float score = hits.score(i);
             String relperc = (int) (score * 100) + "%";
             UIOutput.make(hitrow, "hit-weight", relperc);
@@ -278,7 +264,6 @@ public class SearchResultsProducer implements ViewComponentProducer,
     }
   }
 
-
   private ViewParameters findLink(Document hit, String freetext) {
     // We could presumably use DocFields.TYPE_ITEM here
     String pageno = hit.get(DocFields.PAGESEQ_START);
@@ -292,7 +277,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
       togo.pageseq = Integer.parseInt(pageno);
       DarwinUtil.chooseBestView(togo, itemcollection);
       togo.viewID = FramesetProducer.VIEWID;
-      
+
       togo.keywords = freetext;
       return togo;
     }

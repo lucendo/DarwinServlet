@@ -45,9 +45,12 @@ function pageinit() {
   new_page = 1;
   }
 
-function init(image) {
+function init(imagetarget) {
+ var image = new Image();
+ image.onload = imageloaded;
+ image.src = imagetarget;
 currentimage = image;
-image.onload = imageloaded;
+
 
 original_w = image.width;
 original_h = image.height;
@@ -111,6 +114,10 @@ return fct;
 function fit_width() {
     // this function resizes the image to fill the current window width
 clicks = compute_fit_width();
+if (clicks > 0) {
+  clicks = 0;
+  }
+
 fit_width_mode = 1;
 zoom();
 
@@ -125,10 +132,14 @@ fctw = ((Math.log(mw/original_w)/Math.log(mag_factor)) );
 
 mh = parent.frames.imageframe.document.body.clientHeight - 20;
 fcth = ((Math.log(mh/original_h)/Math.log(mag_factor)) );
+
 fct = Math.min(fctw, fcth);
 
 clicks = fct;
-if (original_w < mw) clicks = 0;
+
+if (clicks > 0) {
+  clicks = 0;
+  }
 fit_both_mode = 1;
 zoom();
 }

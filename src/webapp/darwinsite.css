@@ -5,7 +5,7 @@ body {
 	margin-right: 10%;
 	margin-bottom: 39;
 	margin-left: 10%;
-		background-color: #FFFFCC;
+    background-color: #FFFFCC;
 }
 
 td {
@@ -20,7 +20,7 @@ th {
 }
 h1 {
 	font-family: "Times New Roman", Times, serif;
-	font-size: 24pt;
+	font-size: 2.4em;
 	color: #990000;
 	font-weight: normal;
 	text-decoration: none;
