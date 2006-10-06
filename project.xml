@@ -164,6 +164,120 @@
         <war.bundle>true</war.bundle>
       </properties>
     </dependency>
+    <!-- *** BEGIN HIBERNATE DEPENDENCIES *** -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate</artifactId>
+      <version>3.1.3</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+      <!--  We exclude Sun's JTA since it is not redistributable (and hence
+        not on ibiblio - see geronimo replacements below. -->
+      <exclusions>
+        <exclusion>
+          <artifactId>jta</artifactId>
+          <groupId>javax.transaction</groupId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.security</groupId>
+          <artifactId>jacc</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- Hibernate parses its .hbm files with this -->
+    <dependency>
+     <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.6.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <!-- The ANTLR parser is required for Hibernate 3 queries -->
+    <dependency>
+      <groupId>antlr</groupId>
+      <artifactId>antlr</artifactId>
+      <version>2.7.6</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+     <!--  EHCache is required by Hibernate SettingsFactory -->
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache</artifactId>
+      <version>1.2.2</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <!-- geronimo has supplied open source replacements for JTA, which is
+      required by the Spring LocalSessionFactoryBean. Open source replacements for jta, jacc -->
+    <dependency>
+      <artifactId>geronimo-spec-jta</artifactId>
+      <groupId>geronimo-spec</groupId>
+      <version>1.0.1B-rc4</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>geronimo-spec</groupId>
+      <artifactId>geronimo-spec-j2ee-jacc</artifactId>
+      <version>1.0-rc3</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <!--  commons-dbcp is required for connection pooling, operated by
+      Hibernate DataSource -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.2.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <!-- commons-pool is required by commons-dbcp -->
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>1.2</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <!-- Commons-collections is required by commons pooling, as well as
+      hbm2java task at build-time -->
+    <dependency>
+      <groupId>commons-collections</groupId>
+      <artifactId>commons-collections</artifactId>
+      <version>3.1</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <!-- You will require a JDBC connector appropriate for your database. Here
+      we use MySQL -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>3.1.11</version>
+      <type>jar</type>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+
   </dependencies>
   <build>
     <sourceDirectory>src/java</sourceDirectory>

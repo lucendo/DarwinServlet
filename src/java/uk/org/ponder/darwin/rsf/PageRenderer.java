@@ -9,6 +9,7 @@ import java.io.InputStream;
 import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.item.PageInfo;
+import uk.org.ponder.darwin.pages.PageCountDAO;
 import uk.org.ponder.darwin.parse.ContentParser;
 import uk.org.ponder.darwin.parse.URLMapper;
 import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
@@ -21,6 +22,7 @@ public class PageRenderer {
   private ItemCollection collection;
   private URLMapper urlmapper;
   private ViewStateHandler viewstatehandler;
+  private PageCountDAO pagecountDAO;
 
   public void setItemCollection(ItemCollection collection) {
     this.collection = collection;
@@ -32,6 +34,10 @@ public class PageRenderer {
 
   public void setViewStateHandler(ViewStateHandler viewstatehandler) {
     this.viewstatehandler = viewstatehandler;
+  }
+
+  public void setPageCountDAO(PageCountDAO pagecountDAO) {
+    this.pagecountDAO = pagecountDAO;
   }
   
   public void renderTextBlock(TextBlockRenderParams params,
@@ -47,6 +53,7 @@ public class PageRenderer {
     rpr.setViewStateHandler(viewstatehandler);
     rpr.setViewParams(params);
     rpr.setHitPage(params.hitpage);
+    rpr.setPageCountDAO(pagecountDAO);
     ContentParser cp = new ContentParser();
     InputStream is = null;
     try {

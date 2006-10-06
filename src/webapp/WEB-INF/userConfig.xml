@@ -14,4 +14,48 @@
   <bean id="indexDirectory" class="java.lang.String">
     <constructor-arg><value>e:\lucendo\darwin\index</value></constructor-arg>
   </bean>
+  
+  
+  <!--  Configure the Hibernate SessionFactory bean with a basic data source
+    pointing at our database  -->
+  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+    destroy-method="close">
+    <property name="driverClassName">
+      <value>com.mysql.jdbc.Driver</value>
+    </property>
+    <property name="url">
+      <value>jdbc:mysql://localhost:3306/darwinpages</value>
+    </property>
+    <property name="username">
+      <value>darwinuser</value>
+    </property>
+    <property name="password">
+      <value>resuniwrad</value>
+    </property>
+  </bean>
+
+  <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource">
+      <ref bean="dataSource" />
+    </property>
+    <property name="mappingLocations">
+      <value>classpath:conf/darwinpages.hbm.xml</value>
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">
+          org.hibernate.dialect.MySQLDialect
+        </prop>
+        <prop key="hibernate.show_sql">true</prop>
+        <!-- Always drop and recreate the database schema on startup -->
+        <prop key="hbm2ddl.auto">update</prop>
+      </props>
+    </property>
+    <!-- Always drop and recreate the database schema on startup -->
+    <property name="schemaUpdate">
+      <value>true</value>
+    </property>
+  </bean>
+  
 </beans>

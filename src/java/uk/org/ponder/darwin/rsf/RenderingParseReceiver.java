@@ -5,6 +5,9 @@ package uk.org.ponder.darwin.rsf;
 
 import java.io.CharArrayReader;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,6 +21,7 @@ import uk.org.ponder.darwin.item.ContentInfo;
 import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.lucene.DarwinAnalyzer;
+import uk.org.ponder.darwin.pages.PageCountDAO;
 import uk.org.ponder.darwin.parse.Attributes;
 import uk.org.ponder.darwin.parse.BaseParser;
 import uk.org.ponder.darwin.parse.Constants;
@@ -67,6 +71,11 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   private Map keytoind;
   private int hitpage;
   private TextBlockRenderParams viewparams;
+  private PageCountDAO pagecountDAO;
+
+  public void setPageCountDAO(PageCountDAO pagecountDAO) {
+    this.pagecountDAO = pagecountDAO;
+  }
 
   public void setOutputStream(PrintOutputStream pos) {
     this.pos = pos;
@@ -290,8 +299,22 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
         + frameset + "';\n" + " }\n" + "</SCRIPT>");
   }
 
+
+  private void dumpPageCount() {
+    String URL = vsh.getFullURL(viewparams);
+    int count = pagecountDAO.registerAccess(URL);
+    Date date = pagecountDAO.getStartDate();
+    DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
+    buffer.append("<br/>This page has been accessed " + count + " times since "
+        + format.format(date) + "</br>");
+    
+  }
+  
   // status change from CONTENT
   public void endEditable(String editclass) {
+    if (editclass.equals(Constants.BODY)) {
+      dumpPageCount();
+    }
     currenteditableclass = null;
     if (templatesource != null) {
       if (editclass.equals(Constants.TITLE)) {
@@ -302,6 +325,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       }
     }
   }
+
 
   // skim along the TEMPLATE until we hit an editable section, then since we
   // stop scanning, the CONTENT will continue to be delivered from the outside.

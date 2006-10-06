@@ -54,10 +54,12 @@
     factory-method="getIndexSearcher"/>
   -->
 
-  <bean id="pageRenderer" class="uk.org.ponder.darwin.rsf.PageRenderer">
-    <property name="itemCollection" ref="itemCollectionProxy"/>
-    <property name="viewStateHandler" ref="viewStateHandler"/>
-    <property name="URLMapper" ref="urlMapper"/>
+  <bean id="pageRenderer"
+    class="uk.org.ponder.darwin.rsf.PageRenderer">
+    <property name="itemCollection" ref="itemCollectionProxy" />
+    <property name="viewStateHandler" ref="viewStateHandler" />
+    <property name="URLMapper" ref="urlMapper" />
+    <property name="pageCountDAO" ref="pageCountDAO" />
   </bean>
 
   <bean id="itemFieldTables"
@@ -81,14 +83,14 @@
   <bean id="frameset-view"
     class="uk.org.ponder.darwin.rsf.producers.FramesetProducer">
     <property name="RSACBeanLocator" ref="RSACBeanLocator" />
-    <property name="pageRenderer" ref="pageRenderer"/>
+    <property name="pageRenderer" ref="pageRenderer" />
   </bean>
 
   <bean id="navframe-view"
     class="uk.org.ponder.darwin.rsf.producers.NavFrameProducer">
     <property name="URLMapper" ref="urlMapper" />
-    <property name="itemCollection" ref="itemCollectionProxy"/>
-    <property name="viewStateHandler" ref="viewStateHandler"/>
+    <property name="itemCollection" ref="itemCollectionProxy" />
+    <property name="viewStateHandler" ref="viewStateHandler" />
   </bean>
 
   <bean id="status-view"
@@ -107,7 +109,7 @@
   <bean id="advanced-search-view"
     class="uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer">
     <property name="itemFieldTables" ref="itemFieldTables" />
-    <property name="docTypeInterpreter" ref="docTypeInterpreter"/>
+    <property name="docTypeInterpreter" ref="docTypeInterpreter" />
   </bean>
 
   <bean id="record-view"
@@ -131,4 +133,41 @@
     class="uk.org.ponder.stringutil.StringHolder">
     <property name="value" value="/missing" />
   </bean>
+
+  <bean id="pageCountDAO"
+    class="uk.org.ponder.darwin.pages.PageCountDAOImpl">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+
+  <bean name="transactionManager"
+    class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean>
+
+  <bean id="transactionInterceptor"
+    class="org.springframework.transaction.interceptor.TransactionInterceptor">
+    <property name="transactionManager">
+      <ref bean="transactionManager" />
+    </property>
+    <property name="transactionAttributes">
+      <props>
+        <prop key="*">PROPAGATION_REQUIRED</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="autoProxyCreator"
+    class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    <property name="interceptorNames">
+      <list>
+        <idref bean="transactionInterceptor" />
+      </list>
+    </property>
+    <property name="beanNames">
+      <list>
+        <idref local="pageCountDAO" />
+      </list>
+    </property>
+  </bean>
+
 </beans>

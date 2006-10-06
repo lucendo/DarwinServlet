@@ -27,6 +27,9 @@ import uk.org.ponder.streamutil.write.PrintOutputStream;
 import uk.org.ponder.util.UniversalRuntimeException;
 
 public class DarwinHandlerHook implements HandlerHook {
+
+  private static org.apache.log4j.Logger accesslog = org.apache.log4j.Logger.getLogger("accesslog");
+  
   private HttpServletRequest request;
   private HttpServletResponse response;
   private String requesttype;
@@ -60,6 +63,7 @@ public class DarwinHandlerHook implements HandlerHook {
   }
 
   public boolean handle() {
+    logAccess();
     if (handlerhook == null || !handlerhook.handle()) {
       if (requesttype.equals(EarlyRequestParser.RENDER_REQUEST)) {
         if (viewparams instanceof PageRenderParams) {
@@ -79,6 +83,12 @@ public class DarwinHandlerHook implements HandlerHook {
     else {
       return true;
     }
+  }
+
+  private void logAccess() {
+    String ip = request.getRemoteAddr();
+    String url = request.getRequestURL().append('?').append(request.getQueryString()).toString();
+    accesslog.info(request.getMethod() + " from " + ip + " " + url);
   }
 
   private void renderPage(PageRenderParams params) {

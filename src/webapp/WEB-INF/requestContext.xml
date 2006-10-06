@@ -18,5 +18,5 @@
     <property name="itemCollectionManager" ref="itemCollectionManager"/>
     <property name="indexItemSearcher" ref="indexItemSearcher"/>
   </bean>
-   
+    
 </beans>
