@@ -298,11 +298,11 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     DarwinUtil.chooseBestView(frameparams, collection);
 
     String frameset = vsh.getFullURL(frameparams);
-    buffer.append("<SCRIPT TYPE=\"text/javascript\">\n"
+    buffer.append("<script type=\"text/javascript\">\n"
         + "if (parent.location.href == self.location.href) {\n"
         + "if (window.location.href.replace)\n" + "window.location.replace('"
         + frameset + "');" + " else\n " + " window.location.href = '"
-        + frameset + "';\n" + " }\n" + "</SCRIPT>");
+        + frameset + "';\n" + " }\n" + "</script>");
   }
 
   private void dumpPageCount() {
@@ -315,9 +315,12 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     int count = pagecountDAO.registerAccess(URL);
     Date date = pagecountDAO.getStartDate();
     DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
-    buffer.append("<br/>This page has been accessed " + count
-        + (count == 1 ? " time"
-            : " times") + " since " + format.format(date) + "</br>");
+    buffer
+        .append("<br style=\"border-width: 1px; border-style: solid; " +
+                "border-color: #AAAAAA; background-color: #EEEEBB\">" +
+                "This document has been accessed "
+            + count + (count == 1 ? " time"
+                : " times") + " since " + format.format(date) + "</br>");
 
   }
 
