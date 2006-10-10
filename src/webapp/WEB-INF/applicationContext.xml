@@ -60,6 +60,7 @@
     <property name="viewStateHandler" ref="viewStateHandler" />
     <property name="URLMapper" ref="urlMapper" />
     <property name="pageCountDAO" ref="pageCountDAO" />
+    <property name="viewParamsMapper" ref="viewParamsMapper" />
   </bean>
 
   <bean id="itemFieldTables"
@@ -83,7 +84,6 @@
   <bean id="frameset-view"
     class="uk.org.ponder.darwin.rsf.producers.FramesetProducer">
     <property name="RSACBeanLocator" ref="RSACBeanLocator" />
-    <property name="pageRenderer" ref="pageRenderer" />
   </bean>
 
   <bean id="navframe-view"
@@ -121,6 +121,11 @@
 
   <bean id="missing-view"
     class="uk.org.ponder.darwin.rsf.producers.ErrorProducer">
+  </bean>
+
+  <bean id="page-counter-view"
+    class="uk.org.ponder.darwin.rsf.producers.PageCounterProducer">
+    <property name="pageCountDAO" ref="pageCountDAO" />
   </bean>
 
   <bean id="siteMap" parent="siteMapDef" />

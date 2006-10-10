@@ -34,6 +34,7 @@ import uk.org.ponder.darwin.rsf.producers.FramesetProducer;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.htmlutil.HTMLConstants;
+import uk.org.ponder.rsf.viewstate.ViewParamsMapper;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.streamutil.StreamCopyUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
@@ -72,6 +73,11 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   private int hitpage;
   private TextBlockRenderParams viewparams;
   private PageCountDAO pagecountDAO;
+  private ViewParamsMapper vpmapper;
+
+  public void setViewParamsMapper(ViewParamsMapper vpmapper) {
+    this.vpmapper = vpmapper;
+  }
 
   public void setPageCountDAO(PageCountDAO pagecountDAO) {
     this.pagecountDAO = pagecountDAO;
@@ -288,7 +294,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     frameparams.viewID = FramesetProducer.VIEWID;
     frameparams.itemID = viewparams.itemID;
     frameparams.pageseq = viewparams.hitpage;
-    
+
     DarwinUtil.chooseBestView(frameparams, collection);
 
     String frameset = vsh.getFullURL(frameparams);
@@ -299,17 +305,22 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
         + frameset + "';\n" + " }\n" + "</SCRIPT>");
   }
 
-
   private void dumpPageCount() {
-    String URL = vsh.getFullURL(viewparams);
+    TextBlockRenderParams reduced = new TextBlockRenderParams();
+    reduced.viewID = viewparams.viewID;
+    reduced.itemID = viewparams.itemID;
+    reduced.basepage = viewparams.basepage;
+    String URL = vpmapper.toHTTPRequest(reduced);
+
     int count = pagecountDAO.registerAccess(URL);
     Date date = pagecountDAO.getStartDate();
     DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
-    buffer.append("<br/>This page has been accessed " + count + " times since "
-        + format.format(date) + "</br>");
-    
+    buffer.append("<br/>This page has been accessed " + count
+        + (count == 1 ? " time"
+            : " times") + " since " + format.format(date) + "</br>");
+
   }
-  
+
   // status change from CONTENT
   public void endEditable(String editclass) {
     if (editclass.equals(Constants.BODY)) {
@@ -325,7 +336,6 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       }
     }
   }
-
 
   // skim along the TEMPLATE until we hit an editable section, then since we
   // stop scanning, the CONTENT will continue to be delivered from the outside.

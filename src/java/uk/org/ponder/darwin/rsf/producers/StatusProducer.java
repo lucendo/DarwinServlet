@@ -4,7 +4,6 @@
 package uk.org.ponder.darwin.rsf.producers;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -23,8 +22,6 @@ import uk.org.ponder.rsf.components.UIOutputMultiline;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
-import uk.org.ponder.sortutil.ObjArraySortFacade;
-import uk.org.ponder.sortutil.Sort;
 import uk.org.ponder.stringutil.StringList;
 
 public class StatusProducer implements ViewComponentProducer {

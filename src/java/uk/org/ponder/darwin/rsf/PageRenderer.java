@@ -13,6 +13,7 @@ import uk.org.ponder.darwin.pages.PageCountDAO;
 import uk.org.ponder.darwin.parse.ContentParser;
 import uk.org.ponder.darwin.parse.URLMapper;
 import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
+import uk.org.ponder.rsf.viewstate.ViewParamsMapper;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.streamutil.StreamCloseUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
@@ -23,6 +24,7 @@ public class PageRenderer {
   private URLMapper urlmapper;
   private ViewStateHandler viewstatehandler;
   private PageCountDAO pagecountDAO;
+  private ViewParamsMapper vpmapper;
 
   public void setItemCollection(ItemCollection collection) {
     this.collection = collection;
@@ -36,6 +38,10 @@ public class PageRenderer {
     this.viewstatehandler = viewstatehandler;
   }
 
+  public void setViewParamsMapper(ViewParamsMapper vpmapper) {
+    this.vpmapper = vpmapper;
+  }
+  
   public void setPageCountDAO(PageCountDAO pagecountDAO) {
     this.pagecountDAO = pagecountDAO;
   }
@@ -53,7 +59,9 @@ public class PageRenderer {
     rpr.setViewStateHandler(viewstatehandler);
     rpr.setViewParams(params);
     rpr.setHitPage(params.hitpage);
+    rpr.setViewParamsMapper(vpmapper);
     rpr.setPageCountDAO(pagecountDAO);
+    
     ContentParser cp = new ContentParser();
     InputStream is = null;
     try {

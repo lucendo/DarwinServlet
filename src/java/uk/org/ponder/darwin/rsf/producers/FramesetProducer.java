@@ -4,7 +4,6 @@
 package uk.org.ponder.darwin.rsf.producers;
 
 import uk.org.ponder.darwin.item.ItemCollection;
-import uk.org.ponder.darwin.rsf.PageRenderer;
 import uk.org.ponder.darwin.rsf.ViewParamGetter;
 import uk.org.ponder.darwin.rsf.params.NavParams;
 import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
@@ -12,21 +11,15 @@ import uk.org.ponder.rsac.RSACBeanLocator;
 import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
-import uk.org.ponder.rsf.components.UIVerbatim;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.rsf.viewstate.ViewParamsReporter;
-import uk.org.ponder.streamutil.write.StringPOS;
 
 public class FramesetProducer implements ViewComponentProducer,
     ViewParamsReporter {
   public static final String VIEWID = "frameset";
-
-  public void setPageRenderer(PageRenderer pageRenderer) {
-    this.pageRenderer = pageRenderer;
-  }
 
   public String getViewID() {
     return VIEWID;
@@ -37,7 +30,6 @@ public class FramesetProducer implements ViewComponentProducer,
   }
 
   private RSACBeanLocator rbl;
-  private PageRenderer pageRenderer;
 
   public void setRSACBeanLocator(RSACBeanLocator rbl) {
     this.rbl = rbl;
