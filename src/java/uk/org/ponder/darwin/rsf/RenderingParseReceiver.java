@@ -202,7 +202,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
               frameparams.viewID = FramesetProducer.VIEWID;
               frameparams.itemID = ci.itemID;
               frameparams.pageseq = ci.firstpage;
-              ItemDetails id = collection.getItem(ci.itemID);
+//              ItemDetails id = collection.getItem(ci.itemID);
               DarwinUtil.chooseBestView(frameparams, collection);
 
               String globalurl = vsh.getFullURL(frameparams);
@@ -316,11 +316,11 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     Date date = pagecountDAO.getStartDate();
     DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
     buffer
-        .append("<br style=\"border-width: 1px; border-style: solid; " +
+        .append("<br/><span class=\"style2\" style=\"border-width: 1px; border-style: solid; " +
                 "border-color: #AAAAAA; background-color: #EEEEBB\">" +
                 "This document has been accessed "
             + count + (count == 1 ? " time"
-                : " times") + " since " + format.format(date) + "</br>");
+                : " times") + " since " + format.format(date) + "</span>");
 
   }
 
