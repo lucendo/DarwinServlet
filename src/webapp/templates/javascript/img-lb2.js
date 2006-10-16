@@ -34,7 +34,7 @@ if (new_page == 1) {
 if (fit_width_mode) {
   fit_width();
   }
-if (fit_both_mode) {
+else if (fit_both_mode) {
   fit_both();
   }
 zoom();
@@ -117,7 +117,8 @@ clicks = compute_fit_width();
 if (clicks > 0) {
   clicks = 0;
   }
-
+  
+clear_modes();
 fit_width_mode = 1;
 zoom();
 
@@ -140,6 +141,7 @@ clicks = fct;
 if (clicks > 0) {
   clicks = 0;
   }
+clear_modes();
 fit_both_mode = 1;
 zoom();
 }

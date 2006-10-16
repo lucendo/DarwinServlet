@@ -169,7 +169,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
         hits = searcher.search(query, sort);
       }
       catch (Exception e) {
-        Logger.log.warn("Error performing search", e);
+        Logger.log.error("Error performing search", e);
       }
 
       if (hits == null || hits.length() == 0) {
@@ -201,66 +201,71 @@ public class SearchResultsProducer implements ViewComponentProducer,
         UIOutput.make(tofill, "totalhits", Integer.toString(hits.length()));
 
         for (int i = start; i < limit; ++i) {
-          Document hit = hits.doc(i);
+          try {
+            Document hit = hits.doc(i);
 
-          String keywords = rewriteQuery(query);
+            String keywords = rewriteQuery(query);
 
-          UIBranchContainer hitrow = UIBranchContainer.make(tofill,
-              "hit-item:", Integer.toString(i));
-          String doctype = hit.get("documenttype");
+            UIBranchContainer hitrow = UIBranchContainer.make(tofill,
+                "hit-item:", Integer.toString(i));
+            String doctype = hit.get("documenttype");
 
-          String name = hit.get("name");
-          UIOutput.make(hitrow, "document-type", doctype);
+            String name = hit.get("name");
+            UIOutput.make(hitrow, "document-type", doctype);
 
-          ViewParameters navparams = findLink(hit, keywords);
-          UIInternalLink.make(hitrow, "identifier-link", hit.get("identifier"),
-              navparams);
+            ViewParameters navparams = findLink(hit, keywords);
+            UIInternalLink.make(hitrow, "identifier-link", hit
+                .get("identifier"), navparams);
 
-          if (doctypeinterpreter.isConciseType(doctype)) {
-            String concise = hit.get("reference");
-            UIOutput.make(hitrow, "title", concise);
-          }
-          else {
-            String datestring = hit.get("displaydate");
-            UIOutput.make(hitrow, "date:", datestring);
-
-            String title = hit.get("searchtitle");
-            if (title != null) {
-              UIOutput.make(hitrow, "title", title);
-            }
-
-            if (!doctypeinterpreter.isType(doctype,
-                DocTypeInterpreter.CORRESPONDENCE)) {
-              UIOutput.make(hitrow, "name", name);
+            if (doctypeinterpreter.isConciseType(doctype)) {
+              String concise = hit.get("reference");
+              UIOutput.make(hitrow, "title", concise);
             }
             else {
-              String place = hit.get("place");
-              if (place != null) {
-                UIOutput.make(hitrow, "place-created:", place);
+              String datestring = hit.get("displaydate");
+              UIOutput.make(hitrow, "date:", datestring);
+
+              String title = hit.get("searchtitle");
+              if (title != null) {
+                UIOutput.make(hitrow, "title", title);
+              }
+
+              if (!doctypeinterpreter.isType(doctype,
+                  DocTypeInterpreter.CORRESPONDENCE)) {
+                UIOutput.make(hitrow, "name", name);
+              }
+              else {
+                String place = hit.get("place");
+                if (place != null) {
+                  UIOutput.make(hitrow, "place-created:", place);
+                }
               }
             }
-          }
 
-          if (isfreetext) {
-            UIOutput.make(hitrow, "page-annot:", Integer
-                .toString(((NavParams) navparams).pageseq));
-            float score = hits.score(i);
-            String relperc = (int) (score * 100) + "%";
-            UIOutput.make(hitrow, "hit-weight", relperc);
-            String pagetext = hit.get(DocFields.FLAT_TEXT);
-            String rendered = DarwinHighlighter.getHighlightedHit(query,
-                pagetext, searcher.getIndexReader());
-            UIVerbatim.make(hitrow, "rendered-hit", rendered);
+            if (isfreetext) {
+              UIOutput.make(hitrow, "page-annot:", Integer
+                  .toString(((NavParams) navparams).pageseq));
+              float score = hits.score(i);
+              String relperc = (int) (score * 100) + "%";
+              UIOutput.make(hitrow, "hit-weight", relperc);
+              String pagetext = hit.get(DocFields.FLAT_TEXT);
+              String rendered = DarwinHighlighter.getHighlightedHit(query,
+                  pagetext, searcher.getIndexReader());
+              UIVerbatim.make(hitrow, "rendered-hit", rendered);
+            }
+            else {
+              UIOutput.make(hitrow, "hit-weight", (1 + i) + ". ");
+            }
           }
-          else {
-            UIOutput.make(hitrow, "hit-weight", (1 + i) + ". ");
+          catch (Exception e) {
+            Logger.log.error("Error rendering hit " + (1 + i), e);
           }
-        }
-      }
+        } // end for each hit
+      } // end if there were hits
 
     }
     catch (Exception e) {
-      Logger.log.warn("Error performing query: ", e);
+      Logger.log.error("Error performing query: ", e);
     }
   }
 

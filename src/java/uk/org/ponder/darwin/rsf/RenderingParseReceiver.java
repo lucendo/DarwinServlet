@@ -415,7 +415,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void outputHighlight() {
-    DarwinAnalyzer analyzer = new DarwinAnalyzer();
+    DarwinAnalyzer analyzer = new DarwinAnalyzer(true);
     TokenStream ts = analyzer.tokenStream(DocFields.TEXT, new CharArrayReader(
         buffer.storage, 0, buffer.size));
     int writpos = 0;

@@ -21,9 +21,10 @@
     <property name="contentRoot" ref="contentRoot" />
     <property name="externalContentRoot" ref="externalContentRoot" />
   </bean>
-
+<!-- 
   <bean id="analyzer"
     class="uk.org.ponder.darwin.lucene.DarwinAnalyzer" />
+    -->
   <!-- 
     <bean id="indexBuilder" class="uk.org.ponder.darwin.lucene.IndexBuilder">
     <property name="analyser" ref="analyzer"/>
