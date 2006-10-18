@@ -122,14 +122,19 @@ public class RecordProducer implements ViewComponentProducer,
       FieldAdder adder = new FieldAdder(tofill, hit);
       adder.add("Date:", "displaydate");
       String doctype = hit.get("documenttype");
+      AdvancedSearchParams againparams = new AdvancedSearchParams();
       
       if (doctypeinterpreter.isConciseType(doctype)) {
         adder.add("Concise reference:", "reference");
         adder.add("Detailed reference:", "notes");
         UIOutput.make(tofill, "title", "The Freeman Bibliographical Database");
+        againparams.published = true;
+        UIInternalLink.make(tofill, "same-search", "Search Bibliography Again", againparams);
       }
       else {
         UIOutput.make(tofill, "title", "The Darwin Online Manuscript Catalogue");
+        againparams.manuscript = true;
+        UIInternalLink.make(tofill, "same-search", "Search Manuscripts Again", againparams);
         adder.add("Name:", "name");
         adder.add("Attributed title:", "attributedtitle");
         //adder.add("Source date:", "sourcedate");

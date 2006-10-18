@@ -12,7 +12,6 @@ import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
 import uk.org.ponder.darwin.rsf.params.NavParams;
 import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
 import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
-import uk.org.ponder.rsac.RSACBeanLocator;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
 import uk.org.ponder.rsf.components.UIOutput;

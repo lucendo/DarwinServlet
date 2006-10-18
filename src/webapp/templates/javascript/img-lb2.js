@@ -1,15 +1,12 @@
 // Image Magnification Functions v2.0 (Feb 19, 2004)
+// Written by Dr Michael Hawkins, The Newton Project http://www.newtonproject.ic.ac.uk
+// Reorganised, with additions by Dr. Antranig Basman, The Complete Work of
+// Charles Darwin Online http://darwin-online.org.uk
+
 // These functions are written to change the size of only one image:
 // parent.mainframe.document.viewed_image
 // but this could easily be changed by changing the functions so that
 // they accept a value containing the image name
-
-// Potential solution for non-sequential page numbers:
-// ie. manuscripts where the text goes as follows, fo 1r, 1v, 15v, 2r, 2v, 16v, 3r ... 15r, 16r
-// Include a 0 in the array position for the missing image - if array[pos]=0 then
-// if next = page+1; previous = pag-1
-
-// Solution for displaying the hi-rez image - clicks = -5
 
 var mag_factor = 1.1;  // this is the magnification factor 1.1 = 10%
 var clicks = 0;

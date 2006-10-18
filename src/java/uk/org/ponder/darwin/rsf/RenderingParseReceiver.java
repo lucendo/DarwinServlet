@@ -11,7 +11,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.lucene.analysis.StopAnalyzer;
+import org.apache.lucene.analysis.StopFilter;
 import org.apache.lucene.analysis.Token;
 import org.apache.lucene.analysis.TokenStream;
 import org.springframework.core.io.InputStreamSource;
@@ -70,11 +73,14 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   private ItemCollection collection;
   private ViewStateHandler vsh;
   private Map keytoind;
+  private boolean suppressStop = false;
   private int hitpage;
   private TextBlockRenderParams viewparams;
   private PageCountDAO pagecountDAO;
   private ViewParamsMapper vpmapper;
 
+  private static Set stopset = StopFilter.makeStopSet(StopAnalyzer.ENGLISH_STOP_WORDS);
+  
   public void setViewParamsMapper(ViewParamsMapper vpmapper) {
     this.vpmapper = vpmapper;
   }
@@ -138,9 +144,10 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   // called by the CONTENT reader when tag is received.
-  public void protoTag(String tagname, String clazz, HashMap attrmap,
+  public void protoTag(String tagname, String clazz, HashMap origattr,
       boolean isempty) {
     flushBuffer(true);
+    HashMap attrmap = new HashMap(origattr);
     if (Attributes.PAGE_CLASS.equals(clazz)) {
       // I am without style
       pos.print("<p>");
@@ -222,6 +229,9 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       }
     }
     pos.print("<" + tagname + " ");
+    if (clazz != null) {
+      Attributes.cleanseDarwin(attrmap);
+    }
     XMLUtil.dumpAttributes(attrmap, xmlw);
 
     pos.print(isempty ? "/>"
@@ -297,7 +307,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
 
     DarwinUtil.chooseBestView(frameparams, collection);
 
-    String frameset = vsh.getFullURL(frameparams);
+    String frameset = XMLUtil.encode(vsh.getFullURL(frameparams));
     buffer.append("<script type=\"text/javascript\">\n"
         + "if (parent.location.href == self.location.href) {\n"
         + "if (window.location.href.replace)\n" + "window.location.replace('"
@@ -373,7 +383,14 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       keytoind = new HashMap();
       String[] split = keywords.split(" ");
       for (int i = 0; i < split.length; ++i) {
-        keytoind.put(split[i], new Integer(i));
+        if (!stopset.contains(split[i])) {
+          suppressStop = true;
+        } 
+      }
+      for (int i = 0; i < split.length; ++i) {
+        if (!suppressStop || !stopset.contains(split[i])) {
+          keytoind.put(split[i], new Integer(i));
+        }
       }
       if (keytoind.size() == 0) {
         keytoind = null;
@@ -413,7 +430,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       output();
     }
   }
-
+  
   private void outputHighlight() {
     DarwinAnalyzer analyzer = new DarwinAnalyzer(true);
     TokenStream ts = analyzer.tokenStream(DocFields.TEXT, new CharArrayReader(
