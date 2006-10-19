@@ -41,21 +41,13 @@ body {
   src="../acknowledgements1.png" alt="Acknowledgements"
   name="Acknowledgements" width="186" height="22" hspace="1" border="0"
   id="Acknowledgements" /></a>
+  &nbsp; Search:  <input name="text"
+  type="text" onkeypress="handleFieldKeyPress(event,this)" size="15" />
 </p>
 <!-- #BeginEditable "body" --> 
 <div class="indent">
-<table border="0">
-	<tr>
-		<td class="align-left-top">
-		<form rsf:id="research-form" method="get">
-		<input rsf:id="freetext" type="text" size="35" value="punctuated equilibrium" />
-		<input type="submit" id="Search" value="Quick Search" />
-		<div style="margin-top:0.2em;"></div>
-		</form>
-		</td>
-	</tr>
-</table>
-<a href="/help/search.html">Search&nbsp;Help</a>
+
+<a href="../searchhelp.html" onclick="return popup(this, 'searchhelp')">Search&nbsp;Help</a>
 <a href="." rsf:id="search-again">New search</a>
 <p></p>
 

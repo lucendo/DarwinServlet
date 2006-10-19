@@ -174,9 +174,8 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
       }
       else {
         attrmap.put("onClick",
-            "onPageClick(this.getAttribute('dar:pageseq')); return false;");
+            "onPageClick("+pageseq+"); return false;");
         attrmap.put("href", "#");
-        attrmap.put(Attributes.PAGESEQ_ATTR, "" + pageseq);
       }
       attrmap.put("name", pageseq);
       tagname = "a";
@@ -254,14 +253,14 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   private void dumpHeader() {
     if (keytoind != null && keytoind.size() > 0) {
       buffer
-          .append("<table border=0 cellpadding=0 cellspacing=0><tr><td bgcolor=#ffc0c0>"
-              + "<font face=\"\"  color=black size=-1>The following search terms have been highlighted:&nbsp;</font></td>");
+          .append("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\"><tr><td bgcolor=\"#ffc0c0\">"
+              + "<font face=\"\"  color=\"black\" size=\"-1\">The following search terms have been highlighted:&nbsp;</font></td>");
       for (int i = 0; i < keytoind.size(); ++i) {
         String keyword = getKeyword(i);
         String bgcol = TermColours.TERM_COLOURS[i];
         String fgcol = TermColours.getContrastColour(i);
-        buffer.append("<td bgcolor=" + bgcol + "><b><font face=\"\" color="
-            + fgcol + " size=-1>" + keyword + "&nbsp;</font></b></td>");
+        buffer.append("<td bgcolor=\"" + bgcol + "\"><b><font face=\"\" color=\""
+            + fgcol + "\" size=-1>" + keyword + "&nbsp;</font></b></td>");
       }
       buffer.append("</tr></table>");
     }
@@ -307,7 +306,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
 
     DarwinUtil.chooseBestView(frameparams, collection);
 
-    String frameset = XMLUtil.encode(vsh.getFullURL(frameparams));
+    String frameset = vsh.getFullURL(frameparams);
     buffer.append("<script type=\"text/javascript\">\n"
         + "if (parent.location.href == self.location.href) {\n"
         + "if (window.location.href.replace)\n" + "window.location.replace('"
@@ -387,9 +386,10 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
           suppressStop = true;
         } 
       }
+      int ind = 0;
       for (int i = 0; i < split.length; ++i) {
         if (!suppressStop || !stopset.contains(split[i])) {
-          keytoind.put(split[i], new Integer(i));
+          keytoind.put(split[i], new Integer(ind++));
         }
       }
       if (keytoind.size() == 0) {

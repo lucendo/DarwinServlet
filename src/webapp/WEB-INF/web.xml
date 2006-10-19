@@ -12,8 +12,7 @@
     <param-value>
       classpath:conf/rsf-config.xml,
       classpath:conf/blank-applicationContext.xml,
-      /WEB-INF/applicationContext.xml,
-      /WEB-INF/userConfig.xml
+      /WEB-INF/applicationContext.xml, /WEB-INF/userConfig.xml
     </param-value>
   </context-param>
   <!-- Configure "resource scope" Spring application contexts (RSAC).
@@ -23,14 +22,23 @@
     <param-name>requestContextConfigLocation</param-name>
     <param-value>
       classpath:conf/rsf-requestscope-config.xml,
-      classpath:conf/blank-requestContext.xml, /WEB-INF/requestContext.xml
+      classpath:conf/blank-requestContext.xml,
+      /WEB-INF/requestContext.xml
     </param-value>
   </context-param>
-    
-   <!--
-    The declaration of your FacesServlet.
-    Map it to whatever url pattern you like.
-  -->
+
+  <filter>
+    <filter-name>LoggingFilter</filter-name>
+    <filter-class>
+      uk.org.ponder.darwin.servlet.DarwinLoggingFilter
+    </filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>LoggingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <servlet>
     <servlet-name>ReasonableServlet</servlet-name>
     <servlet-class>

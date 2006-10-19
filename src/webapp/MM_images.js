@@ -21,3 +21,13 @@ function MM_swapImage() { //v3.0
   var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
    if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
 }
+
+function handleFieldKeyPress(e, input){
+  var key=e.keyCode || e.which;
+    if (key == 13) {
+//      alert ("Got href " + submiturl + " input " + input);
+      var inputval = input.value;
+//      alert ("Got value" + inputval);
+      top.location = "http://darwin-online.org.uk/content/search-results?freetext=" + inputval ;
+      }
+}

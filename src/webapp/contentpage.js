@@ -1,3 +1,4 @@
 function onPageClick(arg) {
- top.navframe.setPage(Number(arg));
+//  alert("pageClick" + arg);
+  top.navframe.setPage(Number(arg));
 }

@@ -132,7 +132,7 @@ public class RecordProducer implements ViewComponentProducer,
         UIInternalLink.make(tofill, "same-search", "Search Bibliography Again", againparams);
       }
       else {
-        UIOutput.make(tofill, "title", "The Darwin Online Manuscript Catalogue");
+        UIOutput.make(tofill, "title", "The Darwin Manuscript Catalogue");
         againparams.manuscript = true;
         UIInternalLink.make(tofill, "same-search", "Search Manuscripts Again", againparams);
         adder.add("Name:", "name");

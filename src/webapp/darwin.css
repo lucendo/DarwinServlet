@@ -1,0 +1,81 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+	margin-right: 10%;
+	margin-left: 10%;
+	background-color: #FFFFCC;
+}
+
+td {
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+th {
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}font {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #000000;
+}
+a:link {
+	color: #990000;
+}
+a:visited {
+	color: #660000;
+}
+a:hover {
+	color: #FF0000;
+}
+h1 {
+	font-size: 24pt;
+	color: #000000;
+	font-weight: normal;
+	text-decoration: none;
+}
+h2 {
+	font-size: 126%;
+	font-weight: normal;
+	color: #000000;
+}
+
+
+.style1 {
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	color: #000000;
+}
+h3 {
+	font-size: 126%;
+	font-weight: normal;
+	color: #000000;
+}
+.style4 {
+	color: #990000;
+	font-weight: bold;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+}
+.style2 {
+	font-size: 81%;
+	color: #000000;
+}
+.ednote {
+	font-size: small;
+	color: #990000;
+}
+h5 {
+	color: #000000;
+	font-size: 144%;
+}
+p {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}

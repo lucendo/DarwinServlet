@@ -8,18 +8,21 @@
 <script language="JavaScript">
   function updateTitle() {
 //    alert("UpdateTitle");
-    if (window.txtframe) {
-      var elements = window.txtframe.document.getElementsByTagName("title");
-//      alert("Got " + elements.length+" title elements");
-      title = elements[0].firstChild.nodeValue;
+    if (top.txtframe) {
+    
+    //  var elements = top.txtframe.document.getElementsByTagName("title");
+    //  alert("Got " + elements.length+" title elements");
+    //  alert("Element 0: " + elements[0]);
+    //  title = elements[0].firstChild.nodeValue;
+      title = top.txtframe.document.title;
 //      alert("Title " + title);
-      window.top.document.title = title;
+      top.document.title = title;
     }
   
   }
 
   function framesetloaded() {
-    window.navframe.updatePage();
+    top.navframe.updatePage();
     updateTitle();
   }
 </script>
@@ -30,7 +33,7 @@ View</title>
 </head>
 
 
-<frameset rows="122, *" onload="framesetloaded()">
+<frameset rows="129, *" onload="framesetloaded()">
 	<frame id="nav-frame" name="navframe" src="nav-frame.html"
 		rsf:id="nav-frame" />
 
