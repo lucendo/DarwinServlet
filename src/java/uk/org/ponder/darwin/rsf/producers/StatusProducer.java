@@ -89,7 +89,7 @@ public class StatusProducer implements ViewComponentProducer {
       UIBranchContainer.make(tofill, "index-none:");
     }
     UIOutput.make(tofill, manager.busy? "status-busy" : "status-idle", null);
-    UIForm form = UIForm.make(tofill);
+    UIForm form = UIForm.make(tofill, "basic-form");
     UIInput.make(form, "password", "#{icmtrigger.password}", "");
     UICommand.make(form, "rescan", "#{icmtrigger.index}");
     UICommand.make(form, "research", "#{icmtrigger.refreshSearcher}");

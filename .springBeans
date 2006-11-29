@@ -5,8 +5,6 @@
 	</configExtensions>
 	<configs>
 		<config>src/webapp/WEB-INF/userConfig.xml</config>
-		<config>src/webapp/WEB-INF/requestContext.xml</config>
-		<config>src/webapp/WEB-INF/applicationContext.xml</config>
 	</configs>
 	<configSets>
 		<configSet>
@@ -21,8 +19,6 @@
 				<config>/J-RSFUtil/src/conf/rsf-config.xml</config>
 				<config>/J-RSFUtil/src/conf/rsf-requestscope-config.xml</config>
 				<config>src/webapp/WEB-INF/userConfig.xml</config>
-				<config>src/webapp/WEB-INF/applicationContext.xml</config>
-				<config>src/webapp/WEB-INF/requestContext.xml</config>
 			</configs>
 		</configSet>
 	</configSets>
