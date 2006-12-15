@@ -21,6 +21,20 @@
     <property name="contentRoot" ref="contentRoot" />
     <property name="externalContentRoot" ref="externalContentRoot" />
   </bean>
+  
+  <bean parent="handlerHookParent">
+    <property name="value" ref="darwinHandlerHook"/>
+  </bean>
+  
+  <bean id="darwinHandlerHook" 
+    class="uk.org.ponder.darwin.rsf.DarwinHandlerHook">
+    <property name="httpServletRequest" ref="httpServletRequestProxy"/>
+    <property name="httpServletResponse" ref="httpServletResponseProxy"/>
+    <property name="requestTypeProxy" ref="requestTypeProxy"/>
+    <property name="viewParametersProxy" ref="viewParametersProxy"/>
+    <property name="pageRenderer" ref="pageRenderer"/>
+  </bean>
+  
 <!-- 
   <bean id="analyzer"
     class="uk.org.ponder.darwin.lucene.DarwinAnalyzer" />

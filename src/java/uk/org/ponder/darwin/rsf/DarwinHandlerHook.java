@@ -24,15 +24,15 @@ import uk.org.ponder.rsf.servlet.RootHandlerBean;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.streamutil.StreamCopyUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
+import uk.org.ponder.stringutil.StringGetter;
 import uk.org.ponder.util.UniversalRuntimeException;
 
 public class DarwinHandlerHook implements HandlerHook {
 
   private HttpServletRequest request;
   private HttpServletResponse response;
-  private String requesttype;
-  private ViewParameters viewparams;
-  private HandlerHook handlerhook;
+  private StringGetter requesttypeproxy;
+  private ViewParameters viewparamsproxy;
   private ItemCollection collection;
   private PageRenderer pageRenderer;
 
@@ -43,45 +43,36 @@ public class DarwinHandlerHook implements HandlerHook {
   public void setPageRenderer(PageRenderer pageRenderer) {
     this.pageRenderer = pageRenderer;
   }
-  
+
   public void setHttpServletResponse(HttpServletResponse response) {
     this.response = response;
   }
 
-  public void setRequestType(String requesttype) {
-    this.requesttype = requesttype;
+  public void setRequestTypeProxy(StringGetter requesttypeproxy) {
+    this.requesttypeproxy = requesttypeproxy;
   }
 
-  public void setViewParameters(ViewParameters viewparams) {
-    this.viewparams = viewparams;
-  }
-
-  public void setHandlerHook(HandlerHook handlerhook) {
-    this.handlerhook = handlerhook;
+  public void setViewParametersProxy(ViewParameters viewparamsproxy) {
+    this.viewparamsproxy = viewparamsproxy;
   }
 
   public boolean handle() {
-    if (handlerhook == null || !handlerhook.handle()) {
-      if (requesttype.equals(EarlyRequestParser.RENDER_REQUEST)) {
-        if (viewparams instanceof PageRenderParams) {
-          renderPage((PageRenderParams) viewparams);
-          return true;
-        }
-        if (viewparams instanceof TextBlockRenderParams) {
-          PrintOutputStream pos = RootHandlerBean.setupResponseWriter(
-              ContentTypeInfoRegistry.HTML_CONTENTINFO.contentTypeHeader,
-              request, response);
-          pageRenderer.renderTextBlock((TextBlockRenderParams) viewparams, pos);
-          return true;
-        }
+    if (requesttypeproxy.get().equals(EarlyRequestParser.RENDER_REQUEST)) {
+      ViewParameters viewparams = viewparamsproxy.get();
+      if (viewparams instanceof PageRenderParams) {
+        renderPage((PageRenderParams) viewparams);
+        return true;
       }
-      return false;
+      if (viewparams instanceof TextBlockRenderParams) {
+        PrintOutputStream pos = RootHandlerBean.setupResponseWriter(
+            ContentTypeInfoRegistry.HTML_CONTENTINFO.contentTypeHeader,
+            request, response);
+        pageRenderer.renderTextBlock((TextBlockRenderParams) viewparams, pos);
+        return true;
+      }
     }
-    else {
-      return true;
-    }
+    return false;
   }
-
 
   private void renderPage(PageRenderParams params) {
     ItemDetails item = collection.getItem(params.itemID);

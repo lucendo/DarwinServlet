@@ -6,14 +6,6 @@
   <bean id="itemCollection" factory-bean="itemCollectionManager" 
   factory-method="getItemCollection"/>
   
-  <bean id="handlerHook" class="uk.org.ponder.darwin.rsf.DarwinHandlerHook">
-    <property name="httpServletRequest" ref="httpServletRequest"/>
-    <property name="httpServletResponse" ref="httpServletResponse"/>
-    <property name="requestType" ref="requestType"/>
-    <property name="viewParameters" ref="viewParameters"/>
-    <property name="pageRenderer" ref="pageRenderer"/>
-  </bean>
-  
   <bean id="icmtrigger" class="uk.org.ponder.darwin.rsf.beans.ICMTrigger">
     <property name="itemCollectionManager" ref="itemCollectionManager"/>
     <property name="indexItemSearcher" ref="indexItemSearcher"/>
