@@ -117,12 +117,12 @@ public class SearchResultsProducer implements ViewComponentProducer,
     UIForm repage = UIForm.make(tofill, "repage-form",
         EarlyRequestParser.RENDER_REQUEST);
     UISelect.make(repage, "pagesize", SearchResultsParams.pagesizes,
-        SearchResultsParams.pagesizes, Integer.toString(viewparams.pagesize));
+        SearchResultsParams.pagesizes, Integer.toString(viewparams.pagesize), true);
 
     UIForm resort = UIForm.make(tofill, "resort-form",
         EarlyRequestParser.RENDER_REQUEST);
     UISelect.make(resort, "sort", SearchParams.SORT_OPTIONS,
-        SearchParams.SORT_OPTIONS_NAMES, params.sort);
+        SearchParams.SORT_OPTIONS_NAMES, params.sort, true);
 
     UIForm research = UIForm.make(tofill, "research-form",
         new SearchResultsParams());

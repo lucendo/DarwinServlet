@@ -113,7 +113,7 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
     UIOutput.make(tofill, ComponentIDs.VIEW_TYPE, navparams.viewtype);
 
     UISelect.make(tofill, ComponentIDs.PAGE_SELECT, values, labels,
-        values[page - 1]);
+        values[page - 1], false);
     boolean switchany = false;
     if (!(navparams.viewtype.equals(NavParams.SIDE_VIEW)) && item.hasimage
         && item.hastext) {

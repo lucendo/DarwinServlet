@@ -91,7 +91,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
           .size()]);
       Arrays.sort(languages);
 
-      UISelect.make(langbranch, "language", languages, languages, null);
+      UISelect.make(langbranch, "language", languages, languages, null, false);
     }
     if (viewparams.manuscript || advanced) {
       UIBranchContainer.make(searchform, "descriptionbranch:");
@@ -102,7 +102,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
         viewparams.published);
     Arrays.sort(doctypes);
 
-    UISelect.make(searchform, "documenttype", doctypes, doctypes, null);
+    UISelect.make(searchform, "documenttype", doctypes, doctypes, null, false);
   }
 
   private String[] getDocTypes(TreeMap doctypemap, boolean manuscript,
