@@ -111,3 +111,5 @@
 130,"Westmead, Farnborough, Hants",0
 131,"Westport, Conn.",0
 132,"Zagreb",0
+133,"Beirut",0
+134,"Cairo",0

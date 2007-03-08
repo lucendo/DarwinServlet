@@ -66,3 +66,6 @@
 67,"Bericht über die zur Bekanntmachung geeigneten Verhandlungen der Königl. Preuss. Akademie der Wissenschaften zu Berlin"
 68,"Bulletin of the British Museum (Natural History). Historical Series"
 69,"Archives of Natural History"
+70,"Science: A weekly record of scientific progress (New York)"
+71,"Land and Water"
+72,"Punch, or the London Charivari"
