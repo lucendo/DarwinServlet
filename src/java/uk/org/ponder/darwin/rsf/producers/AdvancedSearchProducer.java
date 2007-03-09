@@ -65,6 +65,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     UIOutput.make(tofill, "identifier-title", identifiertitle);
 
     if (advanced) {
+      UIBranchContainer.make(searchform, "freetextbranch:");
       UIBranchContainer itembranch = UIBranchContainer.make(searchform,
           "itemtypebranch:");
       UIBoundBoolean manuscript = UIBoundBoolean.make(itembranch, "manuscript",
