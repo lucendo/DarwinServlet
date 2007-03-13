@@ -11,7 +11,11 @@
       title = top.txtframe.document.title;
       top.document.title = title;
     }
-  
+    else if (top.imageframe) {
+      title = top.imageframe.document.title;
+      top.document.title = title;
+      }
+
   }
 
   function framesetloaded() {
