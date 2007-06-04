@@ -92,7 +92,8 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
           .size()]);
       Arrays.sort(languages);
 
-      UISelect.make(langbranch, "language", languages, languages, null, false);
+      UISelect.makeMultiple(langbranch, "language", languages, languages, 
+          "language", new String[] {"English"});
     }
     if (viewparams.manuscript || advanced) {
       UIBranchContainer.make(searchform, "descriptionbranch:");

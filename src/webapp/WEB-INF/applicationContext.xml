@@ -148,12 +148,14 @@
   <bean parent="requestAddressibleParent">
     <property name="value" value="icmtrigger" />
   </bean>
-
+<!-- TODO This will not work beyond 0.7.1A!! Why did we not just report this
+in the producer? -->
+<!-- 
   <bean id="defaultViewProxy"
     class="uk.org.ponder.stringutil.StringHolder">
     <property name="value" value="/missing" />
   </bean>
-
+-->
   <bean id="pageCountDAO"
     class="uk.org.ponder.darwin.pages.PageCountDAOImpl">
     <property name="sessionFactory" ref="sessionFactory" />

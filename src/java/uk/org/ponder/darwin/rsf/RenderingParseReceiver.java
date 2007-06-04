@@ -322,14 +322,16 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     String URL = vpmapper.toHTTPRequest(reduced);
 
     int count = pagecountDAO.registerAccess(URL);
-    Date date = pagecountDAO.getStartDate();
-    DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
+//    Date date = pagecountDAO.getStartDate();
+//    DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
     buffer
         .append("<br/><span class=\"style2\" style=\"border-width: 1px; border-style: solid; " +
                 "border-color: #AAAAAA; background-color: #EEEEBB\">" +
                 "This document has been accessed "
             + count + (count == 1 ? " time"
-                : " times") + " since " + format.format(date) + "</span>");
+                : " times") //+ " since " + format.format(date) 
+                + "</span>"
+                );
 
   }
 
