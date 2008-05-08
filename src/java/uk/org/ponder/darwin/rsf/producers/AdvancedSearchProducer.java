@@ -56,7 +56,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     String identifiertitle = "('F', 'A' or manuscript catalogue number)";
     if (viewparams.manuscript) {
       title = "Darwin Online Manuscript Catalogue";
-      identifiertitle = "(e.g. CUL-DAR139)";
+      identifiertitle = "(e.g. CUL-DAR6.1-13)";
     }
     if (viewparams.published) {
       title = "Freeman Bibliographical Database";
