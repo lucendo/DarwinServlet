@@ -62,7 +62,8 @@ public class StatusProducer implements ViewComponentProducer {
       Collections.sort(idlist);
       for (i = 0; i < idlist.size(); ++ i) {
         ItemDetails item = manager.getItemCollection().getItem(idlist.stringAt(i));
-        UIBranchContainer line = UIBranchContainer.make(tofill, "linktable:imagetext");
+        UIBranchContainer line = UIBranchContainer.make(tofill, "linktable:imagetext", 
+            Integer.toString(i));
         UIOutput.make(line, "itemid", item.ID);
         NavParams params = new NavParams();
         params.itemID = item.ID;

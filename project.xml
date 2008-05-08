@@ -64,7 +64,7 @@
     <dependency>
       <groupId>ponderutilcore</groupId>
       <artifactId>ponderutilcore</artifactId>
-      <version>1.2.2M1</version>
+      <version>1.2.3M2</version>
       <type>jar</type>
       <properties>
         <war.bundle>true</war.bundle>
@@ -73,7 +73,7 @@
     <dependency>
       <groupId>j-servletutil</groupId>
       <artifactId>j-servletutil</artifactId>
-      <version>1.2.2M1</version>
+      <version>1.2.3M2</version>
       <type>jar</type>
       <properties>
         <war.bundle>true</war.bundle>
@@ -82,7 +82,7 @@
     <dependency>
       <groupId>rsfutil</groupId>
       <artifactId>rsfutil</artifactId>
-      <version>0.7.2M1</version>
+      <version>0.7.3M2</version>
       <type>jar</type>
       <properties>
         <war.bundle>true</war.bundle>

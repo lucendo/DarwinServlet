@@ -17,7 +17,12 @@
 body {
   margin-right: 5%;
   margin-left: 5%;
-}
+}   
+.even-row {
+   background-color: #F2F2C0;
+   }
+table {border-collapse: collapse; }
+tr.hit-item > td {padding: 4px 0px 4px; }
 </style>
 </head>
 <body alink="#FF9999" onload="MM_preloadImages('../publications2.png','../manuscripts2.png','../biography2.png','../credits2.png')" >
@@ -54,12 +59,12 @@ body {
 <a href="." rsf:id="search-again">New search</a>
 <p></p>
 
-<table width="98%" class="resultsInGreyBar">
+<table width="98%" >
 	<tr valign="top">
 		<td class="align-left" width="45%">
 		<form rsf:id="repage-form" action="BasicResults" method="get" id="Go">Show <select
 			rsf:id="pagesize" name="hp">
-			<option value="10" selected="true">10</option>
+			<option value="10" selected="selected">10</option>
 			<option value="25">25</option>
 			<option value="50">50</option>
 			<option value="100">100</option>
@@ -84,6 +89,7 @@ body {
 			<option value="NewestFirst">Most Recent To Oldest</option>
 			<option value="OldestFirst">Oldest To Most Recent</option>
 			<option value="Title">Title</option>
+            <option value="Identifier">Identifier</option>
 		</select><input type="submit" value="Sort" id="Sort.Go" /></form>
 		</td>
 	</tr>
@@ -94,16 +100,23 @@ There were no results for your search. Make sure all words are spelled
 correctly, or use fewer or more general keywords.
 </div>
 
+<form rsf:id="goto-form:">
+</form>
+
 <table border="0" cellpadding="3">
-	<tr rsf:id="hit-item:">
-		<td align="right" valign="top" rsf:id="hit-weight">100%</td>
+	<tr class="hit-item" rsf:id="hit-item:">
+		<td align="right" valign="top" rsf:id="hit-weight" style="padding-right: 5px">100%</td>
 		<td>
-		<div><span rsf:id="document-type">abstract</span>:&nbsp; <span
-			rsf:id="name">Darwin Charles Robert</span> 
+		<div><a href="#" rsf:id="identifier-link" style="font-weight: bold">CUL-Dar84.2.157</a>
+            <span rsf:id="page-annot:">&nbsp;(page sequence <span rsf:id="payload-component">10</span>)</span>&nbsp;&nbsp;
+            <span rsf:id="document-type">abstract</span>:&nbsp;&nbsp;
+            <span rsf:id="name">Darwin Charles Robert</span> 
 			<span rsf:id="date:">&nbsp;<span rsf:id="payload-component">[1876][.02.24.after]</span></span> &nbsp;
-				<span rsf:id="title">Barrington D `Phil Trans' 1773: 164</span>
+            <span rsf:id="title">Barrington D `Phil Trans' 1773: 164</span>
 		<span rsf:id="place-created:">&nbsp;<span rsf:id="payload-component">The Beetle Hatchery</span></span>
-		<a href="#" rsf:id="identifier-link">CUL-Dar84.2.157</a><span rsf:id="page-annot:">&nbsp;(page sequence <span rsf:id="payload-component">10</span>)</span> 
+		
+       <span rsf:id="switch-text">&nbsp;&nbsp;<a rsf:id="payload-component" target="_top" href="#">Text</a></span>
+       <span rsf:id="switch-image">&nbsp;&nbsp;<a rsf:id="switch-image" target="_top" href="#">Image</a></span>
 		</div>
 		<div rsf:id="rendered-hit" style="font-size: 80%; color: #606060" >"I will give a proof of my zeal," he wrote
 		in his autobiography. "One day on tearing off some old bark, I saw two
@@ -119,7 +132,7 @@ correctly, or use fewer or more general keywords.
 
 <div id="resultspages">
 
-<form rsf:id="goto-form" action="BasicResults" method="get">	
+<form rsf:id="goto-form:" action="BasicResults" method="get">	
 	<a href="#"
 	rsf:id="previous-page">PREVIOUS</a>
 	<span rsf:id="no-previous-text"></span>

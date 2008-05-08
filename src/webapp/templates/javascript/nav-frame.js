@@ -68,14 +68,14 @@ function updatePage() {
   getElement("next-button").disabled = (currentpage >= lastpage);
  
   if (viewtype=="text" || viewtype=="side") {
-    var texttarget=getValue("text-target:"+currentpage);
-    var textframeid = "frames:" + viewtype + "::txt-frame";
+    var texttarget = getValue("text-target:"+currentpage);
+    var textframeid = "frames::txt-frame";
 	  var textframe = getElementGlob(window.parent.document, textframeid);
 	  textframe.src = texttarget;
 	  }
   if (viewtype=="image" || viewtype=="side") {
 	var imagetarget=getValue("image-target:"+currentpage);
-    var imgframeid = "frames:" + viewtype + "::toolbar";
+    var imgframeid = "frames::toolbar";
     var imageframe = parent.frames[imgframeid];
 //	    alert ("imageframe: " + imageframe);
 	    // + " document: " + imageframe.document);

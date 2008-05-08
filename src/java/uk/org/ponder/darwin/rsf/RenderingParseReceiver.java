@@ -37,8 +37,10 @@ import uk.org.ponder.darwin.rsf.producers.FramesetProducer;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.htmlutil.HTMLConstants;
-import uk.org.ponder.rsf.viewstate.ViewParamsMapper;
+import uk.org.ponder.rsf.viewstate.RawURLState;
+import uk.org.ponder.rsf.viewstate.ViewParamUtil;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
+import uk.org.ponder.rsf.viewstate.support.ViewParamsMapper;
 import uk.org.ponder.streamutil.StreamCopyUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
 import uk.org.ponder.stringutil.CharWrap;
@@ -315,11 +317,16 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   }
 
   private void dumpPageCount() {
-    TextBlockRenderParams reduced = new TextBlockRenderParams();
-    reduced.viewID = viewparams.viewID;
-    reduced.itemID = viewparams.itemID;
-    reduced.basepage = viewparams.basepage;
-    String URL = vpmapper.toHTTPRequest(reduced);
+//    TextBlockRenderParams reduced = new TextBlockRenderParams();
+//    reduced.viewID = viewparams.viewID;
+//    reduced.itemID = viewparams.itemID;
+//    reduced.basepage = viewparams.basepage;
+//    RawURLState rus = vpmapper.renderViewParams(reduced); 
+    //String URL = ViewParamUtil.toHTTPRequest(rus);
+    // Must be PRECISELY compatible with pre-RSF 0.7 algorithm to recover 
+    // page counts
+    String URL = "/contentblock?itemID=" + viewparams.itemID 
+    + "&basepage=" + viewparams.basepage + "&hitpage=0"; 
 
     int count = pagecountDAO.registerAccess(URL);
 //    Date date = pagecountDAO.getStartDate();

@@ -11,7 +11,7 @@
   </bean>
 
   <bean id="templateResolverStrategy"
-    class="uk.org.ponder.rsf.templateresolver.CRITemplateResolverStrategy">
+    class="uk.org.ponder.rsf.templateresolver.support.CRITemplateResolverStrategy">
     <property name="baseDirectory" value="templates/" />
     <property name="consumerInfo" ref="consumerInfoProxy" />
     <property name="contextURLProvider" ref="contextURLProvider" />
@@ -23,7 +23,7 @@
   </bean>
   
   <bean parent="handlerHookParent">
-    <property name="value" ref="darwinHandlerHook"/>
+    <property name="valueRef" value="darwinHandlerHook"/>
   </bean>
   
   <bean id="darwinHandlerHook" 
@@ -96,6 +96,10 @@
     <property name="itemScanner" ref="itemScanner" />
   </bean>
 
+  <bean id="linkBlockProducer" class="uk.org.ponder.darwin.rsf.producers.LinkBlockProducer">
+    <property name="itemCollection" ref="itemCollectionProxy"/>
+  </bean>
+
   <bean id="frameset-view"
     class="uk.org.ponder.darwin.rsf.producers.FramesetProducer">
     <property name="RSACBeanLocator" ref="RSACBeanLocator" />
@@ -118,6 +122,7 @@
     <property name="indexItemSearcher" ref="indexItemSearcher" />
     <property name="queryBuilder" ref="queryBuilder" />
     <property name="itemCollection" ref="itemCollectionProxy" />
+    <property name="linkBlockProducer" ref="linkBlockProducer"/>
     <property name="docTypeInterpreter" ref="docTypeInterpreter" />
   </bean>
 
@@ -129,9 +134,10 @@
 
   <bean id="record-view"
     class="uk.org.ponder.darwin.rsf.producers.RecordProducer">
-    <property name="itemCollection" ref="itemCollectionProxy" />
+    <property name="linkBlockProducer" ref="linkBlockProducer"/>
     <property name="indexItemSearcher" ref="indexItemSearcher" />
     <property name="docTypeInterpreter" ref="docTypeInterpreter" />
+    <property name="itemCollection" ref="itemCollectionProxy" />
   </bean>
 
   <bean id="missing-view"
@@ -143,7 +149,7 @@
     <property name="pageCountDAO" ref="pageCountDAO" />
   </bean>
 
-  <bean id="siteMap" parent="siteMapDef" />
+  <bean id="siteMap" parent="siteMapParent" />
 
   <bean parent="requestAddressibleParent">
     <property name="value" value="icmtrigger" />

@@ -20,7 +20,7 @@ import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
 import uk.org.ponder.rsf.content.ContentTypeInfoRegistry;
 import uk.org.ponder.rsf.processor.HandlerHook;
 import uk.org.ponder.rsf.request.EarlyRequestParser;
-import uk.org.ponder.rsf.servlet.RootHandlerBean;
+import uk.org.ponder.rsf.servlet.ServletRootHandlerBean;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.streamutil.StreamCopyUtil;
 import uk.org.ponder.streamutil.write.PrintOutputStream;
@@ -58,15 +58,14 @@ public class DarwinHandlerHook implements HandlerHook {
 
   public boolean handle() {
     if (requesttypeproxy.get().equals(EarlyRequestParser.RENDER_REQUEST)) {
-      ViewParameters viewparams = viewparamsproxy.get();
+      ViewParameters viewparams = (ViewParameters) viewparamsproxy.get();
       if (viewparams instanceof PageRenderParams) {
         renderPage((PageRenderParams) viewparams);
         return true;
       }
       if (viewparams instanceof TextBlockRenderParams) {
-        PrintOutputStream pos = RootHandlerBean.setupResponseWriter(
-            ContentTypeInfoRegistry.HTML_CONTENTINFO.contentTypeHeader,
-            request, response);
+        PrintOutputStream pos = ServletRootHandlerBean.setupResponseWriter(
+            request, response, ContentTypeInfoRegistry.HTML_CONTENTINFO.contentTypeHeader);
         pageRenderer.renderTextBlock((TextBlockRenderParams) viewparams, pos);
         return true;
       }

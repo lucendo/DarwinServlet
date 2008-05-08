@@ -35,6 +35,7 @@ import uk.org.ponder.rsf.components.UIInternalLink;
 import uk.org.ponder.rsf.components.UIOutput;
 import uk.org.ponder.rsf.components.UISelect;
 import uk.org.ponder.rsf.components.UIVerbatim;
+import uk.org.ponder.rsf.components.decorators.UIStyleDecorator;
 import uk.org.ponder.rsf.request.EarlyRequestParser;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
@@ -51,6 +52,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
   private QueryBuilder querybuilder;
   private ItemCollection itemcollection;
   private DocTypeInterpreter doctypeinterpreter;
+  private LinkBlockProducer linkBlockProducer;
 
   public String getViewID() {
     return VIEWID;
@@ -72,6 +74,10 @@ public class SearchResultsProducer implements ViewComponentProducer,
     this.itemcollection = itemcollection;
   }
 
+  public void setLinkBlockProducer(LinkBlockProducer linkBlockProducer) {
+    this.linkBlockProducer = linkBlockProducer;
+  }
+  
   public void setDocTypeInterpreter(DocTypeInterpreter doctypeinterpreter) {
     this.doctypeinterpreter = doctypeinterpreter;
   }
@@ -152,7 +158,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
     else {
       UIOutput.make(tofill, "no-previous-text");
     }
-    UIForm gotoform = UIForm.make(tofill, "goto-form",
+    UIForm gotoform = UIForm.make(tofill, "goto-form:",
         EarlyRequestParser.RENDER_REQUEST);
     UIInput.make(gotoform, "pageno", null, "");
 
@@ -208,14 +214,15 @@ public class SearchResultsProducer implements ViewComponentProducer,
 
             UIBranchContainer hitrow = UIBranchContainer.make(tofill,
                 "hit-item:", Integer.toString(i));
+            hitrow.decorate(new UIStyleDecorator(((i%2 == 0)? "even-row": "odd-row")));
             String doctype = hit.get("documenttype");
 
             String name = hit.get("name");
             UIOutput.make(hitrow, "document-type", doctype);
 
             ViewParameters navparams = findLink(hit, keywords);
-            UIInternalLink.make(hitrow, "identifier-link", hit
-                .get("identifier"), navparams);
+            String hitid = hit.get("identifier");
+            UIInternalLink.make(hitrow, "identifier-link", hitid, navparams);
 
             if (doctypeinterpreter.isConciseType(doctype)) {
               String concise = hit.get("reference");
@@ -256,6 +263,8 @@ public class SearchResultsProducer implements ViewComponentProducer,
             else {
               UIOutput.make(hitrow, "hit-weight", (1 + i) + ". ");
             }
+            
+            linkBlockProducer.makeLinkBlock(hitrow, hitid);
           }
           catch (Exception e) {
             Logger.log.error("Error rendering hit " + (1 + i), e);

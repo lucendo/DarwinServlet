@@ -54,17 +54,17 @@ h1 {
 
 <form method="get" rsf:id="search-form">
 <div rsf:id="freetextbranch:">
-<label for="free-text">Free Text:</label> 
-<input
-	name="freetext" type="text"></input> (Free text search within the body of the texts) <br />
+  <label for="free-text">Full Text:</label> 
+  <input
+	name="freetext" type="text"></input> (Full text search within the body of all historical documents) <br />
 </div>
-<label for="searchid">Identifier:</label> 
-<input name="searchid" type="text"></input> 
-  <span rsf:id="identifier-title">(e.g. CUL-DAR262.23.1)</span> <br />
 <label for="allfields">All Fields:</label>
 <input name="allfields" type="text"></input> (Search all textual fields) <br />
+<label for="searchid">Identifier:</label> 
+<input name="searchid" type="text"></input> 
+  <span rsf:id="identifier-title">(e.g. CUL-DAR139)</span> <br />
 <label for="name">Name(s): </label>
-<input name="name" type="text" style="width: 250px;"></input> (Name of author, editor or other contributor)<br />
+<input rsf:id="name" name="name" onfocus="this.select()" type="text" style="width: 250px;"></input> (Name of author, editor or other contributor)<br />
 <label for="dateafter">After date:</label>
 <input name="dateafter" style="width: 100px"></input>
 Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
@@ -82,12 +82,12 @@ Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
 <div rsf:id="languagebranch:">
   <label for="place">Place: </label><input name="place"
 	type="text"></input>(e.g. London)<br />
-  <label for="name">Publisher: </label><input name="publisher"
+  <label for="publisher">Publisher: </label><input name="publisher"
   type="text"></input>(e.g. John Murray)<br />
   <label for="periodical">Periodical: </label><input name="periodical"
   type="text"></input>(e.g. Bienen Zeitung)<br />
 	<label for="language">Language(s): </label><select rsf:id="language" name="language"
-	type="text" multiple="true" size="8" style="width:120px">
+	type="text" multiple="multiple" size="8" style="width:120px">
 	<option value="1">English</option>
 	<option value="2">French</option>
 	<option value="3">Danish</option>
@@ -98,7 +98,7 @@ Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
   (Hold Ctrl key to deselect a chosen language with left mouse click)</span><br />
 </div>
 <label for="documenttype">Document Type(s): </label><select rsf:id="documenttype" name="documenttype"
-	type="text" multiple="true" size="5">	
+	type="text" multiple="multiple" size="5">	
 	<option value="1">Abstract</option>
 	<option value="2">Note</option>
 	<option value="3">Correspondence</option>
@@ -119,7 +119,8 @@ Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
 <label for="fulltext">Storage types: </label>Available full text<input
 	name="havetext" value="true" type="checkbox"/>Available digital images<input
 	name="haveimages" value="true" type="checkbox"/><br />
-	
+
+<p><strong>See <a href="../searchhelp.html" target="_blank">Advanced search help</a>.</strong> <br /></p>
 <div style="text-align: center;">
 <input type="submit" value="Search" style="font-size: 105%" />
 </div>

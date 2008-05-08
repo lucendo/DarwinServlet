@@ -17,6 +17,8 @@ import uk.org.ponder.rsf.components.UIBoundBoolean;
 import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIForm;
+import uk.org.ponder.rsf.components.UIInput;
+import uk.org.ponder.rsf.components.UIInputMany;
 import uk.org.ponder.rsf.components.UIOutput;
 import uk.org.ponder.rsf.components.UISelect;
 import uk.org.ponder.rsf.view.ComponentChecker;
@@ -54,7 +56,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     String identifiertitle = "('F', 'A' or manuscript catalogue number)";
     if (viewparams.manuscript) {
       title = "Darwin Online Manuscript Catalogue";
-      identifiertitle = "(e.g. CUL-Dar99.94v)";
+      identifiertitle = "(e.g. CUL-DAR139)";
     }
     if (viewparams.published) {
       title = "Freeman Bibliographical Database";
@@ -63,15 +65,17 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
 
     UIOutput.make(tofill, "title", title);
     UIOutput.make(tofill, "identifier-title", identifiertitle);
+    UIInput.make(searchform, "name", "params.name", (viewparams.manuscript && !viewparams.published)? 
+        "" : "Darwin Charles Robert");
 
     if (advanced) {
       UIBranchContainer.make(searchform, "freetextbranch:");
       UIBranchContainer itembranch = UIBranchContainer.make(searchform,
           "itemtypebranch:");
-      UIBoundBoolean manuscript = UIBoundBoolean.make(itembranch, "manuscript",
+      UIBoundBoolean manuscript = UIBoundBoolean.make(itembranch, "manuscript", "params.manuscript",
           viewparams.manuscript);
       manuscript.fossilize = false;
-      UIBoundBoolean published = UIBoundBoolean.make(itembranch, "published",
+      UIBoundBoolean published = UIBoundBoolean.make(itembranch, "published", "params.published", 
           viewparams.published);
       published.fossilize = false;
     }
@@ -92,8 +96,13 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
           .size()]);
       Arrays.sort(languages);
 
-      UISelect.makeMultiple(langbranch, "language", languages, languages, 
-          "language", new String[] {"English"});
+      //UISelect.makeMultiple(langbranch, "language", languages, languages, 
+      //    "params.language", new String[] {"English"});
+      UISelect langsel = UISelect.make(langbranch, "language", languages, languages, null, false);
+      langsel.selection = new UIInputMany();
+      langsel.selection.willinput = false;
+      langsel.selection.updateValue(new String[] {"English"});
+      
     }
     if (viewparams.manuscript || advanced) {
       UIBranchContainer.make(searchform, "descriptionbranch:");
