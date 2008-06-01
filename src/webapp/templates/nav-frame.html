@@ -80,7 +80,7 @@ margin: 0px;
 </div>
 <div class="centerzero"><a href="../tempcontents.html"></a> <input
   type="button" id="back-button" value=" &lt; Back"
-  onclick="addPage(-1)" ondblclick="addPage(-1)" /> <select
+  onmouseup="addPage(-1)" /> <select
   rsf:id="page-select" id="page-select-selection"
   onchange="onPageSelect()">
   <option value="1" selected="true">page 47</option>
@@ -88,7 +88,7 @@ margin: 0px;
   <option value="3">page 49</option>
   <option value="4">page 50</option>
 </select> <input type="button" id="next-button" value="Next &gt;"
-  onclick="addPage(1)" ondblclick="addPage(1)" /> <span class="zerowidt">
+  onmouseup="addPage(1)" /> <span class="zerowidt">
 <span rsf:id="switch-any">&nbsp;&nbsp;&nbsp;Switch to: </span><a rsf:id="switch-text" target="_top" href="#">Text view</a>&nbsp;
 <a rsf:id="switch-image" id="switch-image" target="_top" href="#">Image
 view</a>&nbsp;<a rsf:id="switch-side" target="_top" href="#">Text &amp; Image view</a>
