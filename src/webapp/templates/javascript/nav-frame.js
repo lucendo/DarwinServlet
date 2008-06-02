@@ -74,7 +74,7 @@ function updatePage() {
 	  textframe.src = texttarget;
 	  }
   if (viewtype=="image" || viewtype=="side") {
-	var imagetarget=getValue("image-target:"+currentpage);
+	var imagetarget = getValue("image-target:"+currentpage);
     var imgframeid = "frames::toolbar";
     var imageframe = parent.frames[imgframeid];
 //	    alert ("imageframe: " + imageframe);
@@ -118,7 +118,7 @@ function onPageSelect() {
 }
 
 function handleFieldKeyPress(e, input){
-  var key=e.keyCode || e.which;
+  var key = e.keyCode || e.which;
     if (key == 13) {
       var submitlink = getElement("search-submit");
 //      alert ("Got element " + submitlink);

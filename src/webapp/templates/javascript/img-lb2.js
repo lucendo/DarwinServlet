@@ -81,7 +81,7 @@ function orig_size() {
 }
 
 function zoom() {
-	// this function controls the resizing of the image
+  // this function controls the resizing of the image
   current_image = parent.frames.imageframe.document.viewed_image;
 
   current_image.width = original_w*Math.pow(mag_factor,clicks);
