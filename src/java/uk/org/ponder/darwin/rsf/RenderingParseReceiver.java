@@ -5,9 +5,6 @@ package uk.org.ponder.darwin.rsf;
 
 import java.io.CharArrayReader;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -37,8 +34,6 @@ import uk.org.ponder.darwin.rsf.producers.FramesetProducer;
 import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocFields;
 import uk.org.ponder.htmlutil.HTMLConstants;
-import uk.org.ponder.rsf.viewstate.RawURLState;
-import uk.org.ponder.rsf.viewstate.ViewParamUtil;
 import uk.org.ponder.rsf.viewstate.ViewStateHandler;
 import uk.org.ponder.rsf.viewstate.support.ViewParamsMapper;
 import uk.org.ponder.streamutil.StreamCopyUtil;
