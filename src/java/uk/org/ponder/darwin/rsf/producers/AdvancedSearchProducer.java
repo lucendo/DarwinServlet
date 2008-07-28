@@ -60,7 +60,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     }
     if (viewparams.published) {
       title = "Freeman Bibliographical Database";
-      identifiertitle = "(Freeman's 'F' or Ancillary 'A' number. e.g. F373)";
+      identifiertitle = "(Freeman's 'F' or Additional 'A' number. e.g. F373)";
     }
 
     UIOutput.make(tofill, "title", title);
