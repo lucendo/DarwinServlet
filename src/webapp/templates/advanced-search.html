@@ -1,20 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:rsf="http://ponder.org.uk/rsf">
-<!-- #BeginTemplate "/Templates/site.dwt" -->
-<!-- DW6 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- #BeginTemplate "/Templates/site.dwt" --><!-- DW6 -->
 <head>
+<script src="../prototype.js" language="JavaScript" type="text/javascript"> </script> 
+<script src="../pagecounter.js" language="JavaScript" type="text/javascript"> </script>
+<script type="text/javascript" src="../MM_images.js" ></script>
+
+<link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" /> 
 <!-- #BeginEditable "doctitle" -->
-<title>Advanced Search - The Complete Work of Charles Darwin Online</title>
+<title>Darwin Online: Advanced Search</title>
 <link href="css/forms.css" rel="stylesheet" type="text/css" />
 <!-- #EndEditable -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../darwinsite.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../MM_images.js" >
-</script>
-<script src="../prototype.js" language="JavaScript" type="text/javascript">
-</script>
-<script src="../pagecounter.js" language="JavaScript" type="text/javascript">
-</script>
 <style type="text/css">
 body {
   margin-right: 5%;
@@ -25,29 +22,34 @@ h1 {
 }
 </style>
 </head>
-<body alink="#FF9999" onload="MM_preloadImages('../publications2.png','../manuscripts2.png','../biography2.png','../credits2.png')" >
+<body alink="#FF9999" onload="MM_preloadImages('../publications2.png','../manuscripts2.png','../biography2.png','../credits2.png');updatePageCounter();" >
 
-<p align="center"><a href="http://darwin-online.org.uk/"><img src="../title16.jpg" width="721" height="89" border="0" /></a>
+<p align="center"><a href="http://darwin-online.org.uk/"><img src="../title16.jpg" alt="The Complete Work of Charles Darwin Online" title="Click to return to homepage" width="721" height="89" border="0" /></a>
 <br/>
-<a href="../contents.html" target="_top" onmouseout="MM_swapImgRestore()"
+<a href="../contents.html" onmouseout="MM_swapImgRestore()"
   onmouseover="MM_swapImage('Publications','','../publications2.png',1)"><img
-  src="../publications1.png" alt="Publications" name="Publications"
+  src="../publications1.png" alt="Publications" title="Darwin's publications and published manuscripts" name="Publications"
   width="120" height="22" hspace="1" border="0" id="Publications" /></a><a
-  href="../manuscripts.html" target="_top" onmouseout="MM_swapImgRestore()"
+  href="../manuscripts.html" onmouseout="MM_swapImgRestore()"
   onmouseover="MM_swapImage('Manuscripts','','../manuscripts2.png',1)"><img
-  src="../manuscripts1.png" alt="Manuscripts" name="Manuscripts"
+  src="../manuscripts1.png" alt="Manuscripts" title="Darwin manuscripts and private papers" name="Manuscripts"
   width="120" height="22" hspace="1" border="0" id="Manuscripts" /></a><a
-  href="../biography.html" target="_top" onmouseout="MM_swapImgRestore()"
+  href="../biography.html" onmouseout="MM_swapImgRestore()"
   onmouseover="MM_swapImage('Biography','','../biography2.png',1)"><img
-  src="../biography1.png" alt="Biography"
+  src="../biography1.png" alt="Biography" title="Timeline, life in pictures and more"
   name="Biography" width="103" height="22" hspace="1" border="0"
   id="Biography" /></a><a
-  href="../acknowledgements.html" target="_top" onmouseout="MM_swapImgRestore()"
+  href="../acknowledgements.html" onmouseout="MM_swapImgRestore()"
   onmouseover="MM_swapImage('Credits','','../credits2.png',1)"><img
-  src="../credits1.png" alt="Credits &amp; Acknowledgements"
+  src="../credits1.png" alt="Credits &amp; Acknowledgements" title="Credits &amp; Acknowledgements"
   name="Credits" width="78" height="22" hspace="1" border="0"
-  id="Credits" /></a>
-</p>
+  id="Credits" /></a>&nbsp;
+
+    Search:  
+    <input name="text"
+  type="text" onkeypress="handleFieldKeyPress(event,this)" size="15" />
+<span class="zerowidt"><a href="http://darwin-online.org.uk/content/advanced-search?manuscript=false&amp;published=false" target="_blank" class="style2" id="advanced-search">Advanced search</a></span></p>
+<hr class="style4" />
 <!-- #BeginEditable "body" --> 
 
 <h1 align="center" rsf:id="title">Advanced Search</h1>
@@ -64,63 +66,68 @@ h1 {
 <input name="searchid" type="text"></input> 
   <span rsf:id="identifier-title">(e.g. CUL-DAR139)</span> <br />
 <label for="name">Name(s): </label>
-<input rsf:id="name" name="name" onfocus="this.select()" type="text" style="width: 250px;"></input> (Name of author, editor or other contributor)<br />
+<input rsf:id="name" name="name" onfocus="this.select()" type="text" style="width: 250px;" /> (Name of author, editor or other contributor)<br />
 <label for="dateafter">After date:</label>
-<input name="dateafter" style="width: 100px"></input>
+<input name="dateafter" style="width: 100px" />
 Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
 <label for="datebefore">Before date:</label>
-<input name="datebefore" style="width: 100px">
-</input>Date in format YYYY-MM-DD (MM, DD optional)<br />
+<input name="datebefore" style="width: 100px" />
+Date in format YYYY-MM-DD (MM, DD optional)<br />
 <label for="searchtitle">Title: </label><input name="searchtitle"
-	type="text"></input>(e.g. Voyage of the Beagle)<br />
+  type="text" />(e.g. Voyage of the Beagle)<br />
 
 <div rsf:id="descriptionbranch:">
 <label for="description">Description: </label><input name="description"
-  type="text"></input>(e.g. 'draft Expression queries')<br />
+  type="text" />(e.g. 'draft Expression queries')<br />
 </div>
 
 <div rsf:id="languagebranch:">
   <label for="place">Place: </label><input name="place"
-	type="text"></input>(e.g. London)<br />
+  type="text" />(e.g. London)<br />
   <label for="publisher">Publisher: </label><input name="publisher"
-  type="text"></input>(e.g. John Murray)<br />
+  type="text" />(e.g. John Murray)<br />
   <label for="periodical">Periodical: </label><input name="periodical"
-  type="text"></input>(e.g. Bienen Zeitung)<br />
-	<label for="language">Language(s): </label><select rsf:id="language" name="language"
-	type="text" multiple="multiple" size="8" style="width:120px">
-	<option value="1">English</option>
-	<option value="2">French</option>
-	<option value="3">Danish</option>
-	<option value="4">Dutch</option>
-	<option value="5">German</option>
-	<option value="6">Russian</option>
-	</select><span style="vertical-align:top">&nbsp;&nbsp;&nbsp;
+  type="text" />(e.g. Bienen Zeitung)<br />
+  <label for="language">Language(s): </label><select rsf:id="language" name="language"
+  type="text" multiple="multiple" size="8" style="width:120px">
+  <option value="1">English</option>
+  <option value="2">French</option>
+  <option value="3">Danish</option>
+  <option value="4">Dutch</option>
+  <option value="5">German</option>
+  <option value="6">Russian</option>
+  </select><span style="vertical-align:top">&nbsp;&nbsp;&nbsp;
   (Hold Ctrl key to deselect a chosen language with left mouse click)</span><br />
 </div>
 <label for="documenttype">Document Type(s): </label><select rsf:id="documenttype" name="documenttype"
-	type="text" multiple="multiple" size="5">	
-	<option value="1">Abstract</option>
-	<option value="2">Note</option>
-	<option value="3">Correspondence</option>
-	<option value="4">Figure</option>
-	<option value="4">Printed</option>	
-	</select><span style="vertical-align:top">&nbsp;&nbsp;&nbsp;
+  type="text" multiple="true" size="5"> 
+  <option value="1">Abstract</option>
+  <option value="2">Note</option>
+  <option value="3">Correspondence</option>
+  <option value="4">Figure</option>
+  <option value="4">Printed</option>  
+  </select><span style="vertical-align:top">&nbsp;&nbsp;&nbsp;
   (Hold Ctrl key to deselect a chosen type with left mouse click)</span><br />
-		
+    
 
 <div rsf:id="itemtypebranch:">
 <label for="manuscripts">Item types: </label>Manuscripts<input
-	name="manuscript" rsf:id="manuscript" type="checkbox"/>Published works<input
-	name="published" rsf:id="published" type="checkbox"/><br />
+  name="manuscript" rsf:id="manuscript" type="checkbox"/>Published works<input
+  name="published" rsf:id="published" type="checkbox"/><br />
 </div>
 <input type="hidden" rsf:id="manuscript" value="true"/>
 <input type="hidden" rsf:id="published" value="true"/>
 
-<label for="fulltext">Storage types: </label>Available full text<input
-	name="havetext" value="true" type="checkbox"/>Available digital images<input
-	name="haveimages" value="true" type="checkbox"/><br />
-
-<p><strong>See <a href="../searchhelp.html" target="_blank">Advanced search help</a>.</strong> <br /></p>
+<label for="fulltext">Storage types: </label>
+<p>Available full text
+  <input
+  name="havetext" value="true" type="checkbox"/>
+  Available digital images
+  <input
+  name="haveimages" value="true" type="checkbox"/>
+  </p>
+<p><strong>See <a href="../searchhelp.html" target="_blank">Advanced search help</a>.</strong> <br />
+</p>
 <div style="text-align: center;">
 <input type="submit" value="Search" style="font-size: 105%" />
 </div>
@@ -128,30 +135,26 @@ Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
 <!-- #EndEditable -->
 <hr class="style4" />
 <div id="page-counter"><span>&nbsp;</span></div> 
-<p align="center" class="style5"><a href="http://darwin-online.org.uk/" target="_top">Return 
+<p align="center" class="style5"><a href="http://darwin-online.org.uk/">Return 
   to homepage</a></p>
-<p align="left" class="style2" ><a href="../TermsOfUse.html" target="_top">Terms of Use</a>. These materials  may be freely used for   non-commercial purposes in accordance with applicable statutory allowances and  distribution to students;  republication in any form is subject to written permission. Contact: Dr <a href="http://darwin-online.org.uk/people/van_wyhe.html" target="_blank">John 
+<p align="left" class="style2" ><a href="../TermsOfUse.html" target="_blank">Terms of Use</a>. These materials  may be freely used for   non-commercial purposes  and  distribution to students;  republication in any form requires written permission. Contact: Dr <a href="http://darwin-online.org.uk/people/van_wyhe.html" target="_blank">John 
     van Wyhe</a>.</p>
 <p align="left" class="style2" ><span class="style4">© 2002-7 <em>The Complete Work of Charles Darwin Online</em></span> - University of Cambridge - CRASSH 17 Mill Lane - Cambridge - CB2 1RX</p>
 <div align="center">
-
-  <table width="582" border="0" cellpadding="5" cellspacing="5">
+  <table width="732" border="0" cellpadding="5" cellspacing="5">
     <tr>
-      <td width="105"><div align="center"><a href="http://www.cam.ac.uk/" target="_blank"></a><a href="http://www.cam.ac.uk/" target="_blank"><img src="../identifier2.gif" alt="University of Cambridge" width="192" height="46" border="0" /></a></div></td>
-      <td width="65"><div align="center" class="style2"><em><strong>Sponsored by:</strong></em></div></td>
-      <td width="181"><div align="center">
+      <td width="192"><a href="http://www.cam.ac.uk/" target="_blank"><img src="../identifier2.gif" alt="University of Cambridge" width="192" height="46" border="0" /></a></td>
+      <td width="66"><div align="center"><a href="http://www.cam.ac.uk/" target="_blank"></a><a href="http://www.cam.ac.uk/" target="_blank"></a><a href="http://www.crassh.cam.ac.uk/" target="_blank"><img src="../crasshlogo.gif" alt="CRASSH" width="66" height="66" border="0" /></a></div></td>
+      <td width="92"><div align="center" class="style2"><em><strong>Sponsored by:</strong></em></div></td>
+      <td width="180"><div align="center">
         <p><a href="http://www.ahrc.ac.uk/" target="_blank"><img src="../ahrcsmall.gif" alt="Arts and Humanities Research Council" width="126" height="34" border="0" /></a></p>
-        </div>
-      <div align="center"><a href="http://www.darwinforum.org.uk/trust.htm" target="_blank"><img src="../CDT.jpg" alt="The Charles Darwin Trust" width="181" height="25" border="0" /></a></div></td>
-
-      <td width="74"><div align="center"><a href="http://www.crassh.cam.ac.uk/" target="_blank"><img src="../crasshlogo.gif" alt="CRASSH" width="66" height="66" border="0" /></a></div></td>
-      <td width="77"><div align="center"><a href="http://www.caret.cam.ac.uk/" target="_blank"><img src="../caret_logo.gif" alt="CARET" width="75" height="23" border="0" /></a></div>
-      </td>
+        </div>     </td>
+      <td width="122"><div align="center"><a href="http://www.caret.cam.ac.uk/" target="_blank"><img src="../caret_logo.gif" alt="CARET" width="75" height="23" border="0" /></a></div>      </td>
     </tr>
   </table>
 </div>
 <p align="left" class="style2">File last updated 
-  <!-- #BeginDate format:Sw1 -->5 February, 2007<!-- #EndDate -->
+  <!-- #BeginDate format:Sw1 -->23 June, 2008<!-- #EndDate -->
 </p>
 </body>
 <!-- #EndTemplate --></html>
