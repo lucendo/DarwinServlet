@@ -36,3 +36,5 @@
 210,"Armenian","Armenian"
 211,"Catalan","Catalan"
 212,"Arabic","Arabic"
+213,"Maltese","Maltese"
+215,"Vietnamese","Vietnamese"

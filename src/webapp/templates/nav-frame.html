@@ -1,8 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:rsf="http://ponder.org.uk/rsf">
 <head>
-<link href="../darwinsite.css" rel="stylesheet" type="text/css"/>
+<link href="../darwin.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
  .hidden {
 display: none;
@@ -14,10 +13,12 @@ display: none;
 .centerzero
 { text-align: center; }
 body {
-margin: 0px;
-margin-top: 0px; /* Negative margin required in NS/FF, ignored by others */
-padding: 0px;
-border: 0px;
+	margin: 0px;
+	margin-top: 0px; /* Negative margin required in NS/FF, ignored by others */
+	padding: 0px;
+	border: 0px;
+	background-image: url();
+	background-repeat: no-repeat;
 }
 .advanced {
 font-size: 70%;
@@ -36,7 +37,7 @@ margin: 0px;
 <link rel="shortcut icon" href="http://darwin-online.org.uk/favicon.ico"/>
 </head>
 <!-- http://localhost:48080/Darwin/content/nav-frame -->
-<body onload="MM_preloadImages('../publications2.png','../manuscripts2.png','../biography2.png','../credits2.png')">
+<body>
 <div class="hidden">
 <div rsf:id="text-target:" id="text-target:1">html/dummy/1843_remarks_F1662.html#pageseq-1</div>
 <div rsf:id="text-target:" id="text-target:2">html/dummy/1843_remarks_F1662.html#pageseq-2</div>
@@ -52,47 +53,46 @@ margin: 0px;
 <a rsf:id="search-submit" id="search-submit" href="#">Blank</a>
 </div>
 <div class="center">
-<p><a href="http://darwin-online.org.uk/" target="_top"><img
-  src="../title17.jpg" width="722" height="37" border="0" alt="Darwin Online Logo"/></a><br />
-<a href="../contents.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Publications','','../publications2.png',1)"><img
-  src="../publications1.png" alt="Publications" name="Publications"
-  width="120" height="22" hspace="1" border="0" id="Publications" /></a><a
-  href="../manuscripts.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Manuscripts','','../manuscripts2.png',1)"><img
-  src="../manuscripts1.png" alt="Manuscripts" name="Manuscripts"
-  width="120" height="22" hspace="1" border="0" id="Manuscripts" /></a><a
-  href="../biography.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Biography','','../biography2.png',1)"><img
-  src="../biography1.png" alt="Biography"
-  name="Biography" width="103" height="22" hspace="1" border="0"
-  id="Biography" /></a><a
-  href="../acknowledgements.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Credits','','../credits2.png',1)"><img
-  src="../credits1.png" alt="Credits &amp; Acknowledgements"
-  name="Credits" width="78" height="22" hspace="1" border="0"
-  id="Credits" /></a>
 
-<span class="zerowidt">&nbsp;&nbsp;&nbsp;<strong>Search:</strong> <input name="text"
-  type="text" onkeypress="handleFieldKeyPress(event,this)" size="15" />
-&nbsp; <a rsf:id="advanced-search" target="_top" href="#"
-  class="advanced">Advanced search</a></span></p>
+		<div class="menurow_frameset">
+		<div class="menu">
+			<a href="http://darwin-online.org.uk" target="_top"><img src="../image/logo.gif" alt="Darwin Online" /></a>
+			
+			<div>
+			<div class="floatleft"><a href="http://darwin-online.org.uk/contents.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Publications','','../image/menu_publications_on.gif',1)"><img src="../image/menu_publications_off.gif" alt="Publications" title="Darwin's publications and published manuscripts" name="Publications" id="Publications" /></a></div>
+			
+			<div class="floatleft"><a href="http://darwin-online.org.uk/manuscripts.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Manuscripts','','../image/menu_manuscripts_on.gif',1)"><img src="../image/menu_manuscripts_off.gif" alt="Manuscripts" title="Darwin manuscripts and private papers" name="Manuscripts" id="Manuscripts" /></a></div>
+			
+			<div class="floatleft"><a href="http://darwin-online.org.uk/biography.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Biography','','../image/menu_biography_on.gif',1)"><img src="../image/menu_biography_off.gif" alt="Biography" title="Timeline, life in pictures and more" name="Biography" id="Biography" /></a></div>
+			
+			<div class="floatleft"><a href="http://darwin-online.org.uk/press.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Media','','../image/menu_media_on.gif',1)"><img src="../image/menu_media_off.gif" alt="Media" title="Press, Permissions and Illustrations" name="Media" id="Media" /></a></div>
+
+			<div class="floatleft"><a href="http://darwin-online.org.uk/Introduction.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('About','','../image/menu_aboutus_on.gif',1)"><img src="../image/menu_aboutus_off.gif" alt="About Us" title="Introduction, Credits, User guide and Feedback" name="About" id="About" /></a></div>
+			
+			<div class="menu_search_bg floatright"><input type="text" size="16" onfocus="this.value=''" onkeypress="handleFieldKeyPress(event,this)" name="text" value="Search" class="menu_search_input" /> <a rsf:id="advanced-search" target="_top" href="#">Advanced search</a></div>
+			</div>
+
+		</div> <!-- menu -->
+		</div> <!-- menurow -->
+
 </div>
+
 <div class="centerzero"><a href="../tempcontents.html"></a> <input
   type="button" id="back-button" value=" &lt; Back"
-  onmouseup="addPage(-1)" /> <select
+  onclick="addPage(-1)" ondblclick="addPage(-1)" /> <select
   rsf:id="page-select" id="page-select-selection"
   onchange="onPageSelect()">
-  <option value="1" selected="selected">page 47</option>
+  <option value="1" selected="true">page 47</option>
   <option value="2">page 48</option>
   <option value="3">page 49</option>
   <option value="4">page 50</option>
 </select> <input type="button" id="next-button" value="Next &gt;"
-  onmouseup="addPage(1)" /> <span class="zerowidt">
-<strong><span rsf:id="switch-any">&nbsp;&nbsp;&nbsp;Switch to: </span><a rsf:id="switch-text" target="_top" href="#">Text view</a>&nbsp;
-<a rsf:id="switch-image" id="switch-image" target="_top" href="#">Image
-view</a>&nbsp;<a rsf:id="switch-side" target="_top" href="#">Text &amp; Image view</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></span></div>
+  onclick="addPage(1)" ondblclick="addPage(1)" /> <span class="zerowidt">
+<span rsf:id="switch-any">&nbsp;&nbsp;&nbsp;Switch to: </span><a href="#" target="_top" rsf:id="switch-text"><strong>Text view</strong></a>&nbsp;
+<a href="#" target="_top" id="switch-image" rsf:id="switch-image"><strong>Image
+view</strong></a>&nbsp;<a href="#" target="_top" rsf:id="switch-side"><strong>Text &amp; Image view</strong></a>
+<a href="#" target="_top" rsf:id="switch-pdf"><strong>PDF view</strong></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
 
 
 </body>

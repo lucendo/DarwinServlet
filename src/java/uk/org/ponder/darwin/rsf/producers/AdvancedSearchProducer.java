@@ -101,7 +101,9 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
       UISelect langsel = UISelect.make(langbranch, "language", languages, languages, null, false);
       langsel.selection = new UIInputMany();
       langsel.selection.willinput = false;
-      langsel.selection.updateValue(new String[] {"English"});
+      if (viewparams.manuscript || !viewparams.published) {
+          langsel.selection.updateValue(new String[] {"English"});
+      }
       
     }
     if (viewparams.manuscript || advanced) {

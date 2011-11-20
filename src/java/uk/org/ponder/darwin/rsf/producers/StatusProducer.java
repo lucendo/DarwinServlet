@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.parse.ItemCollectionManager;
+import uk.org.ponder.darwin.parse.URLMapper;
 import uk.org.ponder.darwin.rsf.params.NavParams;
 import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UICommand;
@@ -17,6 +18,7 @@ import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIForm;
 import uk.org.ponder.rsf.components.UIInput;
 import uk.org.ponder.rsf.components.UIInternalLink;
+import uk.org.ponder.rsf.components.UILink;
 import uk.org.ponder.rsf.components.UIOutput;
 import uk.org.ponder.rsf.components.UIOutputMultiline;
 import uk.org.ponder.rsf.view.ComponentChecker;
@@ -27,12 +29,16 @@ import uk.org.ponder.stringutil.StringList;
 public class StatusProducer implements ViewComponentProducer {
   public static final String VIEWID = "status";
   private ItemCollectionManager manager;
+  private URLMapper urlmapper;
   public String getViewID() {
    return VIEWID;
   }
 
   public void setItemCollectionManager(ItemCollectionManager manager) {
     this.manager = manager;
+  }
+  public void setURLMapper(URLMapper urlmapper) {
+    this.urlmapper = urlmapper;
   }
   public void fillComponents(UIContainer tofill, ViewParameters origviewparams, ComponentChecker checker) {
     if (manager.getItemCollection() != null) {
@@ -54,7 +60,7 @@ public class StatusProducer implements ViewComponentProducer {
       int i = 0;
       for (Iterator itemit = items.iterator(); itemit.hasNext();) {
         ItemDetails details = (ItemDetails)itemit.next();
-        if (details.hasimage || details.hastext) {
+        if (details.hasimage || details.hastext || details.haspdf) {
           idlist.add(details.ID);
         }
       }
@@ -83,6 +89,10 @@ public class StatusProducer implements ViewComponentProducer {
           NavParams imagep = (NavParams) params.copyBase();
           imagep.viewtype = NavParams.SIDE_VIEW;
           UIInternalLink.make(line, "sidelink", imagep);
+        }
+        if (item.haspdf) {
+          String url = urlmapper.fileToURL(item.pdffile);
+          UILink.make(line, "pdflink", url);
         }
       }
     }

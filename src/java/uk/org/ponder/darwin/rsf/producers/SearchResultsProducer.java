@@ -232,8 +232,8 @@ public class SearchResultsProducer implements ViewComponentProducer,
               String datestring = hit.get("displaydate");
               UIOutput.make(hitrow, "date:", datestring);
 
-              String title = hit.get("searchtitle");
-              if (title != null) {
+              String title = hit.get("sorttitle");
+              if (title != null && !title.equals("")) {
                 UIOutput.make(hitrow, "title", title);
               }
 

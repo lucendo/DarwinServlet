@@ -113,3 +113,5 @@
 132,"Zagreb",0
 133,"Beirut",0
 134,"Cairo",0
+135,"Belfast",0
+136,"Hanoi",0

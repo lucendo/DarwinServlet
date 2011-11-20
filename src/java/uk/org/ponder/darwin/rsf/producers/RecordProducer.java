@@ -15,11 +15,13 @@ import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
 import uk.org.ponder.rsf.components.UIOutput;
+import uk.org.ponder.rsf.components.UIVerbatim;
 import uk.org.ponder.rsf.view.ComponentChecker;
 import uk.org.ponder.rsf.view.ViewComponentProducer;
 import uk.org.ponder.rsf.viewstate.ViewParameters;
 import uk.org.ponder.rsf.viewstate.ViewParamsReporter;
 import uk.org.ponder.util.Logger;
+import uk.org.ponder.xml.XMLUtil;
 
 public class RecordProducer implements ViewComponentProducer,
     ViewParamsReporter {

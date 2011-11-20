@@ -79,8 +79,7 @@
   </bean>
 
   <bean id="itemFieldTables"
-    class="uk.org.ponder.darwin.search.ItemFieldTables"
-    init-method="init">
+    class="uk.org.ponder.darwin.search.ItemFieldTables" init-method="init">
     <property name="itemDirectory" ref="itemDirectory" />
   </bean>
 
@@ -90,13 +89,13 @@
   </bean>
 
   <bean id="itemCollectionManager"
-    class="uk.org.ponder.darwin.parse.ItemCollectionManager"
-    init-method="index">
+    class="uk.org.ponder.darwin.parse.ItemCollectionManager" init-method="index">
     <property name="contentRoot" ref="contentRoot" />
     <property name="itemScanner" ref="itemScanner" />
   </bean>
 
   <bean id="linkBlockProducer" class="uk.org.ponder.darwin.rsf.producers.LinkBlockProducer">
+    <property name="URLMapper" ref="urlMapper" />
     <property name="itemCollection" ref="itemCollectionProxy"/>
   </bean>
 
@@ -115,6 +114,7 @@
   <bean id="status-view"
     class="uk.org.ponder.darwin.rsf.producers.StatusProducer">
     <property name="itemCollectionManager" ref="itemCollectionManager" />
+    <property name="URLMapper" ref="urlMapper" />
   </bean>
 
   <bean id="search-results-view"

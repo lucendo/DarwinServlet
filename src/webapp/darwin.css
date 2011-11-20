@@ -1,81 +1,110 @@
-body {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #000000;
-	margin-right: 10%;
-	margin-left: 10%;
-	background-color: #FFFFCC;
-}
+/*new*/
+html, body {font-family: Verdana, sans-serif; color: #000000; background-color: white; margin: 0px; padding: 0px; height: 100%;}
 
-td {
-	color: #000000;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}
+img {border: 0px;}
+img.png {behavior: url(iepngfix.htc);}
 
-th {
-	color: #000000;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}font {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	color: #000000;
-}
-a:link {
-	color: #990000;
-}
-a:visited {
-	color: #660000;
-}
-a:hover {
-	color: #FF0000;
-}
-h1 {
-	font-size: 24pt;
-	color: #000000;
-	font-weight: normal;
-	text-decoration: none;
-}
-h2 {
-	font-size: 126%;
-	font-weight: normal;
-	color: #000000;
-}
+.floatleft {float: left;}
+.floatright {float: right;}
+
+.align-right {text-align: right;}
+.align-left {text-align: left;}
+
+a:link {color: #990000;}
+a:visited {color: #660000;}
+a:hover {color: #FF0000;}
+
+#background {z-index: 0; width: 100%; background-color: white; position: absolute; top: 0; left: 0; min-height: 100%; *height: 100%; height: auto !important!; min-width: 730px;}
+
+#side-L {width: 150px; position: absolute; top: 0; left: 0; min-height: 100%; height: 100%; background:url("image/container_left.gif") repeat-y #d6ceba;}
+#side-R {width: 150px; position: absolute; top: 0; right: 0; min-height: 100%; height: 100%; background:url("image/container_right.gif") repeat-y #d6ceba;}
+
+#illus-L {z-index: 2; width:200px; position: absolute; }
+#illus-R {z-index: 2; width:200px; position: absolute; right: 0px}
+
+#main {z-index: 4; margin: 0 auto; padding: 0 180px; padding-top: 0px; text-align: center; min-height: 790px; height: auto !important; height: 790px;}
+:first-child+html #main {z-index: 4; margin: 0 auto; padding: 0; padding-top: 30px; text-align: center; min-height: 750px; height: auto !important; height: 750px;}
+
+#container {text-align: center; min-height: 100%; height: 100%; min-width: 730px; width: 100%; top: 0px;}
+
+.menurow {width: 100%; height: 115px; background-color: white; z-index:3; position: relative}
+.menurow .menu {z-index: 4; position: relative; width: 730px; padding-top: 10px; margin: 0px auto;}
+
+.menurow_frameset {width: 100%; height: 115px;}
+.menurow_frameset .menu {z-index: 4; position: relative; width: 730px; padding-top: 10px; margin: 0px auto;}
+
+#menu_search {height: 20px; font-size: 12px; width: 550px; text-align: right; margin-top: 12px;}
+
+.menu_search_bg {width: 225px; height: 30px; padding-top: 6px; background: url(image/menu_search_bg.gif) no-repeat; font-size: 11px; font-family: Verdana, serif; color: white; text-align: right; padding-right: 10px;}
+.menu_search_bg input {margin-right: 5px;}
+html>body .menu_search_bg input {margin-right: 5px; margin-top: 1px;}
+
+.menu_search_input {font-family: Verdana; font-size: 12px; color: grey; width: 90px;}
+.menu_search_btn {font-size: 12px; font-family: Verdana, serif; color: white;}
+
+.menu_search_bg a:link {color: white;}
+.menu_search_bg a:visited {color: white;}
+.menu_search_bg a:hover {color: #fff1b5;}
+
+.content {z-index: 1; width: 70%; min-width: 300px; margin: 0px auto; position: relative; margin-top: -16px; padding: 0px 20px 100px 20px; text-align: left;}
+:first-child+html .content {z-index: 1; width: 90%; min-width: 300px; margin: 0px auto; position: relative; top: -30px; padding: 0px 20px 100px 20px; text-align: left;}
+
+.content_internal {width: 70%; min-width: 300px; margin: 0px auto; position: relative; margin-top: 0px; padding: 0px 20px 140px 20px; text-align: left;}
+:first-child+html .content_internal {z-index: 1; width: 90%; min-width: 300px; margin: 0px auto; position: relative; top: -30px; padding: 0px 20px 140px 20px; text-align: left;}
+
+#randomImg {z-index: 1; text-align: center; clear: both; position: absolute; right: 10px; top: 485px;}
+#staticImg {z-index: 1; text-align: center; clear: both; position: absolute; right: 10px; top: 485px;}
+
+.footer, .push {position: absolute; min-width: 730px; width: 100%; height: 70px; bottom: 0; left: 0; text-align: left; background-color: white; padding: 5px 0;}
+
+.footer #copyright {padding-top: 10px; width: 450px; float: left; padding-left: 10px; font-size: 12px; line-height: 16px;}
+.footer #footer-R {text-align: right; width: 500px; float: right; padding-right: 10px;}
+
+#footerrow {position: absolute; min-width: 730px; width: 100%; height: 130px; bottom: 0; left: 0; text-align: left; background-color: white; padding: 5px 0;}
+#footerrow #logos {height: 90px; float: left; margin-left: 20px;}
+#footerrow #logos #NUS {width: 148px; height: 90px; float: left; margin-right: 30px;}
+#footerrow #logos #sponsoredby {width: 120px; height: 55px; float: left; padding-top: 35px; font-weight: bold; font-size: 12px;}
+#footerrow #logos #ahrc {width: 126px; height: 34px; float: left; padding-top: 30px;}
+#footerrow #logos #caret {width: 75px; height: 23px; float: left; padding-top: 40px; padding-left: 10px;}
+#footerrow #statistics {float: right; margin-right: 20px; margin-top: 25px;}
+#footerrow #copyright {clear: both; width: 960px; margin-left: 20px; font-size: 14px; height: 30px; padding-top: 10px;}
+
+#footerrow_internal {position: absolute; min-width: 730px; width: 100%; height: 110px; bottom: 0; left: 0; text-align: left; background-color: white; padding: 10px 0;}
+#footerrow_internal #statistics_internal {height: 40px; float: left; margin-left: 20px;}
+#footerrow_internal #returntohomepage {height: 30px; width: 100%; clear: both; text-align: center;}
+#footerrow_internal #copyright {clear: both; width: 960px; margin-left: 20px; font-size: 14px; height: 30px; padding-top: 10px;}
+
+#sponsors {height: 30px; padding-bottom:5px;}
+
+#sponsors span {position: absolute; margin-top: 5px; margin-left: -90px;}
+#sponsors img {padding-left: 15px;}
+/*new*/
 
 
-.style1 {
-	font-style: normal;
-	line-height: normal;
-	font-weight: normal;
-	font-variant: normal;
-	color: #000000;
-}
-h3 {
-	font-size: 126%;
-	font-weight: normal;
-	color: #000000;
-}
-.style4 {
-	color: #990000;
-	font-weight: bold;
-	font-family: Arial, Helvetica, sans-serif;
-}
-.style5 {
-	font-family: Arial, Helvetica, sans-serif;
-}
-.style2 {
-	font-size: 81%;
-	color: #000000;
-}
-.ednote {
-	font-size: small;
-	color: #990000;
-}
-h5 {
-	color: #000000;
-	font-size: 144%;
-}
-p {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	color: #000000;
-}
+.footer_full, .push_full {position: absolute; min-width: 730px; width: 100%; height: 70px; bottom: 0; left: 0; text-align: left; background-color: red; padding: 5px 0;}
+.footer_full .counter_content {margin-left: 20px; background: blue; padding-top: 0px; width: 500px;}
+.footer_full .homepage_content {margin-left: 20px; background: green; padding-top: 0px; width: 500px;}
+.footer_full .copyright_content {margin-left: 20px; background: yellow; padding-top: 0px; width: 900px;}
+
+td {}
+th {}
+
+h1 {font-size: 150%; color: #990000; font-weight: bold; text-decoration: none; line-height: normal; margin-bottom: 1px;}
+h2 {font-size: 130%; font-weight: bold; color: #174a1b;}
+h3 {font-size: 126%; font-weight: normal;}
+h5 {font-size: 140%; font-weight: bold;}
+
+.style1 {}
+.style2 {font-size: 81%;}
+.style3 {}
+.style4 {font-weight: bold; font-size: 90%; color: #174a1b;}
+
+.style5 {}
+.ednote {font-size: 81%; color: #990000;}
+
+p {margin-top: 0px;}
+form {margin: 0px; padding: 0px;}
+
+.doubleunderline {border-bottom: 3px double;}
+
+.footer_spacer {width: 1px; height: 10px; display: block;}

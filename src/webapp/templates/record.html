@@ -14,7 +14,7 @@ td.right {padding-left: 10px}
 </style>
 <!-- #EndEditable -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../darwinsite.css" rel="stylesheet" type="text/css" />
+<link href="../darwin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../MM_images.js" >
 </script>
 <script src="../prototype.js" language="JavaScript" type="text/javascript">
@@ -24,30 +24,57 @@ td.right {padding-left: 10px}
 <style type="text/css">
 </style>
 </head>
-<body alink="#FF9999" onload="MM_preloadImages('../publications2.png','../manuscripts2.png','../biography2.png','../credits2.png')" >
+<body alink="#FF9999" onload="MM_preloadImages('../image/menu_publications_on.gif','../image/menu_manuscripts_on.gif',
+    '../image/menu_biography_on.gif','../image/menu_media_on.gif','../image/menu_aboutus_on.gif');updatePageCounter();" >
 
-<p align="center"><a href="http://darwin-online.org.uk/"><img src="../title16.jpg" width="721" height="89" border="0" /></a>
-<br/>
-<a href="../contents.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Publications','','../publications2.png',1)"><img
-  src="../publications1.png" alt="Publications" name="Publications"
-  width="120" height="22" hspace="1" border="0" id="Publications" /></a><a
-  href="../manuscripts.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Manuscripts','','../manuscripts2.png',1)"><img
-  src="../manuscripts1.png" alt="Manuscripts" name="Manuscripts"
-  width="120" height="22" hspace="1" border="0" id="Manuscripts" /></a><a
-  href="../biography.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Biography','','../biography2.png',1)"><img
-  src="../biography1.png" alt="Biography"
-  name="Biography" width="103" height="22" hspace="1" border="0"
-  id="Biography" /></a><a
-  href="../acknowledgements.html" target="_top" onmouseout="MM_swapImgRestore()"
-  onmouseover="MM_swapImage('Credits','','../credits2.png',1)"><img
-  src="../credits1.png" alt="Credits &amp; Acknowledgements"
-  name="Credits" width="78" height="22" hspace="1" border="0"
-  id="Credits" /></a>&nbsp; <strong>Search:</strong>  <input name="text"
-  type="text" onkeypress="handleFieldKeyPress(event,this)" size="15" />
-</p>
+<div id="container">
+    
+    <div id="background">
+        <div class="menurow">
+        <div class="menu">
+            <a href="/"><img src="../image/logo.gif" alt="Darwin Online" /></a>
+            
+            <div>
+            <div class="floatleft"><a href="/contents.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Publications','','../image/menu_publications_on.gif',1)">
+                <img src="../image/menu_publications_off.gif" alt="Publications" title="Darwin's publications and published manuscripts" name="Publications" id="Publications" /></a></div>
+            
+            <div class="floatleft"><a href="/manuscripts.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Manuscripts','','../image/menu_manuscripts_on.gif',1)">
+                <img src="../image/menu_manuscripts_off.gif" alt="Manuscripts" title="Darwin manuscripts and private papers" name="Manuscripts" id="Manuscripts" /></a></div>
+            
+            <div class="floatleft"><a href="/biography.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Biography','','../image/menu_biography_on.gif',1)">
+                <img src="../image/menu_biography_off.gif" alt="Biography" title="Timeline, life in pictures and more" name="Biography" id="Biography" /></a></div>
+            
+            <div class="floatleft"><a href="/press.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Media','','../image/menu_media_on.gif',1)">
+                <img src="../image/menu_media_off.gif" alt="Media" title="Press, Permissions and Illustrations" name="Media" id="Media" /></a></div>
+
+            <div class="floatleft"><a href="/Introduction.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('About','','../image/menu_aboutus_on.gif',1)">
+                <img src="../image/menu_aboutus_off.gif" alt="About Us" title="Introduction, Credits, User guide and Feedback" name="About" id="About" /></a></div>
+            
+            <div class="menu_search_bg floatright"><input type="text" size="16" onfocus="this.value=''" onkeypress="handleFieldKeyPress(event,this)" name="text" value="Search" class="menu_search_input" /> <a href="/content/advanced-search?manuscript=false&amp;published=false">Advanced search</a></div>
+            </div>
+
+        </div> <!-- menu -->
+        </div> <!-- menurow -->
+        
+        <div id="illus-L"><img src="../image/side_illus-left.png" alt="" /></div>
+        <div id="illus-R"><img src="../image/side_illus-right.png" alt="" /><br /></div>
+
+        <div id="side-L"></div>
+        <div id="side-R"></div>
+        
+        <div id="main">
+            
+            <div id="staticImg">
+                <img src="../image/side_illus-right-static.png" alt="" />
+            </div> <!-- randomImg -->
+
+            <div class="content_internal">
+            
 <!-- #BeginEditable "body" --> 
 <h1 rsf:id="title" align="center">Freeman Bibliographical Database</h1>
 
@@ -69,7 +96,8 @@ Record</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 <div >
 <a rsf:id="switch-text" target="_top" href="#">Text</a>&nbsp;&nbsp;
 <a rsf:id="switch-image" target="_top" href="#">Images</a>&nbsp;&nbsp; 
-<a rsf:id="switch-side" target="_top" href="#">Text &amp; Images</a>&nbsp;&nbsp; 
+<a rsf:id="switch-side" target="_top" href="#">Text &amp; Images</a>&nbsp;&nbsp;
+<a rsf:id="switch-pdf" target="_top" href="#">PDF</a>&nbsp;&nbsp; 
 </div>
 </div>
 
@@ -82,13 +110,35 @@ Record</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 <!-- #EndEditable -->
 <hr class="style4" />
 <div id="page-counter"><span>&nbsp;</span></div> 
-<p align="center" class="style5"><a href="http://darwin-online.org.uk/" target="_top">Return 
-  to homepage</a></p>
-<p align="left" class="style2" ><span class="style4">© 2002-8 <em>The Complete Work of Charles Darwin Online.</em></span>
- Contact the Director: Dr <a href="http://darwin-online.org.uk/people/van_wyhe.html" target="_top">John van Wyhe</a>.</p>
 
-<p align="left" class="style2">File last updated 
-  <!-- #BeginDate format:Sw1 -->5 February, 2007<!-- #EndDate -->
-</p>
+
+            </div> <!-- content -->
+        
+        
+        </div > <!-- main -->
+        
+        <div id="footerrow_internal">
+        
+            <div id="returntohomepage">
+            <a href="http://darwin-online.org.uk" class="style2">Return to homepage</a>
+            </div> <!-- returntohomepage -->
+            
+            <div id="copyright">
+            <a href="http://darwin-online.org.uk/people/van_wyhe.html">Dr John van Wyhe</a>, editor. 2002-. The Complete Work of Charles Darwin Online (<a href="http://darwin-online.org.uk/">http://darwin-online.org.uk/</a>)
+            </div> <!-- copyright -->
+            
+            <div id="statistics_internal">
+                <div id="counter">
+                <div id="page-counter"><span>&nbsp;</span></div>
+                </div>
+            </div> <!-- statistics_internal -->
+    
+        </div> <!-- footerrow_internal -->
+
+
+
+    </div> <!-- background -->
+</div>  <!-- container -->
+
 </body>
 <!-- #EndTemplate --></html>
