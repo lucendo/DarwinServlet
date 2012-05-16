@@ -1,8 +1,10 @@
 /*new*/
 html, body {font-family: Verdana, sans-serif; color: #000000; background-color: white; margin: 0px; padding: 0px; height: 100%;}
 
+html.content-page, html.content-page body { background-color: #ffffcc; background-repeat: repeat-y; padding-left: 5%; padding-right: 5%}
+
 img {border: 0px;}
-img.png {behavior: url(iepngfix.htc);}
+img.png {behavior: url(../iepngfix.htc);}
 
 .floatleft {float: left;}
 .floatright {float: right;}

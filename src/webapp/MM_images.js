@@ -25,9 +25,7 @@ function MM_swapImage() { //v3.0
 function handleFieldKeyPress(e, input){
   var key=e.keyCode || e.which;
     if (key == 13) {
-//      alert ("Got href " + submiturl + " input " + input);
       var inputval = input.value;
-//      alert ("Got value" + inputval);
-      top.location = "http://darwin-online.org.uk/content/search-results?freetext=" + inputval ;
-      }
+      top.location = "/content/search-results?freetext=" + inputval ;
+    }
 }

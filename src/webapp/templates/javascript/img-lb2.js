@@ -17,6 +17,8 @@ var fit_width_mode = 0, fit_both_mode = 0;
 var new_page = 0;
 var currentimage;
 
+var overlay;
+
 function imageloaded() {
   //alert("imageloaded "+currentimage.width+"x"+currentimage.height);
 
@@ -36,15 +38,18 @@ function imageloaded() {
     }
   zoom();
   parent.frames.imageframe.document.viewed_image.src = currentimage.src;
+  overlay.style.display = "none";
   //alert("rightsrc: " + parent.frames.imageframe.document.viewed_image.src);
   }
 
 function pageinit() {
+  overlay = parent.frames.imageframe.document.getElementById("overlay");
   new_page = 1;
   }
 
 function init(imagetarget) {
   var image = new Image();
+  overlay.style.display = "block";
   currentimage = image;
   image.onload = imageloaded;
   image.src = imagetarget;

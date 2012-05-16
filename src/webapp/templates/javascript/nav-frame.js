@@ -96,7 +96,7 @@ function setPage(num) {
   var lastpage = Number(getValue("last-page"));
   if (num >= lastpage) num = lastpage;
   var currentpage = Number(getPage());
-  if (currentpage == num) return;
+  if (currentpage === num) return;
 
   getElement("current-page").firstChild.nodeValue = num;
   updatePage();
@@ -119,7 +119,7 @@ function onPageSelect() {
 
 function handleFieldKeyPress(e, input){
   var key = e.keyCode || e.which;
-    if (key == 13) {
+    if (key === 13) {
       var submitlink = getElement("search-submit");
 //      alert ("Got element " + submitlink);
       var submiturl = submitlink.href;

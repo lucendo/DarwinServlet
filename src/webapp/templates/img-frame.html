@@ -2,12 +2,29 @@
 	lang="en" xmlns:rsf="http://ponder.org.uk/rsf">
 <head>
 <style type="text/css">
-  .centeredImage
+.centeredImage
     {
     text-align:center;
     margin-top:0px;
     margin-bottom:0px;
     padding:0px;
+    }
+#overlay {
+    /*display: none;*/
+    position: absolute;
+    background-color: white;
+    opacity: 0.85;
+    filter:alpha(opacity=85);
+    z-index: 5000;
+    text-align: center;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    }
+#spinner-image {
+    position: relative;
+    top: 200px;
     }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,6 +34,9 @@
 topmargin="0" bgcolor="#000000">
 <p class="centeredImage">
 <img src="images/blackpx.gif" name="viewed_image" id="viewed_image"/> 
+</p>
+<p id="overlay" class="centeredImage">
+<img id="spinner-image" src="images/indeterminateProgressSpinner_92x92_blackonwhite.gif"/>
 </p>
 </body>
 </html>

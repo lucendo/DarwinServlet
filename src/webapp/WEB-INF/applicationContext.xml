@@ -4,10 +4,18 @@
 <!-- RSF application scope Spring configuration file for the Darwin Servlet app -->
 <beans>
 
+  <bean id="messageSource" parent="messageSourceParent">
+      <property name="basename" value="WEB-INF/messages/wolliss" />
+  </bean>
+
   <bean id="itemCollectionProxy" parent="RSACBridgeProxy">
     <property name="targetBeanName">
       <idref bean="itemCollection" />
     </property>
+  </bean>
+  
+  <bean id="UIChoices" class="uk.org.ponder.darwin.rsf.beans.UIChoices">
+      <property name="searchLanguages" value="true" />
   </bean>
 
   <bean id="templateResolverStrategy"
@@ -130,6 +138,8 @@
     class="uk.org.ponder.darwin.rsf.producers.AdvancedSearchProducer">
     <property name="itemFieldTables" ref="itemFieldTables" />
     <property name="docTypeInterpreter" ref="docTypeInterpreter" />
+    <property name="uiChoices" ref="UIChoices" />
+    <property name="messageLocator" ref="messageLocator" />
   </bean>
 
   <bean id="record-view"

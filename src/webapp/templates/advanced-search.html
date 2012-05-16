@@ -85,6 +85,7 @@ h1 {
 <h1 align="center" rsf:id="title">Advanced Search</h1>
 
 <form method="get" rsf:id="search-form">
+
 <div rsf:id="freetextbranch:">
   <label class="left" for="free-text">Full Text:</label> 
   <input
@@ -94,7 +95,7 @@ h1 {
 <input name="allfields" type="text"></input> (Search all textual fields) <br />
 <label class="left" for="searchid">Identifier:</label> 
 <input name="searchid" type="text"></input> 
-  <span rsf:id="identifier-title">(e.g. CUL-DAR139)</span> <br />
+  <span rsf:id="identifier-example">(e.g. CUL-DAR139)</span> <br />
 <label class="left" for="name">Name(s): </label>
 <input rsf:id="name" name="name" onfocus="this.select()" type="text" style="width: 250px;" /> (Name of author, editor or other contributor)<br />
 <label class="left" for="dateafter">After date:</label>
@@ -104,11 +105,11 @@ Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
 <input name="datebefore" style="width: 100px" />
 Date in format YYYY-MM-DD (MM, DD optional)<br />
 <label class="left" for="searchtitle">Title: </label><input name="searchtitle"
-  type="text" />(e.g. Voyage of the Beagle)<br />
+  type="text" /><span rsf:id="title-example">(e.g. Voyage of the Beagle)</span><br />
 
 <div rsf:id="descriptionbranch:">
 <label class="left" for="description">Description: </label><input name="description"
-  type="text" />(e.g. 'draft Expression queries')<br />
+  type="text" /><span rsf:id="description-example">(e.g. 'draft Expression queries')</span><br />
 </div>
 
 <div rsf:id="languagebranch:">
@@ -117,7 +118,8 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
   <label class="left" for="publisher">Publisher: </label><input name="publisher"
   type="text" />(e.g. John Murray)<br />
   <label class="left" for="periodical">Periodical: </label><input name="periodical"
-  type="text" />(e.g. Bienen Zeitung)<br />
+  type="text" /><span rsf:id="periodical-example">(e.g. Bienen Zeitung)</span><br />
+<div rsf:id="innerlanguagebranch:">
   <label class="left" for="language">Language(s): </label><select rsf:id="language" name="language"
   type="text" multiple="multiple" size="8" style="width:120px">
   <option value="1">English</option>
@@ -128,6 +130,7 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
   <option value="6">Russian</option>
   </select><span style="vertical-align:top">&nbsp;&nbsp;&nbsp;
   (Hold Ctrl key to deselect a chosen language with left mouse click)</span><br />
+</div>
 </div>
 <label class="left" for="documenttype">Document Type(s): </label><select rsf:id="documenttype" name="documenttype"
   type="text" multiple="true" size="5"> 
@@ -142,8 +145,8 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
 
 <div rsf:id="itemtypebranch:">
 <label class="left" for="manuscripts">Item types: </label>
-    <label for="manuscript">Manuscripts</label><input name="manuscript" rsf:id="manuscript" id="manuscript" type="checkbox"/>
-    <label for="published">Published works</label><input name="published" rsf:id="published" id="published" type="checkbox"/><br />
+    <label for="manuscript">Manuscripts</label>&nbsp;<input name="manuscript" rsf:id="manuscript" id="manuscript" type="checkbox"/>
+    <label for="published">Published works</label>&nbsp;<input name="published" rsf:id="published" id="published" type="checkbox"/><br />
 </div>
 <input type="hidden" rsf:id="manuscript" value="true"/>
 <input type="hidden" rsf:id="published" value="true"/>

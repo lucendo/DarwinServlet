@@ -250,8 +250,9 @@ public class SearchResultsProducer implements ViewComponentProducer,
             }
 
             if (isfreetext) {
-              UIOutput.make(hitrow, "page-annot:", Integer
-                  .toString(((NavParams) navparams).pageseq));
+              // Removed by troll edict 15/5/12
+              //UIOutput.make(hitrow, "page-annot:", Integer
+              //    .toString(((NavParams) navparams).pageseq));
               float score = hits.score(i);
               String relperc = (int) (score * 100) + "%";
               UIOutput.make(hitrow, "hit-weight", relperc);
