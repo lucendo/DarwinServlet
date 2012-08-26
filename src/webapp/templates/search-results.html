@@ -9,8 +9,6 @@
 <link href="../darwin.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../MM_images.js" >
 </script>
-<script src="../prototype.js" language="JavaScript" type="text/javascript">
-</script>
 <style type="text/css">
 .content_internal {
    width: 90%
@@ -28,6 +26,7 @@ tr.hit-item > td {padding: 4px 0px 4px; }
 <div id="container">
     
     <div id="background">
+        <div rsf:id="header:">
         <div class="menurow">
         <div class="menu">
             <a href="/"><img src="../image/logo.gif" alt="Darwin Online" /></a>
@@ -64,13 +63,11 @@ tr.hit-item > td {padding: 4px 0px 4px; }
     
         <div id="side-L"></div>
         <div id="side-R"></div>
-        
-        <div id="main">
-            
-            <div id="staticImg">
+        <div id="staticImg">
                 <img src="../image/side_illus-right-static.png" alt="" />
             </div> <!-- randomImg -->
-
+        </div> <!-- header -->
+        <div id="main">
 
             <div class="content_internal">
             
@@ -192,6 +189,7 @@ correctly, or use fewer or more general keywords.
         
         </div > <!-- main -->
         
+        <div rsf:id="footer:">
         <div id="footerrow_internal">
         
             <div id="returntohomepage">
@@ -209,8 +207,7 @@ correctly, or use fewer or more general keywords.
             </div> <!-- statistics_internal -->
     
         </div> <!-- footerrow_internal -->
-
-
+        </div> <!-- footer -->
 
     </div> <!-- background -->
 </div>  <!-- container -->

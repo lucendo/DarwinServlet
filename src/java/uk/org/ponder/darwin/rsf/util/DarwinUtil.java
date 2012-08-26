@@ -6,6 +6,8 @@ package uk.org.ponder.darwin.rsf.util;
 import uk.org.ponder.darwin.item.ItemCollection;
 import uk.org.ponder.darwin.item.ItemDetails;
 import uk.org.ponder.darwin.rsf.params.NavParams;
+import uk.org.ponder.rsf.components.UIContainer;
+import uk.org.ponder.rsf.components.UIJointContainer;
 import uk.org.ponder.util.Logger;
 
 public class DarwinUtil {
@@ -27,5 +29,9 @@ public class DarwinUtil {
       }
     }
     else tofill.viewtype = NavParams.TEXT_VIEW;
+  }
+  public static void addStandardComponents(UIContainer tofill) {
+      new UIJointContainer(tofill, "header:", "header-target:");
+      new UIJointContainer(tofill, "footer:", "footer-target:");
   }
 }

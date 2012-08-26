@@ -10,10 +10,12 @@ import uk.org.ponder.darwin.lucene.DocHit;
 import uk.org.ponder.darwin.lucene.IndexItemSearcher;
 import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
 import uk.org.ponder.darwin.rsf.params.RecordParams;
+import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocTypeInterpreter;
 import uk.org.ponder.rsf.components.UIBranchContainer;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
+import uk.org.ponder.rsf.components.UIMessage;
 import uk.org.ponder.rsf.components.UIOutput;
 import uk.org.ponder.rsf.components.UIVerbatim;
 import uk.org.ponder.rsf.view.ComponentChecker;
@@ -74,6 +76,7 @@ public class RecordProducer implements ViewComponentProducer,
   
   public void fillComponents(UIContainer tofill, ViewParameters viewparams,
       ComponentChecker checker) {
+    DarwinUtil.addStandardComponents(tofill);
     RecordParams recparams = (RecordParams) viewparams;
    
     UIOutput.make(tofill, "identifier", recparams.itemID);
@@ -106,12 +109,12 @@ public class RecordProducer implements ViewComponentProducer,
       if (doctypeinterpreter.isConciseType(doctype)) {
         adder.add("Concise reference:", "reference");
         adder.add("Detailed reference:", "notes");
-        UIOutput.make(tofill, "title", "The Freeman Bibliographical Database");
+        UIMessage.make(tofill, "title", "published.title");
         againparams.published = true;
         UIInternalLink.make(tofill, "same-search", "Search Bibliography Again", againparams);
       }
       else {
-        UIOutput.make(tofill, "title", "The Darwin Manuscript Catalogue");
+        UIMessage.make(tofill, "title", "manuscript.title");
         againparams.manuscript = true;
         UIInternalLink.make(tofill, "same-search", "Search Manuscripts Again", againparams);
         adder.add("Name:", "name");

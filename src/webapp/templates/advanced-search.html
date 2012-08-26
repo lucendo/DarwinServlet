@@ -1,13 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- #BeginTemplate "/Templates/site.dwt" --><!-- DW6 -->
 <head>
-<script src="../prototype.js" language="JavaScript" type="text/javascript"> </script> 
-<script src="../pagecounter.js" language="JavaScript" type="text/javascript"> </script>
 <script type="text/javascript" src="../MM_images.js" ></script>
 
 <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" /> 
 <!-- #BeginEditable "doctitle" -->
-<title>Darwin Online: Advanced Search</title>
+<title rsf:id="page-title">Darwin Online: Advanced Search</title>
 <link href="css/forms.css" rel="stylesheet" type="text/css" />
 <!-- #EndEditable -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,16 +17,18 @@
 html, body {font-family: sans-serif}
 h1 {
   font-size: 1.8em;
-  padding: 0 0 1em 0;
+  padding: 0 0 0.5em 0;
+  margin: 0.4em 0 0 0;
 }
 </style>
 </head>
 <body alink="#FF9999" onload="MM_preloadImages('../image/menu_publications_on.gif','../image/menu_manuscripts_on.gif',
-    '../image/menu_biography_on.gif','../image/menu_media_on.gif','../image/menu_aboutus_on.gif');updatePageCounter();" >
+    '../image/menu_biography_on.gif','../image/menu_media_on.gif','../image/menu_aboutus_on.gif');" >
 
 <div id="container">
     
     <div id="background">
+        <div rsf:id="header:">
         <div class="menurow">
         <div class="menu">
             <a href="/"><img src="../image/logo.gif" alt="Darwin Online" /></a>
@@ -59,22 +59,20 @@ h1 {
 
         </div> <!-- menu -->
         </div> <!-- menurow -->
-            
+        
         <div id="illus-L"><img src="../image/side_illus-left.png" alt="" /></div>
         <div id="illus-R"><img src="../image/side_illus-right.png" alt="" /><br /></div>
 
         <div id="side-L"></div>
         <div id="side-R"></div>
         
+        <div id="staticImg">
+            <img src="../image/side_illus-right-static.png" alt="" />
+        </div> <!-- randomImg -->
         
+        </div> <!-- header -->
         <div id="main">
             
-    
-            <div id="staticImg">
-                <img src="../image/side_illus-right-static.png" alt="" />
-            </div> <!-- randomImg -->
-
-
             <div class="content_internal">
             
             
@@ -89,21 +87,21 @@ h1 {
 <div rsf:id="freetextbranch:">
   <label class="left" for="free-text">Full Text:</label> 
   <input
-	name="freetext" type="text"></input> (Full text search within the body of all historical documents) <br />
+	name="freetext" type="text"></input> <br />
 </div>
 <label class="left" for="allfields">All Fields:</label>
-<input name="allfields" type="text"></input> (Search all textual fields) <br />
+<input name="allfields" type="text"></input> (in database) <br />
 <label class="left" for="searchid">Identifier:</label> 
 <input name="searchid" type="text"></input> 
   <span rsf:id="identifier-example">(e.g. CUL-DAR139)</span> <br />
 <label class="left" for="name">Name(s): </label>
-<input rsf:id="name" name="name" onfocus="this.select()" type="text" style="width: 250px;" /> (Name of author, editor or other contributor)<br />
+<input rsf:id="name" name="name" onfocus="this.select()" type="text" style="width: 250px;" /> (Name of author, editor etc.)<br />
 <label class="left" for="dateafter">After date:</label>
 <input name="dateafter" style="width: 100px" />
-Date in format YYYY-MM-DD - e.g. 1859-11-24 (MM, DD optional)<br />
+YYYY-MM-DD (MM, DD optional)<br />
 <label class="left" for="datebefore">Before date:</label>
 <input name="datebefore" style="width: 100px" />
-Date in format YYYY-MM-DD (MM, DD optional)<br />
+<br />
 <label class="left" for="searchtitle">Title: </label><input name="searchtitle"
   type="text" /><span rsf:id="title-example">(e.g. Voyage of the Beagle)</span><br />
 
@@ -114,7 +112,7 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
 
 <div rsf:id="languagebranch:">
   <label class="left" for="place">Place: </label><input name="place"
-  type="text" />(e.g. London)<br />
+  type="text" />(of Publication)<br />
   <label class="left" for="publisher">Publisher: </label><input name="publisher"
   type="text" />(e.g. John Murray)<br />
   <label class="left" for="periodical">Periodical: </label><input name="periodical"
@@ -139,8 +137,7 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
   <option value="3">Correspondence</option>
   <option value="4">Figure</option>
   <option value="4">Printed</option>  
-  </select><span style="vertical-align:top">&nbsp;&nbsp;&nbsp;
-  (Hold Ctrl key to deselect a chosen type with left mouse click)</span><br />
+  </select><span style="vertical-align:top"></span><br />
     
 
 <div rsf:id="itemtypebranch:">
@@ -156,8 +153,7 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
   <label for="haveimages">Available digital images</label>&nbsp;<input name="haveimages" id="haveimages" value="true" type="checkbox"/>
   <label for="havepdf">Available PDF</label>&nbsp;<input name="havepdf" id="havepdf" value="true" type="checkbox"/><br />
   <br />
-<p><strong>See <a href="../searchhelp.html" target="_blank">Advanced search help</a>.</strong> <br />
-</p>
+<strong>See <a href="../searchhelp.html" target="_blank">Advanced search help</a>.</strong> <br />
 <div style="text-align: center;">
 <input type="submit" value="Search" style="font-size: 105%" />
 </div>
@@ -171,7 +167,7 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
         
         </div > <!-- main -->
         
-        
+        <div rsf:id="footer:">
         <div id="footerrow_internal">
         
             <div id="returntohomepage">
@@ -189,6 +185,7 @@ Date in format YYYY-MM-DD (MM, DD optional)<br />
             </div> <!-- statistics_internal -->
     
         </div> <!-- footerrow_internal -->
+        </div>
 
 
 

@@ -230,8 +230,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     }
     XMLUtil.dumpAttributes(attrmap, xmlw);
 
-    pos.print(isempty ? "/>"
-        : ">");
+    pos.print(isempty ? "/>" : ">");
   }
 
   public void endTag(String tagname) {
@@ -341,6 +340,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
   public void endEditable(String editclass) {
     if (editclass.equals(Constants.BODY)) {
       dumpPageCount();
+      output();
     }
     currenteditableclass = null;
     if (templatesource != null) {
@@ -355,6 +355,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
 
   // skim along the TEMPLATE until we hit an editable section, then since we
   // stop scanning, the CONTENT will continue to be delivered from the outside.
+  // NB this whole section seems to be a dummy, since "templateSource" seems never to be set
   private void scanTemplate(String required) {
     while (true) {
       try {
@@ -414,7 +415,7 @@ public class RenderingParseReceiver extends BaseParser implements ParseReceiver 
     if (templatesource != null) {
       try {
         InputStream xmlstream = templatesource.getInputStream();
-        parser.setInput(xmlstream, null);
+        parser.setInput(xmlstream, "UTF-8");
       }
       catch (Exception e) {
         throw UniversalRuntimeException.accumulate(e,

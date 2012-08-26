@@ -1,7 +1,7 @@
 /*new*/
 html, body {font-family: Verdana, sans-serif; color: #000000; background-color: white; margin: 0px; padding: 0px; height: 100%;}
 
-html.content-page, html.content-page body { background-color: #ffffcc; background-repeat: repeat-y; padding-left: 5%; padding-right: 5%}
+html.content-page, html.content-page body { background-color: #ffffcc; background-repeat: repeat-y; padding-left: 3%; padding-right: 3%}
 
 img {border: 0px;}
 img.png {behavior: url(../iepngfix.htc);}
@@ -29,7 +29,7 @@ a:hover {color: #FF0000;}
 
 #container {text-align: center; min-height: 100%; height: 100%; min-width: 730px; width: 100%; top: 0px;}
 
-.menurow {width: 100%; height: 115px; background-color: white; z-index:3; position: relative}
+.menurow {width: 100%; height: 110px; background-color: white; z-index:3; position: relative}
 .menurow .menu {z-index: 4; position: relative; width: 730px; padding-top: 10px; margin: 0px auto;}
 
 .menurow_frameset {width: 100%; height: 115px;}

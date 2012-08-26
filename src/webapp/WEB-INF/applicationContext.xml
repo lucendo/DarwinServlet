@@ -18,6 +18,12 @@
       <property name="searchLanguages" value="true" />
   </bean>
 
+  <bean id="partialContributor" parent="templateContributorParent">
+    <property name="templateResourceBase" value="/" />
+    <property name="baseDirectory" value="templates/partial/" />
+    <property name="templateNames" value="header-darwin, footer-darwin, header-darwin-short" />
+  </bean>
+
   <bean id="templateResolverStrategy"
     class="uk.org.ponder.rsf.templateresolver.support.CRITemplateResolverStrategy">
     <property name="baseDirectory" value="templates/" />

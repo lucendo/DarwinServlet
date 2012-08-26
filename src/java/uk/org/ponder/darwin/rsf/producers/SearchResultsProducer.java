@@ -105,13 +105,13 @@ public class SearchResultsProducer implements ViewComponentProducer,
       return togo.toString();
     }
     catch (Exception e) {
-      throw UniversalRuntimeException.accumulate(e, "Error rewriting query "
-          + unrwquery);
+      throw UniversalRuntimeException.accumulate(e, "Error rewriting query " + unrwquery);
     }
   }
 
   public void fillComponents(UIContainer tofill, ViewParameters viewparamso,
       ComponentChecker checker) {
+    DarwinUtil.addStandardComponents(tofill);
     SearchResultsParams viewparams = (SearchResultsParams) viewparamso;
 
     if (viewparams.pageno == 0) {
@@ -237,7 +237,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
                 UIOutput.make(hitrow, "title", title);
               }
 
-              if (!doctypeinterpreter.isType(doctype,
+              if (doctypeinterpreter.isType(doctype,
                   DocTypeInterpreter.CORRESPONDENCE)) {
                 UIOutput.make(hitrow, "name", name);
               }

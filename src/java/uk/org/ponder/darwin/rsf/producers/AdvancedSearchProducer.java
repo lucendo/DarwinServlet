@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import uk.org.ponder.darwin.rsf.beans.UIChoices;
 import uk.org.ponder.darwin.rsf.params.AdvancedSearchParams;
 import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
+import uk.org.ponder.darwin.rsf.util.DarwinUtil;
 import uk.org.ponder.darwin.search.DocTypeInterpreter;
 import uk.org.ponder.darwin.search.ItemFieldTables;
 import uk.org.ponder.messageutil.MessageLocator;
@@ -59,6 +60,9 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
   
   public void fillComponents(UIContainer tofill, ViewParameters viewparamso,
       ComponentChecker checker) {
+    DarwinUtil.addStandardComponents(tofill);
+    UIMessage.make(tofill, "page-title", "search.page.title");
+    
     AdvancedSearchParams viewparams = (AdvancedSearchParams) viewparamso;
     UIForm searchform = UIForm.make(tofill, "search-form",
         new SearchResultsParams());
@@ -118,9 +122,10 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
             languages, null, false);
         langsel.selection = new UIInputMany();
         langsel.selection.willinput = false;
-        if (viewparams.manuscript || !viewparams.published) {
-          langsel.selection.updateValue(new String[] { "English" });
-        }
+// Removed by troll edict 02/07/12
+//        if (viewparams.manuscript || !viewparams.published) {
+//          langsel.selection.updateValue(new String[] { "English" });
+//        }
       }
     }
     if (viewparams.manuscript || advanced) {

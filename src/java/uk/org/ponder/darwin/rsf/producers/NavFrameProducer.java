@@ -14,6 +14,7 @@ import uk.org.ponder.darwin.rsf.params.SearchResultsParams;
 import uk.org.ponder.darwin.rsf.params.TextBlockRenderParams;
 import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIInternalLink;
+import uk.org.ponder.rsf.components.UIJointContainer;
 import uk.org.ponder.rsf.components.UIOutput;
 import uk.org.ponder.rsf.components.UISelect;
 import uk.org.ponder.rsf.view.ComponentChecker;
@@ -51,6 +52,8 @@ public class NavFrameProducer implements ViewComponentProducer, ViewParamsReport
   public void fillComponents(UIContainer tofill, ViewParameters origviewparams,
       ComponentChecker checker) {
 
+    new UIJointContainer(tofill, "header:", "header-target-short:");
+    
     NavParams navparams = (NavParams) origviewparams;
 
     ItemDetails item = collection.getItem(navparams.itemID);

@@ -11,7 +11,9 @@ display: none;
 .zerowidth
 { float:right ;}
 .centerzero
-{ text-align: center; }
+{ text-align: center; 
+  clear: both;
+}
 body {
 	margin: 0px;
 	margin-top: 0px; /* Negative margin required in NS/FF, ignored by others */
@@ -54,34 +56,45 @@ margin: 0px;
 </div>
 <div class="center">
 
-		<div class="menurow_frameset">
-		<div class="menu">
-			<a href="http://darwin-online.org.uk" target="_top"><img src="../image/logo.gif" alt="Darwin Online" /></a>
-			
-			<div>
-			<div class="floatleft"><a href="http://darwin-online.org.uk/contents.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Publications','','../image/menu_publications_on.gif',1)"><img src="../image/menu_publications_off.gif" alt="Publications" title="Darwin's publications and published manuscripts" name="Publications" id="Publications" /></a></div>
-			
-			<div class="floatleft"><a href="http://darwin-online.org.uk/manuscripts.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Manuscripts','','../image/menu_manuscripts_on.gif',1)"><img src="../image/menu_manuscripts_off.gif" alt="Manuscripts" title="Darwin manuscripts and private papers" name="Manuscripts" id="Manuscripts" /></a></div>
-			
-			<div class="floatleft"><a href="http://darwin-online.org.uk/biography.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Biography','','../image/menu_biography_on.gif',1)"><img src="../image/menu_biography_off.gif" alt="Biography" title="Timeline, life in pictures and more" name="Biography" id="Biography" /></a></div>
-			
-			<div class="floatleft"><a href="http://darwin-online.org.uk/press.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Media','','../image/menu_media_on.gif',1)"><img src="../image/menu_media_off.gif" alt="Media" title="Press, Permissions and Illustrations" name="Media" id="Media" /></a></div>
+        <div rsf:id="header:">
+        <div class="menurow">
+        <div class="menu">
+            <a target="_top" href="/"><img src="../image/logo.gif" alt="Darwin Online" /></a>
+            
+            <div>
+            <div class="floatleft"><a href="/contents.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Publications','','../image/menu_publications_on.gif',1)">
+                <img src="../image/menu_publications_off.gif" alt="Publications" title="Darwin's publications and published manuscripts" name="Publications" id="Publications" /></a></div>
+            
+            <div class="floatleft"><a href="/manuscripts.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Manuscripts','','../image/menu_manuscripts_on.gif',1)">
+                <img src="../image/menu_manuscripts_off.gif" alt="Manuscripts" title="Darwin manuscripts and private papers" name="Manuscripts" id="Manuscripts" /></a></div>
+            
+            <div class="floatleft"><a href="/biography.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Biography','','../image/menu_biography_on.gif',1)">
+                <img src="../image/menu_biography_off.gif" alt="Biography" title="Timeline, life in pictures and more" name="Biography" id="Biography" /></a></div>
+            
+            <div class="floatleft"><a href="/press.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('Media','','../image/menu_media_on.gif',1)">
+                <img src="../image/menu_media_off.gif" alt="Media" title="Press, Permissions and Illustrations" name="Media" id="Media" /></a></div>
 
-			<div class="floatleft"><a href="http://darwin-online.org.uk/Introduction.html" target="_top" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('About','','../image/menu_aboutus_on.gif',1)"><img src="../image/menu_aboutus_off.gif" alt="About Us" title="Introduction, Credits, User guide and Feedback" name="About" id="About" /></a></div>
-			
-			<div class="menu_search_bg floatright"><input type="text" size="16" onfocus="this.value=''" onkeypress="handleFieldKeyPress(event,this)" name="text" value="Search" class="menu_search_input" /> <a rsf:id="advanced-search" target="_top" href="#">Advanced search</a></div>
-			</div>
+            <div class="floatleft"><a href="/Introduction.html" onmouseout="MM_swapImgRestore()" 
+                  onmouseover="MM_swapImage('About','','../image/menu_aboutus_on.gif',1)">
+                <img src="../image/menu_aboutus_off.gif" alt="About Us" title="Introduction, Credits, User guide and Feedback" name="About" id="About" /></a></div>
+            
+            <div class="menu_search_bg floatright"><input type="text" size="16" onfocus="this.value=''" onkeypress="handleFieldKeyPress(event,this)" name="text" value="Search" class="menu_search_input" /> <a href="/content/advanced-search?manuscript=false&amp;published=false">Advanced search</a></div>
+            </div>
 
-		</div> <!-- menu -->
-		</div> <!-- menurow -->
+        </div> <!-- menu -->
+        </div> <!-- menurow -->
+        
+        </div> <!-- header -->
 
 </div>
 
-<div class="centerzero"><a href="../tempcontents.html"></a> <input
-  type="button" id="back-button" value=" &lt; Back"
-  onclick="addPage(-1)" ondblclick="addPage(-1)" /> <select
-  rsf:id="page-select" id="page-select-selection"
-  onchange="onPageSelect()">
+<div class="centerzero">
+<input type="button" id="back-button" value=" &lt; Back" onclick="addPage(-1)" ondblclick="addPage(-1)" /> 
+<select rsf:id="page-select" id="page-select-selection" onchange="onPageSelect()">
   <option value="1" selected="true">page 47</option>
   <option value="2">page 48</option>
   <option value="3">page 49</option>
@@ -93,7 +106,6 @@ margin: 0px;
 view</strong></a>&nbsp;<a href="#" target="_top" rsf:id="switch-side"><strong>Text &amp; Image view</strong></a>
 <a href="#" target="_top" rsf:id="switch-pdf"><strong>PDF view</strong></a>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
-
 
 </body>
 </html>
