@@ -1,7 +1,7 @@
 /*new*/
 html, body {font-family: Verdana, sans-serif; color: #000000; background-color: white; margin: 0px; padding: 0px; height: 100%;}
 
-html.content-page, html.content-page body { background-color: #ffffcc; background-repeat: repeat-y; padding-left: 3%; padding-right: 3%}
+html.content-page, html.content-page body { background-color: #ffffcc; background-repeat: repeat-y; padding-left: 5%; padding-right: 5%}
 
 img {border: 0px;}
 img.png {behavior: url(../iepngfix.htc);}
@@ -12,8 +12,8 @@ img.png {behavior: url(../iepngfix.htc);}
 .align-right {text-align: right;}
 .align-left {text-align: left;}
 
-a:link {color: #990000;}
-a:visited {color: #660000;}
+a:link {color: #174a1b;}
+a:visited {color: #174a1b;}
 a:hover {color: #FF0000;}
 
 #background {z-index: 0; width: 100%; background-color: white; position: absolute; top: 0; left: 0; min-height: 100%; *height: 100%; height: auto !important!; min-width: 730px;}
@@ -29,7 +29,8 @@ a:hover {color: #FF0000;}
 
 #container {text-align: center; min-height: 100%; height: 100%; min-width: 730px; width: 100%; top: 0px;}
 
-.menurow {width: 100%; height: 110px; background-color: white; z-index:3; position: relative}
+
+.menurow {width: 100%; height: 115px; background-color: white; z-index:3; position: relative}
 .menurow .menu {z-index: 4; position: relative; width: 730px; padding-top: 10px; margin: 0px auto;}
 
 .menurow_frameset {width: 100%; height: 115px;}
@@ -48,6 +49,55 @@ html>body .menu_search_bg input {margin-right: 5px; margin-top: 1px;}
 .menu_search_bg a:visited {color: white;}
 .menu_search_bg a:hover {color: #fff1b5;}
 
+/** From wollis style **/
+
+/* Override top navigation bar */
+#nav-bar {
+    float:left;
+    width: auto;
+    position:relative;
+    margin: 0 0 0 5px;
+}
+#nav-bar a {
+    position: relative;
+    float: left;
+    font-size: 0.9em;
+    padding: 5px 10px 20px 10px;
+    margin: 0 0 0 5px;
+}
+
+#nav-bar a:link { color: white; text-decoration: none; }
+#nav-bar a:visited { color: white; }
+#nav-bar a:hover { 
+    color: gold;
+    border: solid 1px #333;
+}
+
+.drawer-small {
+    background-image: url("image/drawer-small.png");
+    display:block;
+    background-size: 120px auto;
+    background-position: center;
+}
+
+.drawer-big {
+    background-image: url("image/drawer-big.png");
+    display:block;
+    background-size: 140px auto;
+    background-position: center;
+}
+
+.menurow { background-color: transparent; }
+.menurow a img { margin: 10px 0 0 0; }
+
+.menurow .menu { width: 700px; min-width:700px; height:auto; margin: 0px auto; position:relative; }
+.menurow_frameset .menu {width: 700px; padding-top: 20px;}
+
+.menu_search_bg { position: relative; float: right; width: auto; height: auto; padding: 5px 5px 0px 10px; font-size: 10px; font-family: Verdana, serif; color: white; text-align: left; background-image: url("image/search.png");  background-size: cover; }
+.menu_search_bg a:hover { color: gold; }
+
+
+
 .content {z-index: 1; width: 70%; min-width: 300px; margin: 0px auto; position: relative; margin-top: -16px; padding: 0px 20px 100px 20px; text-align: left;}
 :first-child+html .content {z-index: 1; width: 90%; min-width: 300px; margin: 0px auto; position: relative; top: -30px; padding: 0px 20px 100px 20px; text-align: left;}
 
@@ -62,7 +112,17 @@ html>body .menu_search_bg input {margin-right: 5px; margin-top: 1px;}
 .footer #copyright {padding-top: 10px; width: 450px; float: left; padding-left: 10px; font-size: 12px; line-height: 16px;}
 .footer #footer-R {text-align: right; width: 500px; float: right; padding-right: 10px;}
 
-#footerrow {position: absolute; min-width: 730px; width: 100%; height: 130px; bottom: 0; left: 0; text-align: left; background-color: white; padding: 5px 0;}
+#footerrow {
+	position: absolute;
+	min-width: 730px;
+	width: 695px;
+	height: 130px;
+	bottom: -409px;
+	left: 232px;
+	text-align: left;
+	background-color: white;
+	padding: 5px 0;
+}
 #footerrow #logos {height: 90px; float: left; margin-left: 20px;}
 #footerrow #logos #NUS {width: 148px; height: 90px; float: left; margin-right: 30px;}
 #footerrow #logos #sponsoredby {width: 120px; height: 55px; float: left; padding-top: 35px; font-weight: bold; font-size: 12px;}
@@ -71,7 +131,8 @@ html>body .menu_search_bg input {margin-right: 5px; margin-top: 1px;}
 #footerrow #statistics {float: right; margin-right: 20px; margin-top: 25px;}
 #footerrow #copyright {clear: both; width: 960px; margin-left: 20px; font-size: 14px; height: 30px; padding-top: 10px;}
 
-#footerrow_internal {position: absolute; min-width: 730px; width: 100%; height: 110px; bottom: 0; left: 0; text-align: left; background-color: white; padding: 10px 0;}
+#footerrow_internal { width: 700px; min-width: 700px; height: 100px; text-align: center; background-color: white; position: relative; margin: 0 auto; }
+
 #footerrow_internal #statistics_internal {height: 40px; float: left; margin-left: 20px;}
 #footerrow_internal #returntohomepage {height: 30px; width: 100%; clear: both; text-align: center;}
 #footerrow_internal #copyright {clear: both; width: 960px; margin-left: 20px; font-size: 14px; height: 30px; padding-top: 10px;}
@@ -91,7 +152,7 @@ html>body .menu_search_bg input {margin-right: 5px; margin-top: 1px;}
 td {}
 th {}
 
-h1 {font-size: 150%; color: #990000; font-weight: bold; text-decoration: none; line-height: normal; margin-bottom: 1px;}
+h1 {font-size: 150%; color: #174a1b; font-weight: bold; text-decoration: none; line-height: normal; margin-bottom: 1px;}
 h2 {font-size: 130%; font-weight: bold; color: #174a1b;}
 h3 {font-size: 126%; font-weight: normal;}
 h5 {font-size: 140%; font-weight: bold;}

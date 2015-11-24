@@ -81,7 +81,7 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
 
     UIMessage.make(tofill, "title", titlekey);
     UIMessage.make(tofill, "identifier-example", identifierexamplekey);
-    UIInput.make(searchform, "name", "params.name", (viewparams.manuscript && !viewparams.published)? 
+    UIInput.make(searchform, "name", "params.name", (viewparams.manuscript && !viewparams.published || viewparams.beaglelibrary)? 
         "" : messageLocator.getMessage("default.search.name"));
     
     UIMessage.make(tofill, "title-example", "title.example");
@@ -137,8 +137,9 @@ public class AdvancedSearchProducer implements ViewComponentProducer,
     String[] doctypes = getDocTypes(doctypemap, viewparams.manuscript,
         viewparams.published);
     Arrays.sort(doctypes);
+    String initvalue = viewparams.beaglelibrary ? (String)doctypemap.get(Integer.toString(DocTypeInterpreter.BEAGLE_LIBRARY)) : null;
 
-    UISelect.make(searchform, "documenttype", doctypes, doctypes, null, false);
+    UISelect.make(searchform, "documenttype", doctypes, doctypes, initvalue, false);
   }
 
   private String[] getDocTypes(TreeMap doctypemap, boolean manuscript,

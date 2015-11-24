@@ -21,7 +21,7 @@
   <bean id="partialContributor" parent="templateContributorParent">
     <property name="templateResourceBase" value="/" />
     <property name="baseDirectory" value="templates/partial/" />
-    <property name="templateNames" value="header-darwin, footer-darwin, header-darwin-short" />
+    <property name="templateNames" value="header-wolliss, footer-wolliss, header-wolliss-short" />
   </bean>
 
   <bean id="templateResolverStrategy"

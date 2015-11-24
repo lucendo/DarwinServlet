@@ -9,7 +9,7 @@ import uk.org.ponder.rsf.viewstate.SimpleViewParameters;
 /** The parameters for the search FORM itself, not for search results */
 public class AdvancedSearchParams extends SimpleViewParameters {
   public String getParseSpec() {
-    return super.getParseSpec() + ", manuscript, published";
+    return super.getParseSpec() + ", manuscript, published, beaglelibrary";
   }
   
   public AdvancedSearchParams() {
@@ -18,4 +18,5 @@ public class AdvancedSearchParams extends SimpleViewParameters {
   
   public boolean manuscript;
   public boolean published;
+  public boolean beaglelibrary;
 }

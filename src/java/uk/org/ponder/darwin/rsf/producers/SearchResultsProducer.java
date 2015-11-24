@@ -32,6 +32,7 @@ import uk.org.ponder.rsf.components.UIContainer;
 import uk.org.ponder.rsf.components.UIForm;
 import uk.org.ponder.rsf.components.UIInput;
 import uk.org.ponder.rsf.components.UIInternalLink;
+import uk.org.ponder.rsf.components.UIMessage;
 import uk.org.ponder.rsf.components.UIOutput;
 import uk.org.ponder.rsf.components.UISelect;
 import uk.org.ponder.rsf.components.UIVerbatim;
@@ -112,6 +113,7 @@ public class SearchResultsProducer implements ViewComponentProducer,
   public void fillComponents(UIContainer tofill, ViewParameters viewparamso,
       ComponentChecker checker) {
     DarwinUtil.addStandardComponents(tofill);
+    UIMessage.make(tofill, "title", "search.results.title");
     SearchResultsParams viewparams = (SearchResultsParams) viewparamso;
 
     if (viewparams.pageno == 0) {
